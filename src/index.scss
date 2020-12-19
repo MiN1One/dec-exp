@@ -1,0 +1,68 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  background-color: #ecf0f1;
+}
+
+a {
+  text-decoration: none;
+  color: currentColor;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  color: #616161;
+  align-items: center;
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+svg {
+  display: flex;
+}
+
+input {
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-input-placeholder {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  &:-ms-input-placeholder {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  &:-moz-placeholder {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  &::-moz-placeholder {
+    font-family: 'Inter', sans-serif;
+  }
+}

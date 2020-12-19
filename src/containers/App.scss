@@ -1,0 +1,32 @@
+.container {
+    max-width: 114rem;
+    margin: 0 auto;
+}
+
+.heading {
+    
+    &__5 {
+        // font-size: 1.5rem;
+        // font-weight: 600;
+    }
+}
+
+.btn {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+    width: 15rem;
+
+    &__primary {
+        background: #0652DD;
+        border-radius: .5rem;
+        text-transform: uppercase;
+
+        &--yellow {
+            background: #fa8231;
+        }
+    }
+
+}
