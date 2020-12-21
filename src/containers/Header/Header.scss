@@ -1,9 +1,85 @@
 .Header {
-    margin-top: 16rem;
+    margin-top: 7rem;
+    position: relative;
+    z-index: 1;
     
     &__wrapper {
         height: 150rem;
         background-color: #fff;
         box-shadow: 0 0 5rem rgba(#000, .1);
+    }
+
+    &__head {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3.5rem 0;
+        background-color: #f7f7f7;
+        border-bottom: 1px solid rgba(#000, .07);
+    }
+
+    &__hero { border-bottom: 1px solid rgba(#000, .07); }
+
+    &__herowrap {
+        display: flex;
+        height: 50rem;
+    }
+
+    &__list {
+        width: 75%;
+        height: 100%;
+        position: relative;
+    }
+
+    &__item {
+        position: relative;
+    }
+
+    &__img {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    &__heading {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        font-size: 4rem;
+        font-weight: 500;
+    }
+
+    &__btn {
+        position: absolute;
+        top: 50%;
+        left: 8%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        background: rgba(#000, .5);
+        padding: .7rem;
+        border-radius: 50%;
+        transition: opacity .3s ease;
+
+        &:not(.Header__btn--disabled):hover { background: rgba(#000, .9) }
+
+        &--right { left: 92%; }
+
+        &--disabled {
+            opacity: .5;
+            cursor: initial;
+        }
+    }
+
+    &__icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        fill: #f7f7f7;
     }
 }

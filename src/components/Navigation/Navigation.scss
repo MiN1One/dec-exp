@@ -5,7 +5,9 @@
     top: 0;
     left: 0;
     width: 100%;
-    // border: 1px solid rgba(#000, .07);
+    border-bottom: 1px solid rgba(#000, .07);
+    box-shadow: 0 -1rem 4rem rgba(#000, .07);
+    z-index: 2;
 
     &__wrapper {
         height: 7rem;
@@ -29,9 +31,10 @@
         display: flex;
         align-items: center;
         height: 100%;
+        margin-right: 2rem;
 
-        &:not(:last-child) {
-            margin-right: 2.5rem;
+        &--loc:not(:last-child) {
+            margin-right: 1.5rem;
         }
 
         &:hover {
@@ -64,6 +67,22 @@
         justify-content: center;
         align-items: center;
 
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            transform: translateY(100%);
+            right: 0;
+            background: #a5a5a5;
+            color: #fff;
+            width: 1.05rem;
+            height: 1.05rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         &--menu {
             border-radius: .7rem;
             background: #0652DD;
@@ -88,18 +107,9 @@
             height: 3rem;
         }
 
-        &--blue {
-            fill: #0652DD;
-        }
-
         &--menu {
             width: 2rem;
             height: 2rem;
-        }
-
-        &--search {
-            width: 2.5rem;
-            height: 2.5rem;
         }
     }
     
@@ -118,42 +128,25 @@
         position: relative;
     }
 
-    &__form {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        align-items: stretch;
-        overflow: hidden;
-    }
-    
-    &__input {
-        border: 1px solid rgba(#000, .1);
-        padding: 1rem 2rem;
-        border-radius: .7rem 0 0 .7rem;
-        width: 23rem;
-    }
-
-    &__formbtn {
-        background: #0652DD;
-        border-radius: 0 .7rem .7rem 0;
-        padding: 0 1rem;
-        display: flex;
-        justify-content: center;
-    }
-
     &__btn:not(:last-child) {
         margin-right: 1rem;
     }
 
     &__title {
-        margin-right: 1rem;
+        margin-right: .5rem;
         display: inline-block;
         font-weight: 600;
+        font-size: 1.3rem;
+        color: #616161;
 
-        &--blue {
-            color: #0652DD
+        &--user {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        &--white {
+            color: #fff;
+            font-weight: 500;
         }
     }
 

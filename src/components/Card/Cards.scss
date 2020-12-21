@@ -1,0 +1,16 @@
+.Card {
+    height: 35rem;
+    background: #fff;
+    display: flex;
+    border: 1px solid rgba(#000, .08);
+    border-radius: .7rem;
+    box-shadow: 0 0rem 1.5rem rgba(#000, .03);
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+    overflow: hidden;
+    
+    width: calc((100% - 3 * 3rem) / 4);
+    margin-right: 3rem;
+
+    &:nth-child(4n) { margin-right: 0; }
+}

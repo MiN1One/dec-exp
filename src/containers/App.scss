@@ -17,15 +17,24 @@
     justify-content: center;
     align-items: center;
     height: 4rem;
-    width: 15rem;
+    padding: 1rem 2rem;
+    transition: all .15s ease-in-out;
+    border-radius: .7rem;
 
     &__primary {
         background: #0652DD;
-        border-radius: .5rem;
         text-transform: uppercase;
+
+        &:hover {
+            background: darken(#0652DD, 10%);
+        }
 
         &--yellow {
             background: #fa8231;
+
+            &:hover {
+                background: darken(#fa8231, 10%);
+            }
         }
     }
 
