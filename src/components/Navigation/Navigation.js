@@ -1,8 +1,6 @@
 import { Component } from 'react';
-import { connect } from 'react-redux';
 
 import Dropdown from '../Dropdown/Dropdown';
-import * as actions from '../../store/actions';
 
 import Logo from '../Logo/Logo';
 import './Navigation.scss';
@@ -49,7 +47,7 @@ class Navigation extends Component {
     render() {
         const langItems = this.state.langs.map((el, i) => {
             return (
-                <div className="Dropdown__item" key={i} onClick={() => this.props.onChangeLanguage(el)}>
+                <div className="Dropdown__item" key={i} onClick={() => this.props.prefs.onChangeLanguage(el)}>
                     <div className="Dropdown__link">{el}</div>
                 </div>
             );
@@ -57,23 +55,22 @@ class Navigation extends Component {
 
         const locations = this.state.locations.map((el, i) => {
             return (
-                <div className="Dropdown__item" key={i} onClick={() => this.props.onChangeLocation(el)}>
+                <div className="Dropdown__item" key={i} onClick={() => this.props.prefs.onChangeLocation(el)}>
                     <div className="Dropdown__link">{el}</div>
                 </div>
             );
         });
-        
 
         return (
             <header className="Navigation">
                 <div className="container">
                     <nav role="navigation" className="Navigation__wrapper">
                         <div className="Navigation__list">
-                            <Logo class="Navigation__item" />
+                            <Logo classOver="Navigation__item" />
 
-                            <div className="Navigation__item Navigation__item--loc">
+                            <div className="Navigation__item">
                                 <svg className="Navigation__icon" dangerouslySetInnerHTML={{__html: use('globe')}} />
-                                <span className="Navigation__title">{this.props.lang}</span>
+                                <span className="Navigation__title">{this.props.prefs.lang}</span>
                                 <svg className="Navigation__icon Navigation__icon--arrow" dangerouslySetInnerHTML={{__html: use('chevron-down')}} />
                                 <Dropdown class="Dropdown--left-fix">
                                     <p className="Dropdown__title">Language:</p>
@@ -186,18 +183,4 @@ class Navigation extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        lang: state.localization.lang,
-        location: state.localization.location
-    }
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onChangeLanguage: (lang) => dispatch(actions.changeLanguage(lang)),
-        onChangeLocation: (loc) => dispatch(actions.changeLocation(loc))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default Navigation;

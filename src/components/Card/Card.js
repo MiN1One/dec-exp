@@ -9,20 +9,25 @@ class Card extends Component {
     render() {
 
         return (
-            <div tabIndex="0" href="#" className="Card">
-                <div className="Card__head">
-                    <img src={this.props.data.img} alt={this.props.data.title} />
+            <a tabIndex="0" href="#" className="Card">
+                <div className="Card__list Card__list--head">
+                    <figure className="Card__fig">
+                        <img src={this.props.data.img} alt={this.props.data.title} className="Card__img" />
+                    </figure>
                 </div>
-                <div className="Card__body">
-                    <h5 className="Card__heading">{this.props.data.title}</h5>
-                    {this.props.data.location}
-                    {this.props.data.date}
+                <div className="Card__list">
+                    <h5 className="Card__item Card__item--heading">{this.props.data.title}</h5>
+                    <span className="Card__item">{this.props.data.date}</span>
+                    <p className="Card__item Card__item--location">{this.props.data.location}</p>
+                    <div className="Card__item Card__item--space">
+                        <span className="Card__item--price">{this.props.data.price}</span>
+                        <button className="Card__btn">
+                            <svg className="Card__icon" dangerouslySetInnerHTML={{__html: use('heart')}} />
+                        </button>
+                    </div>
                 </div>
-                <div className="Card__footer">
-                    {this.props.data.price}
-                    <svg className="Header__icon" dangerouslySetInnerHTML={{__html: use('star')}} />
-                </div>
-            </div>
+
+            </a>
         );
     }
 }

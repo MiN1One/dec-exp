@@ -91,11 +91,11 @@ class Categories extends Component {
                     className="Categories__item"
                     key={el.id}
                     onClick={() => this.setActiveCat(el.id)}>
-                    <a href="#" className="Categories__link">
+                    <div className="Categories__link">
                         {/* <svg className="Categories__icon" dangerouslySetInnerHTML={{__html: use(el.icon)}} /> */}
                         {el.title}
                         <svg className="Categories__icon" dangerouslySetInnerHTML={{__html: use('chevron-right')}} />
-                    </a>
+                    </div>
                 </li>
             );
         });

@@ -1,16 +1,107 @@
 .Card {
-    height: 35rem;
+    height: 32rem;
     background: #fff;
     display: flex;
-    border: 1px solid rgba(#000, .08);
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2.5px solid rgba(#000, .095);
     border-radius: .7rem;
     box-shadow: 0 0rem 1.5rem rgba(#000, .03);
     padding: 1.5rem;
-    margin-bottom: 3rem;
-    overflow: hidden;
     
-    width: calc((100% - 3 * 3rem) / 4);
-    margin-right: 3rem;
-
+    width: calc((100% - 3 * 5rem) / 4);
+    margin-right: 5rem;
+    margin-bottom: 5rem;
+    
     &:nth-child(4n) { margin-right: 0; }
+
+    &:focus,
+    &:active,
+    &:hover {
+        border-color: rgba(#0652DD, .4);
+        outline: none;
+
+        .Card__item--price { border-color: rgba(#fff, .4); }
+    }
+    
+    &__fig {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        border-radius: .7rem;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        
+        &:not(:last-child) { margin-bottom: 1rem; }
+
+        &--head {
+            width: 100%;
+            height: 15rem;
+        }
+
+        &--footer {
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-between;
+            align-items: stretch;
+            border-radius: .7rem;
+            overflow: hidden;
+        }
+    }
+
+    &__item {
+        font-size: 1.4rem;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+
+        &:not(:last-child) { margin-bottom: .7rem; }
+
+        &--price {
+            padding: .7rem 2.5rem;
+            background: #0652DD;
+            border: 2.5px solid rgba(#fff, .65);
+            color: #fff;
+            border-radius: .7rem;
+            font-size: 1.6rem;
+            font-weight: 300;
+        }
+        
+        &--heading {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        &--space {
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &--location {
+            font-size: 1.3rem;
+        }
+    }
+
+    &__icon {
+        width: 2rem;
+        height: 2rem;
+        fill: #777;
+    }
+
+    &__btn{
+        padding: .7rem 0;
+
+        &:hover .Card__icon { fill: #e55039; }
+    }
 }

@@ -21,9 +21,23 @@ SwiperCore.use([Autoplay, Navigation, Pagination]);
 const use = (svg) => `<use xlink:href="${sprite}#${svg}"></use>`;
 
 class Header extends Component {
-
+    state = {
+        ads: [
+            { title: 'Discover Everything', img: car },
+            { title: 'Discover Everything', img: int },
+            { title: 'Discover Everything', img: int2 }
+        ]
+    }
 
     render() {
+        const ads = this.state.ads.map((el, i) => {
+            return (
+                <SwiperSlide className="Header__item" key={i}>
+                    <img className="Header__img" src={el.img}/>
+                    <h1 className="Header__heading">{el.title}</h1>
+                </SwiperSlide>
+            )
+        });
 
         return (
             <header className="Header">
@@ -45,18 +59,7 @@ class Header extends Component {
                                         navigation={{ prevEl: '.Header__btn--left', nextEl: '.Header__btn--right', disabledClass: 'Header__btn--disabled' }}
                                         pagination={{el: '.swiper-pagination', clickable: true}}
                                         >
-                                        <SwiperSlide className="Header__item">
-                                            <img className="Header__img" src={car}/>
-                                            <h1 className="Header__heading">Discover everything</h1>
-                                        </SwiperSlide>
-                                        <SwiperSlide className="Header__item">
-                                            <img className="Header__img" src={int}/>
-                                            <h1 className="Header__heading">Discover everything</h1>
-                                        </SwiperSlide>
-                                        <SwiperSlide className="Header__item">
-                                            <img className="Header__img" src={int2}/>
-                                            <h1 className="Header__heading">Discover everything</h1>
-                                        </SwiperSlide>
+                                        {ads}
                                         <button className="Header__btn Header__btn--left">
                                             <svg className="Header__icon" dangerouslySetInnerHTML={{__html: use('chevron-left')}} />
                                         </button>

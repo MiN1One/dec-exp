@@ -24,6 +24,7 @@
     &__primary {
         background: #0652DD;
         text-transform: uppercase;
+        border: 2.5px solid rgba(#fff, .7);
 
         &:hover {
             background: darken(#0652DD, 10%);

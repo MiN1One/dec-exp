@@ -3,12 +3,21 @@ import { Component } from 'react';
 import Card from '../Card/Card';
 
 import scan from '../../assets/images/scania.jpg';
+import nexoa from '../../assets/images/nexia.jpg';
+import galax10 from '../../assets/images/galaxy10.jpg';
+import kitty from '../../assets/images/kitty.jpg';
+import galax20 from '../../assets/images/s202.jpg';
+import cobalt from '../../assets/images/Chevrolet_Cobalt_2013_in_Russia.JPG';
+import lenovo from '../../assets/images/lenovo-thinkpad-x1-carbon-7th-2.jpg';
+import iphone8 from '../../assets/images/iphone-8-update-in-hand-logo-500x500.jpg';
+
 import './Premium.scss';
 
 class Premium extends Component {
     state = {
         popular: [
             {
+                id: 'someId_123',
                 title: 'Scania 830',
                 price: '$230,000,00',
                 date: 'February 20',
@@ -16,52 +25,59 @@ class Premium extends Component {
                 location: 'Berlin, 20',
             },
             {
+                id: 'someId_123',
                 title: 'Nexia 3',
                 price: '$10,000,00',
                 date: 'February 19',
-                img: 'img',
+                img: nexoa,
                 location: 'Some location'
             },
             {
+                id: 'someId_123',
                 title: 'Galaxy S10',
                 price: '$400,00',
                 date: 'February 18',
-                img: 'img',
+                img: galax10,
                 location: 'Some location'
             },
             {
+                id: 'someId_123',
                 title: 'Iphone 8',
                 price: '$250,00',
                 date: 'February 20',
-                img: 'img',
+                img: iphone8,
                 location: 'Some location'
             },
             {
-                title: 'Lonovo Thinkpad',
-                price: '$350,00',
+                id: 'someId_123',
+                title: 'Lenovo Thinkpad',
+                price: '$650,00',
                 date: 'February 17',
-                img: 'img',
+                img: lenovo,
                 location: 'Some location'
             },
             {
+                id: 'someId_123',
                 title: 'Cobalt 2019',
                 price: '$8,000,00',
                 date: 'February 16',
-                img: 'img',
+                img: cobalt,
                 location: 'Some location'
             },
             {
+                id: 'someId_123',
                 title: 'Kitty',
                 price: 'Give away',
                 date: 'February 15',
-                img: 'img',
+                img: kitty,
                 location: 'Some location'
             },
             {
+                id: 'someId_123',
                 title: 'Galaxy S20',
                 price: 'Exchange',
                 date: 'February 14',
-                img: 'img',
+                img: galax20,
                 location: 'Some location'
             }
         ]
