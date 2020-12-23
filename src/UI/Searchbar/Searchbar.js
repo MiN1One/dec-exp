@@ -31,7 +31,7 @@ class Searchbar extends Component {
         });
 
         return (
-            <form className="Searchbar">
+            <form className={`Searchbar ${this.props.class ? this.props.class : ''}`}>
                 <input className="Searchbar__input" type="text" placeholder="Search" />
                 <div className="Searchbar__btn Searchbar__btn--map" onMouseEnter={() => this.onHover()} onMouseLeave={() => this.onMouseOut()}>
                     <svg className="Searchbar__icon Searchbar__icon--map" dangerouslySetInnerHTML={{__html: use('map-pin')}} />

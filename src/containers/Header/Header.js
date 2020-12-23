@@ -15,6 +15,7 @@ import car from '../../assets/images/devon-janse-van-rensburg-xJhma-g2cnA-unspla
 import int from '../../assets/images/jonathan-wolf-7sKmRRNH_1Y-unsplash.jpg';
 import int2 from '../../assets/images/taisiia-shestopal-wXwZyBhGSAc-unsplash.jpg';
 import Premium from '../../components/Premium/Premium';
+import Logo from '../../components/Logo/Logo';
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 
@@ -44,8 +45,11 @@ class Header extends Component {
                 {/* <div className="container"> */}
                     <div className="Header__wrapper">
                         <div className="Header__head">
+                            <Searchbar class="Searchbar--abs" />
                             <div className="container">
-                                <Searchbar />
+                                <div className="Header__head--wrap">
+                                    <Logo class="Header__logo" />
+                                </div>
                             </div>
                         </div>
                         <div className="Header__hero">
@@ -54,11 +58,10 @@ class Header extends Component {
                                     <Categories />
                                     <Swiper 
                                         className="Header__list"
-                                        autoplay={{ delay: 3000, disableOnInteraction: false }}
+                                        autoplay={{ delay: 3000, disableOnInteraction: false, waitForTransition: true }}
                                         // pagination={{ el:  }}
                                         navigation={{ prevEl: '.Header__btn--left', nextEl: '.Header__btn--right', disabledClass: 'Header__btn--disabled' }}
-                                        pagination={{el: '.swiper-pagination', clickable: true}}
-                                        >
+                                        pagination={{el: '.swiper-pagination', clickable: true}}>
                                         {ads}
                                         <button className="Header__btn Header__btn--left">
                                             <svg className="Header__icon" dangerouslySetInnerHTML={{__html: use('chevron-left')}} />

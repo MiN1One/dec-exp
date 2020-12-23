@@ -2,8 +2,11 @@
     background: #f7f7f7;
 
     &__wrapper {
-        padding: 7rem 0;
+        padding: 7.5rem 0;
         width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
     }
 
     &__heading {
@@ -16,5 +19,14 @@
     &__list {
         display: flex;
         flex-wrap: wrap;
+    }
+
+    &__btn:hover .Premium__icon {
+        fill: #fff;
+    }
+
+    &__icon {
+        fill: #0652DD;
+        margin-left: .5rem;
     }
 }

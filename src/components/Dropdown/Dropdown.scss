@@ -16,17 +16,6 @@
     font-weight: 500;
     overflow: hidden;
     z-index: 105;
-
-    &::after {
-        content: "";
-        position: absolute;
-        top: -100%;
-        left: 50%;
-        transform: translateX(-50%);
-        border-width: .7rem;
-        border-style: solid;
-        border-color: #fff transparent transparent transparent;
-    }
     
     &--left-fix {
         left: 0;
@@ -56,6 +45,8 @@
         border-top: none;
         font-size: 1.4rem;
     }
+
+    &--w-auto { width: auto; }
 
     &__wrapper {
         position: absolute;
@@ -99,23 +90,7 @@
         width: 100%;
         position: relative;
 
-        span {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 2.5rem;
-            width: 3rem;
-            height: 2rem;
-            border-radius: 1rem;
-            color: #fff;
-            background: #a5a5a5;
-            font-weight: 400;
-        }
-
-        &:hover span {
+        &:hover .Dropdown__counter {
             background: #fff;
             color: #616161;
         }
@@ -123,6 +98,28 @@
         &--thin {
             font-weight: 400;
         }
+
+        &--col {
+            flex-direction: column;
+            padding: 1.5rem 2.5rem;
+            cursor: initial;
+        }
+    }
+
+    &__counter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 2.5rem;
+        width: 3rem;
+        height: 2rem;
+        border-radius: 1rem;
+        color: #fff;
+        background: #a5a5a5;
+        font-weight: 400;
     }
     
     &__btn {
@@ -140,5 +137,35 @@
         &--grey:hover {
             background: #e55039;
         }
+
+        &--sign {
+            text-transform: initial !important;
+            margin-bottom: 1rem;
+        }
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    &__input {
+        padding: 1.2rem;
+        background: #f7f7f7;
+        border-radius: .5rem;
+        border: 2px solid transparent;
+        margin-bottom: 1rem;
+
+        &:focus {
+            border-color: rgba(#0652DD, .4);
+        }
+    }
+
+    &__info {
+        margin-bottom: 1rem;
+        color: #a5a5a5;
+
+        &--high { color: #0652DD; }
     }
 }

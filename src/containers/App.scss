@@ -37,6 +37,19 @@
                 background: darken(#fa8231, 10%);
             }
         }
+
+        &--outline {
+            background: none;
+            border-color: #0652DD;
+            color: #0652DD;
+            font-weight: 500;
+            
+            &:hover {
+                color: #fff;
+                background: #0652DD;
+                border-color: rgba(#fff, .5);
+            }
+        }
     }
 
 }

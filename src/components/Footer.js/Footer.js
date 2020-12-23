@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Dropdown from '../Dropdown/Dropdown';
 
 import './Footer.scss';
@@ -59,7 +61,7 @@ const Footer = props => {
                                 {navItems}
                             </ul>
                             <p className="Footer__info">
-                                For all questions, you can contact us<br/> at any convenient time by phone <br/>
+                                For all questions, you can contact us<br/> at any convenient time by phone or email<br/>
                                 +998 (71) 240-60-50 <br/>
                                 sbuy@retail.uz
                             </p>
@@ -72,4 +74,4 @@ const Footer = props => {
     );
 };
 
-export default Footer;
+export default React.memo(Footer);

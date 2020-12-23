@@ -19,6 +19,11 @@ class Categories extends Component {
                 subItems: ['item2', 'item2', 'item2', 'item2', 'item2'],
                 icon: 'Icon'
             },
+            tech: {
+                val: 'Electronics',
+                subItems: ['item2', 'item2', 'item2', 'item2', 'item2'],
+                icon: 'Icon'
+            },
             trans: {
                 val: 'Transport / Auto',
                 subItems: ['item3', 'item3', 'item3', 'item3', 'item3'],

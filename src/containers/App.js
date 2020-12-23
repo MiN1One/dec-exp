@@ -6,6 +6,7 @@ import Footer from '../components/Footer.js/Footer';
 import Navigation from '../components/Navigation/Navigation';
 import './App.scss';
 import Header from './Header/Header';
+import Authorization from '../components/Authorization/Authorization';
 
 function App(props) {
   return (
@@ -13,6 +14,7 @@ function App(props) {
       <Navigation prefs={{ ...props }} />
       <Header />
       <Footer prefs={{ ...props }} />
+      {/* <Authorization /> */}
     </div>
   );
 };

@@ -47,6 +47,19 @@
                 visibility: visible;
             }
         }
+
+        &--keep .Dropdown {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        &--hide {
+            display: none;
+        }
+
+        &--show {
+            display: flex;
+        }
     }
 
     &__link {
@@ -63,24 +76,16 @@
         background: #777;
         width: 4rem;
         height: 4rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
 
-        &::after {
-            content: "";
+        span {
             position: absolute;
-            bottom: 100%;
-            transform: translateY(100%);
+            top: 0;
             right: 0;
             background: #a5a5a5;
             color: #fff;
             width: 1.05rem;
             height: 1.05rem;
             border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         &--menu {
@@ -103,13 +108,15 @@
         &--white {
             fill: #fff;
             margin-right: 0;
-            width: 3rem;
-            height: 3rem;
-        }
-
-        &--menu {
             width: 2rem;
             height: 2rem;
+        }
+
+        &--abs {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     }
     

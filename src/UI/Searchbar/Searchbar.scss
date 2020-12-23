@@ -2,6 +2,14 @@
     display: flex;
     align-items: stretch;
     position: relative;
+    z-index: 20;
+
+    &--abs {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 
     &__input {
         font-size: 1.65rem;
@@ -38,6 +46,8 @@
             .Searchbar__title {
                 color: #0652DD;
             }
+
+            // .Searchbar__icon { transform: scale(1.05); }
         }
         
         &--map {
@@ -63,6 +73,8 @@
                     opacity: 1;
                     visibility: visible;
                 }
+
+                // .Searchbar__icon { transform: scale(1); }
             }
         }
     }
@@ -75,7 +87,7 @@
     &__icon {
         width: 2.5rem;
         height: 2.5rem;
-        transition: fill .3s ease;
+        transition: transform .3s ease;
         fill: #FFF;
         
         &--map {

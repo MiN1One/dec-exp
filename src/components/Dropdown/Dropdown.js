@@ -6,7 +6,7 @@ class Dropdown extends Component {
 
     render() {
         return (
-            <div className={`Dropdown ${this.props.class && this.props.class}`}>
+            <div className={`Dropdown ${this.props.class ? this.props.class : ''}`}>
                 {this.props.children}
             </div>
         );
