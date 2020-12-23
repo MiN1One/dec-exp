@@ -1,23 +1,36 @@
 {
   "files": {
-    "main.css": "/dec-exp/static/css/main.728bd11c.chunk.css",
-    "main.js": "/dec-exp/static/js/main.56c33c04.chunk.js",
-    "main.js.map": "/dec-exp/static/js/main.56c33c04.chunk.js.map",
-    "runtime-main.js": "/dec-exp/static/js/runtime-main.f610cbd7.js",
-    "runtime-main.js.map": "/dec-exp/static/js/runtime-main.f610cbd7.js.map",
-    "static/js/2.1902685a.chunk.js": "/dec-exp/static/js/2.1902685a.chunk.js",
-    "static/js/2.1902685a.chunk.js.map": "/dec-exp/static/js/2.1902685a.chunk.js.map",
-    "static/js/3.41eb383d.chunk.js": "/dec-exp/static/js/3.41eb383d.chunk.js",
-    "static/js/3.41eb383d.chunk.js.map": "/dec-exp/static/js/3.41eb383d.chunk.js.map",
+    "main.css": "/dec-exp/static/css/main.53671276.chunk.css",
+    "main.js": "/dec-exp/static/js/main.10c19c57.chunk.js",
+    "main.js.map": "/dec-exp/static/js/main.10c19c57.chunk.js.map",
+    "runtime-main.js": "/dec-exp/static/js/runtime-main.7338a173.js",
+    "runtime-main.js.map": "/dec-exp/static/js/runtime-main.7338a173.js.map",
+    "static/css/2.b87e34bd.chunk.css": "/dec-exp/static/css/2.b87e34bd.chunk.css",
+    "static/js/2.2ff06a59.chunk.js": "/dec-exp/static/js/2.2ff06a59.chunk.js",
+    "static/js/2.2ff06a59.chunk.js.map": "/dec-exp/static/js/2.2ff06a59.chunk.js.map",
+    "static/js/3.e8bf6d22.chunk.js": "/dec-exp/static/js/3.e8bf6d22.chunk.js",
+    "static/js/3.e8bf6d22.chunk.js.map": "/dec-exp/static/js/3.e8bf6d22.chunk.js.map",
     "index.html": "/dec-exp/index.html",
-    "static/css/main.728bd11c.chunk.css.map": "/dec-exp/static/css/main.728bd11c.chunk.css.map",
-    "static/js/2.1902685a.chunk.js.LICENSE.txt": "/dec-exp/static/js/2.1902685a.chunk.js.LICENSE.txt",
-    "static/media/sprite.c20d2056.svg": "/dec-exp/static/media/sprite.c20d2056.svg"
+    "static/css/2.b87e34bd.chunk.css.map": "/dec-exp/static/css/2.b87e34bd.chunk.css.map",
+    "static/css/main.53671276.chunk.css.map": "/dec-exp/static/css/main.53671276.chunk.css.map",
+    "static/js/2.2ff06a59.chunk.js.LICENSE.txt": "/dec-exp/static/js/2.2ff06a59.chunk.js.LICENSE.txt",
+    "static/media/Chevrolet_Cobalt_2013_in_Russia.359095e6.JPG": "/dec-exp/static/media/Chevrolet_Cobalt_2013_in_Russia.359095e6.JPG",
+    "static/media/devon-janse-van-rensburg-xJhma-g2cnA-unsplash.a921e332.jpg": "/dec-exp/static/media/devon-janse-van-rensburg-xJhma-g2cnA-unsplash.a921e332.jpg",
+    "static/media/galaxy10.dc97547f.jpg": "/dec-exp/static/media/galaxy10.dc97547f.jpg",
+    "static/media/iphone-8-update-in-hand-logo-500x500.2bae0e7d.jpg": "/dec-exp/static/media/iphone-8-update-in-hand-logo-500x500.2bae0e7d.jpg",
+    "static/media/jonathan-wolf-7sKmRRNH_1Y-unsplash.a02fd020.jpg": "/dec-exp/static/media/jonathan-wolf-7sKmRRNH_1Y-unsplash.a02fd020.jpg",
+    "static/media/lenovo-thinkpad-x1-carbon-7th-2.b9d3cf82.jpg": "/dec-exp/static/media/lenovo-thinkpad-x1-carbon-7th-2.b9d3cf82.jpg",
+    "static/media/nexia.1273c200.jpg": "/dec-exp/static/media/nexia.1273c200.jpg",
+    "static/media/s202.58daa418.jpg": "/dec-exp/static/media/s202.58daa418.jpg",
+    "static/media/scania.aaec10d1.jpg": "/dec-exp/static/media/scania.aaec10d1.jpg",
+    "static/media/sprite.21e5cbf9.svg": "/dec-exp/static/media/sprite.21e5cbf9.svg",
+    "static/media/taisiia-shestopal-wXwZyBhGSAc-unsplash.faf799b1.jpg": "/dec-exp/static/media/taisiia-shestopal-wXwZyBhGSAc-unsplash.faf799b1.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.f610cbd7.js",
-    "static/js/2.1902685a.chunk.js",
-    "static/css/main.728bd11c.chunk.css",
-    "static/js/main.56c33c04.chunk.js"
+    "static/js/runtime-main.7338a173.js",
+    "static/css/2.b87e34bd.chunk.css",
+    "static/js/2.2ff06a59.chunk.js",
+    "static/css/main.53671276.chunk.css",
+    "static/js/main.10c19c57.chunk.js"
   ]
 }
