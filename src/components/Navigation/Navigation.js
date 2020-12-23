@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import Dropdown from '../Dropdown/Dropdown';
+import Language from '../Language/Language';
 
 import Logo from '../Logo/Logo';
 import './Navigation.scss';
@@ -11,7 +13,6 @@ const use = (svg) => `<use xlink:href="${sprite}#${svg}"></use>`;
 class Navigation extends Component {
     state = {
         locations: ['Andijan', 'Bukhara', 'Jizzakh', 'Kashkadarya', 'Navoi', 'Namangan', 'Samarkand', 'Surkhandarya', 'Sirdarya', 'Tashkent region', 'Fergana', 'Khorezm', 'Karakalpakistan', 'Tashkent'],
-        langs: ['O\'zbekcha', 'English', 'Русский'],
         showNavItems: true,
         showCats: false,
         signedIn: false,
@@ -28,8 +29,8 @@ class Navigation extends Component {
         if (scroll === 0) this.setState({ showNavItems: true });
     };
 
-    redirectToUser = () => {
-
+    shouldComponentUpdate(nexProps, nextState) {
+        return nexProps !== this.props;
     }
 
     showCats = () => this.setState((prevState) => {
@@ -52,14 +53,6 @@ class Navigation extends Component {
             logoClass.push('Navigation__item--hide');
         }
         if (this.state.inputFocused) signClass.push('Navigation__item--keep');
-
-        const langItems = this.state.langs.map((el, i) => {
-            return (
-                <div className="Dropdown__item" key={i} onClick={() => this.props.prefs.onChangeLanguage(el)}>
-                    <div className="Dropdown__link">{el}</div>
-                </div>
-            );
-        });
 
         const locations = this.state.locations.map((el, i) => {
             return (
@@ -115,13 +108,13 @@ class Navigation extends Component {
         if (!this.state.signedIn) {
             userDrop = (
                 <Dropdown class="Dropdown--w-auto">
-                    <div className="Dropdown__link Dropdown__link--col">
-                        <p className="Dropdown__info">Sign in</p>
+                    <div to="/signin" className="Dropdown__link Dropdown__link--col">
+                        <p className="Dropdown__info Dropdown__info--bold">Sign in</p>
                         <form className="Dropdown__form">
-                            <input className="Dropdown__input" type="text" placeholder="Enter your phone number" onFocus={() => this.onFocus()} onBlur={() => this.onBlur()} />
-                            <input className="Dropdown__input" type="password" placeholder="Enter your password" onFocus={() => this.onFocus()} onBlur={() => this.onBlur()} />
-                            <button className="btn btn__primary Dropdown__btn--sign">Sign in</button>
-                            <p className="Dropdown__info">Do not have an account? <a href="#" className="Dropdown__info--high">Sign up</a></p>
+                            <input className="Dropdown__input input" type="text" placeholder="Enter your phone number" onFocus={() => this.onFocus()} onBlur={() => this.onBlur()} />
+                            <input className="Dropdown__input input" type="password" placeholder="Enter your password" onFocus={() => this.onFocus()} onBlur={() => this.onBlur()} />
+                            <button className="btn btn__primary Dropdown__btn--sign" onFocus={() => this.onFocus()} onBlur={() => this.onBlur()} >Sign in</button>
+                            <p className="Dropdown__info">Do not have an account? <Link to="/signin" className="Dropdown__info--high">Sign up</Link></p>
                         </form>
                     </div>
                 </Dropdown>
@@ -135,15 +128,7 @@ class Navigation extends Component {
                         <div className="Navigation__list">
                             <Logo classOver={logoClass.join(' ')} />
 
-                            <div className={langClass.join(' ')}>
-                                <svg className="Navigation__icon" dangerouslySetInnerHTML={{__html: use('globe')}} />
-                                <span className="Navigation__title">{this.props.prefs.lang}</span>
-                                <svg className="Navigation__icon Navigation__icon--arrow" dangerouslySetInnerHTML={{__html: use('chevron-down')}} />
-                                <Dropdown class="Dropdown--left-fix">
-                                    <p className="Dropdown__title">Language:</p>
-                                    {langItems}
-                                </Dropdown>
-                            </div>
+                            <Language class={langClass.join(' ')} dropClass="Dropdown--left-fix" />
 
                             {/* <div className="Navigation__item Navigation__item--loc">
                                 <svg className="Navigation__icon" dangerouslySetInnerHTML={{__html: use('map-pin')}} />
@@ -162,15 +147,15 @@ class Navigation extends Component {
 
                         <div className="Navigation__list">
                             <div className={signClass.join(' ')}>
-                                <div className="Navigation__link" onClick={() => this.redirectToUser()}>
+                                <Link to="/signin" className="Navigation__link">
                                     <svg className="Navigation__icon Navigation__icon--arrow" dangerouslySetInnerHTML={{__html: use('chevron-down')}} />
                                     <span className="Navigation__title  Navigation__title--user">{this.state.signedIn ? 'My profile' : 'Sign in'}</span>
                                     <div className="Navigation__iconbox">
                                         <svg className="Navigation__icon Navigation__icon--abs Navigation__icon--white" dangerouslySetInnerHTML={{__html: use('user')}} />
                                         {this.state.signedIn && <span></span>}
                                     </div>
-                                    {userDrop}
-                                </div>
+                                </Link>
+                                {userDrop}
                             </div>
 
                             <button className="btn btn__primary Navigation__btn">

@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.scss'
 import 'swiper/components/pagination/pagination.scss'
 
-import Searchbar from '../../UI/Searchbar/Searchbar';
+import Searchbar from '../../components/Searchbar/Searchbar';
 import './Header.scss';
 import sprite from '../../assets/icons/sprite.svg';
 import Categories from '../../components/Categories/Categories';

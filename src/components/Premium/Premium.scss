@@ -1,5 +1,5 @@
 .Premium {
-    background: #f7f7f7;
+    background: var(--color-light-7);
 
     &__wrapper {
         padding: 7.5rem 0;
@@ -12,7 +12,7 @@
     &__heading {
         font-size: 4.5rem;
         font-weight: 500;
-        color: #444;
+        color: var(--color-black);
         margin-bottom: 4.5rem;
     }
 
@@ -21,12 +21,16 @@
         flex-wrap: wrap;
     }
 
-    &__btn:hover .Premium__icon {
-        fill: #fff;
+    &__btn {
+        &:hover .Premium__icon, 
+        &:active .Premium__icon, 
+        &:focus .Premium__icon {
+            fill: #fff;
+        }
     }
 
     &__icon {
-        fill: #0652DD;
+        fill: var(--color-primary);
         margin-left: .5rem;
     }
 }

@@ -5,6 +5,7 @@ import Dropdown from '../Dropdown/Dropdown';
 import './Footer.scss';
 import sprite from '../../assets/icons/sprite.svg';
 import Logo from '../Logo/Logo';
+import Language from '../Language/Language';
 
 
 const Footer = props => {
@@ -32,7 +33,7 @@ const Footer = props => {
     });
 
     return (
-        <div className="Footer">
+        <footer className="Footer">
             <div className="Footer__head">
                 <div className="container">
                     <div className="Footer__headwrap">
@@ -40,15 +41,7 @@ const Footer = props => {
                             <svg className="Footer__icon" dangerouslySetInnerHTML={{__html: use('home')}} />
                             <h5 className="Footer__heading">Home</h5>
                         </div>
-                        <div className="Navigation__item">
-                            <svg className="Navigation__icon" dangerouslySetInnerHTML={{__html: use('globe')}} />
-                            <span className="Navigation__title">{props.prefs.lang}</span>
-                            <svg className="Navigation__icon Navigation__icon--arrow" dangerouslySetInnerHTML={{__html: use('chevron-down')}} />
-                            <Dropdown class="Dropdown--right-fix">
-                                <p className="Dropdown__title">Language:</p>
-                                {langItems}
-                            </Dropdown>
-                        </div>
+                        <Language class="Navigation__item" dropClass="Dropdown--right-fix" />
                     </div>
                 </div>
             </div>
@@ -70,7 +63,7 @@ const Footer = props => {
                     </div>
                 </div>
             </div>
-        </div>
+        </footer>
     );
 };
 

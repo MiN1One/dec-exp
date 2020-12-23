@@ -42,7 +42,7 @@
                 transform: rotate(180deg);
             }
 
-            .Dropdown {
+            & .Dropdown {
                 opacity: 1;
                 visibility: visible;
             }
@@ -66,14 +66,14 @@
         font-size: 1.5rem;
         display: flex;
         align-items: center;
-        color: #616161;
+        color: var(--color-grey-dark);
     }
 
     &__iconbox {
         padding: .8rem;
         position: relative;
         border-radius: 50%;
-        background: #777;
+        background: var(--color-grey-7);
         width: 4rem;
         height: 4rem;
 
@@ -81,7 +81,7 @@
             position: absolute;
             top: 0;
             right: 0;
-            background: #a5a5a5;
+            background: var(--color-grey-a5);
             color: #fff;
             width: 1.05rem;
             height: 1.05rem;
@@ -90,7 +90,7 @@
 
         &--menu {
             border-radius: .7rem;
-            background: #0652DD;
+            background: var(--color-primary);
             border: none;
         }
     }
@@ -98,7 +98,7 @@
     &__icon {
         width: 1.7rem;
         height: 1.7rem;
-        fill: #777;
+        fill: var(--color-grey-7);
         transition: all .3s ease;
 
         &:not(:last-child) {
@@ -121,7 +121,7 @@
     }
     
     &__bottom {
-        background: #f5f5f5;
+        background: var(--color-light-5);
         width: 100%;
         border: 1px solid rgba(#000, .05);
     }
@@ -130,7 +130,7 @@
         height: 5rem;
         font-size: 1.45rem;
         display: flex;
-        color: #777;
+        color: var(--color-grey-7);
         justify-content: space-between;
         position: relative;
     }
@@ -144,7 +144,7 @@
         display: inline-block;
         font-weight: 600;
         font-size: 1.3rem;
-        color: #616161;
+        color: var(--color-grey-dark);
 
         &--user {
             margin-right: 1rem;

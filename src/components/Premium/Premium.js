@@ -95,7 +95,7 @@ class Premium extends Component {
         });
 
         return (
-            <div className="Premium">
+            <section className="Premium">
                 <div className="container">
                     <div className="Premium__wrapper">
                         <div>
@@ -110,7 +110,7 @@ class Premium extends Component {
                         </button>
                     </div>
                 </div>
-            </div>
+            </section>
         );
     }
 }

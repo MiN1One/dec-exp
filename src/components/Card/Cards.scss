@@ -18,10 +18,10 @@
     &:focus,
     &:active,
     &:hover {
-        border-color: rgba(#0652DD, .4);
+        border-color: var(--color-primary-opaque);
         outline: none;
 
-        .Card__item--price { border-color: rgba(#fff, .4); }
+        .Card__item--price { border-color: var(--color-white-opaque-5); }
     }
     
     &__fig {
@@ -69,8 +69,8 @@
 
         &--price {
             padding: .7rem 2.5rem;
-            background: #0652DD;
-            border: 2.5px solid rgba(#fff, .65);
+            background: var(--color-primary);
+            border: 2.5px solid var(--color-white-opaque-7);
             color: #fff;
             border-radius: .7rem;
             font-size: 1.6rem;
@@ -96,12 +96,12 @@
     &__icon {
         width: 2rem;
         height: 2rem;
-        fill: #777;
+        fill: var(--color-grey-7);
     }
 
     &__btn{
         padding: .7rem 0;
 
-        &:hover .Card__icon { fill: #e55039; }
+        &:hover .Card__icon { fill: var(--color-red); }
     }
 }
