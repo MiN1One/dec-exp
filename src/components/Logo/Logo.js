@@ -6,7 +6,7 @@ const Logo = (props) => {
     return (
         <div className={`Logo ${props.classOver ? props.classOver : ''}`}>
             <Link to="/">
-                <h5 className={`heading heading__5 Logo__heading ${props.class ? props.class : ''}`}>Logo</h5>
+                <h5 className={`heading heading__3 Logo__heading ${props.class ? props.class : ''}`}>Logo</h5>
             </Link>
         </div>
     )

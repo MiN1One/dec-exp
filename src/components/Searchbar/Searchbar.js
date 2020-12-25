@@ -1,66 +1,103 @@
-import { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from '../../store/actions';
-import Dropdown from '../Dropdown/Dropdown';
+import Logo from '../../components/Logo/Logo';
 
 import sprite from '../../assets/icons/sprite.svg';
 import './Searchbar.scss';
+import Dropdown from '../Dropdown/Dropdown';
+import Backdrop from '../../UI/Backdrop/Backdrop';
 
 const use = (svg) => `<use xlink:href="${sprite}#${svg}"></use>`;
 
-class Searchbar extends Component {
+class Searchbar extends PureComponent {
     state = {
-        locations: ['Andijan', 'Bukhara', 'Jizzakh', 'Kashkadarya', 'Navoi', 'Namangan', 'Samarkand', 'Surkhandarya', 'Sirdarya', 'Tashkent region', 'Fergana', 'Khorezm', 'Karakalpakistan', 'Tashkent'],
+        locations: ['Whole country', 'Andijan', 'Bukhara', 'Jizzakh', 'Kashkadarya', 'Navoi', 'Namangan', 'Samarkand', 'Surkhandarya', 'Sirdarya', 'Tashkent region', 'Fergana', 'Khorezm', 'Karakalpakistan', 'Tashkent'],
         showDrop: false
     }
     
-    onHover = () => this.setState({ showDrop: true });
-    onMouseOut = () => this.setState({ showDrop: false });
+    onClick = () => this.setState({ showDrop: true });
+    onClickOutside = () => this.setState({ showDrop: false });
+
+    onSubmit = (e) => {
+        e.preventDefault();
+    }
+
+    changeSearchLocation = (location) => {
+        this.props.onChangeSearchLoc(location);
+        this.onClickOutside();
+    }
+
+    clearInput = (event) => {
+        event.preventDefault();
+        this.props.onChangeSearchInput('');
+    }
 
     render() {
-        const dropClass = ['Dropdown--small Dropdown--right--fix Dropdown--full Dropdown--big'];
+        const dropClass = ['Dropdown--right--fix Dropdown--full'];
         if (this.state.showDrop) dropClass.push('Dropdown--show');
 
         const locations = this.state.locations.map((el, i) => {
             return (
-                <div className="Dropdown__item" key={i} onClick={() => this.props.onChangeSearchLoc(el)}>
-                    <div className="Dropdown__link Dropdown__link--thin">{el}</div>
-                </div>
+                <li className="Dropdown__item Dropdown__item--float" key={i} onClick={() => this.changeSearchLocation(el)}>{el}</li>
             );
         });
 
         return (
-            <form className={`Searchbar ${this.props.class ? this.props.class : ''}`}>
-                <input className="Searchbar__input" type="text" placeholder="Search" />
-                <div className="Searchbar__btn Searchbar__btn--map" onMouseEnter={() => this.onHover()} onMouseLeave={() => this.onMouseOut()}>
-                    <svg className="Searchbar__icon Searchbar__icon--map" dangerouslySetInnerHTML={{__html: use('map-pin')}} />
-                    <span className="Searchbar__title">{this.props.searchLocation}</span>
-                </div>
-                
-                <button className="Searchbar__btn" type="submit">
-                    <svg className="Searchbar__icon" dangerouslySetInnerHTML={{__html: use('search')}} />
-                </button>
-                <Dropdown class={dropClass.join(' ')}>
-                    <div className="Dropdown__wrapper">
-                        <p className="Dropdown__title">Search in:</p>
-                        {locations}
+            <div className="Searchbar">
+                <div className="container">
+                    <div className="Searchbar__wrapper">
+                        <Logo class="Searchbar__logo" />
+                        {this.state.showDrop && <Backdrop z={1} click={this.onClickOutside} />}
+                        <form className="Searchbar__form" onSubmit={(event) => this.onSubmit(event)}>
+                            <label className="Searchbar__label" for="search">
+                                {this.props.search && 
+                                    <div className="Searchbar__btn Searchbar__btn--map Searchbar__btn--clear" onClick={(e) => this.clearInput(e)} >
+                                        <svg className="Searchbar__icon Searchbar__icon--map Searchbar__icon--clear" dangerouslySetInnerHTML={{__html: use('x')}} />
+                                    </div>
+                                }
+                                <input 
+                                    className="Searchbar__input"
+                                    type="text"
+                                    placeholder="Search"
+                                    id="search"
+                                    onChange={(ev) => this.props.onChangeSearchInput(ev.target.value)}
+                                    value={this.props.search} />
+                            </label>
+                            <div className="Searchbar__btn Searchbar__btn--map" onClick={() => this.onClick()}>
+                                    <svg className="Searchbar__icon Searchbar__icon--map" dangerouslySetInnerHTML={{__html: use('map-pin')}} />
+                                    <span className="Searchbar__title">{this.props.searchLocation}</span>
+                            </div>
+                            
+                            <button className="Searchbar__btn" type="submit">
+                                <svg className="Searchbar__icon" dangerouslySetInnerHTML={{__html: use('search')}} />
+                            </button>
+                            <Dropdown class={dropClass.join(' ')}>
+                                <p className="Dropdown__heading">Search in:</p>
+                                <ul className="Dropdown__wrap">
+                                    {locations}
+                                </ul>
+                            </Dropdown>
+                        </form>
                     </div>
-                </Dropdown>
-            </form>
+                </div>
+            </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        searchLocation: state.localization.searchLocation
+        searchLocation: state.localization.searchLocation,
+        search: state.data.search
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onChangeSearchLoc: (loc) => dispatch(actions.changeSearchLoc(loc))
+        onChangeSearchLoc: (loc) => dispatch(actions.changeSearchLoc(loc)),
+        onChangeSearchInput: (search) => dispatch(actions.changeSearchInput(search))
     }
 };
 

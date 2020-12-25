@@ -5,15 +5,17 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import local from './store/reducers/reducer_location';
+import localization from './store/reducers/reducer_location';
+import data from './store/reducers/reducer_data';
 import App from './containers/App';
 import './index.scss';
 
 const rootReducer = combineReducers({
-  localization: local
+  localization,
+  data
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,30 +1,12 @@
 .Header {
-    margin-top: 7rem;
     position: relative;
     z-index: 1;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(#000, .07);
     
-    &__wrapper { background-color: #fff; }
-
-    &__head {
-        position: relative;
-        width: 100%;
-        background-color: var(--color-light-7);
-        border-bottom: 1px solid rgba(#000, .07);
-
-        &--wrap {
-            width: 100%;
-            display: flex;
-            justify-content: start;
-            align-items: center;
-            height: 11.5rem;
-        }
-    }
-
-    &__hero { border-bottom: 1px solid rgba(#000, .07); }
-
-    &__herowrap {
-        display: flex;
+    &__wrapper {
         height: 50rem;
+        display: flex;
     }
 
     &__list {
@@ -41,7 +23,7 @@
             right: 0;
             background: rgb(255,255,255);
             background: linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgba(0,212,255,0) 100%);
-            z-index: 3;
+            z-index: 2;
         }
     }
 
@@ -93,9 +75,5 @@
         width: 2.5rem;
         height: 2.5rem;
         fill: var(--color-light-7);
-    }
-
-    &__logo {
-        font-size: 2.65rem;
     }
 }

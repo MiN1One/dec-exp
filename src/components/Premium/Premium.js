@@ -27,6 +27,7 @@ class Premium extends Component {
                 date: 'February 20',
                 img: scan,
                 location: 'Berlin, 20',
+                favorite: false,
             },
             {
                 id: 'someId_123',
@@ -34,7 +35,8 @@ class Premium extends Component {
                 price: '$10,000,00',
                 date: 'February 19',
                 img: nexoa,
-                location: 'Some location'
+                location: 'Some location',
+                favorite: false,
             },
             {
                 id: 'someId_123',
@@ -42,7 +44,8 @@ class Premium extends Component {
                 price: '$400,00',
                 date: 'February 18',
                 img: galax10,
-                location: 'Some location'
+                location: 'Some location',
+                favorite: true,
             },
             {
                 id: 'someId_123',
@@ -50,7 +53,8 @@ class Premium extends Component {
                 price: '$250,00',
                 date: 'February 20',
                 img: iphone8,
-                location: 'Some location'
+                location: 'Some location',
+                favorite: false,
             },
             {
                 id: 'someId_123',
@@ -58,7 +62,8 @@ class Premium extends Component {
                 price: '$650,00',
                 date: 'February 17',
                 img: lenovo,
-                location: 'Some location'
+                location: 'Some location',
+                favorite: true,
             },
             {
                 id: 'someId_123',
@@ -66,7 +71,8 @@ class Premium extends Component {
                 price: '$8,000,00',
                 date: 'February 16',
                 img: cobalt,
-                location: 'Some location'
+                location: 'Some location',
+                favorite: false,
             },
             {
                 id: 'someId_123',
@@ -74,7 +80,8 @@ class Premium extends Component {
                 price: 'Give away',
                 date: 'February 15',
                 img: kitty,
-                location: 'Some location'
+                location: 'Some location',
+                favorite: true,
             },
             {
                 id: 'someId_123',
@@ -82,7 +89,8 @@ class Premium extends Component {
                 price: 'Exchange',
                 date: 'February 14',
                 img: galax20,
-                location: 'Some location'
+                location: 'Some location',
+                favorite: false,
             }
         ]
     }
@@ -106,7 +114,7 @@ class Premium extends Component {
                         </div>
                         <button className="btn btn__primary btn__primary--outline Premium__btn">
                             Show more
-                            <svg className="Navigation__icon Premium__icon" dangerouslySetInnerHTML={{__html: use('chevrons-down')}} />
+                            <svg className="Premium__icon" dangerouslySetInnerHTML={{__html: use('chevrons-down')}} />
                         </button>
                     </div>
                 </div>

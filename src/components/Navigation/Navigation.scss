@@ -7,7 +7,7 @@
     width: 100%;
     border-bottom: 1px solid rgba(#000, .07);
     box-shadow: 0 -1rem 4rem rgba(#000, .07);
-    z-index: 2;
+    z-index: 15;
 
     &__wrapper {
         height: 7rem;
@@ -42,7 +42,7 @@
                 transform: rotate(180deg);
             }
 
-            & .Dropdown {
+            .Dropdown {
                 opacity: 1;
                 visibility: visible;
             }

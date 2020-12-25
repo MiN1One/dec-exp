@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Dropdown from '../Dropdown/Dropdown';
-
 import './Footer.scss';
 import sprite from '../../assets/icons/sprite.svg';
 import Logo from '../Logo/Logo';
@@ -13,7 +11,6 @@ const Footer = props => {
 
     const year = new Date().getFullYear();
 
-    const langs = ['O\'zbekcha', 'English', 'Русский']
     const navs = ['Help', 'Enterprise Adverts', 'Terms of use', 'Privacy Policy', 'SBUY Guide', 'Security measures', 'Site map', 'Map of regions', 'Career', 'Feedback'];
 
     const navItems = navs.map((el, i) => {
@@ -21,14 +18,6 @@ const Footer = props => {
             <li className="Footer__item" key={i}>
                 <a href="#" className="Footer__link">{el}</a>
             </li>
-        );
-    });
-
-    const langItems = langs.map((el, i) => {
-        return (
-            <div className="Dropdown__item" key={i} onClick={() => props.prefs.onChangeLanguage(el)}>
-                <div className="Dropdown__link">{el}</div>
-            </div>
         );
     });
 

@@ -28,25 +28,33 @@
         left: initial;
     }
     
-    &--small {
-        box-shadow: 0 0 3rem rgba(#000, .07);
-        height: 30rem;
-        border-bottom: 1px solid rgba(#000, .07);
-    }
+    &--small { height: 30rem; }
 
     &--show {
         opacity: 1;
         visibility: visible;
     }
 
-    &--full { width: 100%; }
-
-    &--big {
+    &--full {
+        width: 100%;
         border-top: none;
         font-size: 1.4rem;
+        padding: 2.5rem 4rem;
+        user-select: none;
+        box-shadow: 0 3rem 3rem rgba(#000, .07);
+    
+        &:hover {
+            opacity: 0;
+            visibility: hidden;
+        }
     }
 
     &--w-auto { width: auto; }
+
+    &:hover {
+        opacity: 1;
+        visibility: visible;
+    }
 
     &__wrapper {
         position: absolute;
@@ -59,22 +67,57 @@
         z-index: 100;
     }
 
-    &:hover {
-        opacity: 1;
-        visibility: visible;
+    &__wrap {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
 
-    &__full {
-        height: 50rem;
-        width: 100%;
+    &__heading {
+        font-size: 1.45rem;
+        padding-bottom: 1.35rem;
+        border-bottom: 1px solid rgba(#000, .04);
+        color: var(--color-grey-a5);
     }
 
     &__item {
         cursor: pointer;
-
+        
         &:hover {
             background: var(--color-primary);
             color: #fff;
+        }
+        
+        &--float {
+            flex-basis: calc(100% / 2);
+            font-size: 1.5rem;
+            font-weight: 400;
+            // margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            padding: 1.5rem 0;
+
+            &:nth-child(2n) { margin-right: 0; }
+
+            &:hover {
+                background: none;
+                color: #000;
+
+                &::before {
+                    background: var(--color-red);
+                }
+            }
+
+            &::before {
+                content: "";
+                text-align: start;
+                width: .7rem;
+                height: .7rem;
+                background: var(--color-grey-a5);
+                border-radius: 50%;
+                margin-right: .7rem;
+            }
         }
     }
     
@@ -97,11 +140,12 @@
 
         &--thin {
             font-weight: 400;
+            padding: 0;
         }
 
         &--col {
             flex-direction: column;
-            padding: 1.5rem 2.5rem;
+            padding: 2rem 3rem;
             cursor: initial;
         }
     }
@@ -153,7 +197,7 @@
     &__input {
         padding: 1.2rem;
         border-radius: .5rem !important;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         border-width: 2px !important;
     }
 

@@ -8,6 +8,13 @@
     border-radius: .7rem;
     box-shadow: 0 0rem 1.5rem rgba(#000, .03);
     padding: 1.5rem;
+    position: relative;
+    backface-visibility: hidden;
+
+    transition: transform .1s ease;
+    animation: popCard 2s cubic-bezier(0.99, -0.01, 0, 0.99);
+    animation-delay: .35s;
+    animation-fill-mode: backwards;
     
     width: calc((100% - 3 * 5rem) / 4);
     margin-right: 5rem;
@@ -20,8 +27,14 @@
     &:hover {
         border-color: var(--color-primary-opaque);
         outline: none;
+        transform: scale(1.02);
 
-        .Card__item--price { border-color: var(--color-white-opaque-5); }
+        .Card__wrapper .Card__item--price { border-color: var(--color-white-opaque-5); }
+    }
+
+    &__wrapper { 
+        height: 100%;
+        width: 100%;
     }
     
     &__fig {
@@ -100,8 +113,29 @@
     }
 
     &__btn{
+        position: absolute;
+        bottom: 2.2rem;
+        right: 1.5rem;
         padding: .7rem 0;
 
         &:hover .Card__icon { fill: var(--color-red); }
+    }
+
+    [data-favorite=true] &__icon {
+        fill: var(--color-red);
+    }
+}
+
+@keyframes popCard {
+    0% {
+        opacity: 0;
+        transform: scale(.7);
+    }
+    50% {  
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
     }
 }

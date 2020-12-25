@@ -2,8 +2,8 @@
     
     &__heading {
         font-size: 1.9rem;
-        color: var(--color-primary);
-        font-weight: 700;
+        color: var(--color-primary) !important;
+        font-weight: 700 !important;
         text-transform: uppercase;
     }
 }

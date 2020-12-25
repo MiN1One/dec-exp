@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import slugify from 'slugify';
+import { Link } from 'react-router-dom';
 
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import sprite from '../../assets/icons/sprite.svg';
@@ -6,12 +8,12 @@ import './Categories.scss';
 
 const use = (svg) => `<use xlink:href="${sprite}#${svg}"></use>`;
 
-class Categories extends Component {
+class Categories extends PureComponent {
     state = {
         catItems: {
             kids: {
                 val: 'For kids',
-                subItems: ['item1', 'item1', 'item1', 'item1', 'item1', 'item1', 'item1'],
+                subItems: ['Clothing', 'Furniture', 'Toys', 'Educational assets', 'Carriages', 'Food', 'Child car seats', 'Others'],
                 icon: 'Icon'
             },
             props: {
@@ -80,13 +82,19 @@ class Categories extends Component {
     setActiveCat = (cat) => this.setState({ activeCat: cat }, console.log('over'));
     unsetActiveCat = () => this.setState({ activeCat: null }, console.log('out'));
 
+    slug = (string) =>  slugify(string, { replacement: '-', lower: true, remove: /[*+~.()'"!:@/]/g });
+
     render() {
         const catItemsArr = [];
         for (let key in this.state.catItems) {
             catItemsArr.push({
                 id: key,
                 title: this.state.catItems[key].val,
-                icon: this.state.catItems[key].icon
+                icon: this.state.catItems[key].icon,
+                // link: slugify(this.state.catItems[key].val, {
+                //     replacement: '-',
+                //     lower: true
+                // })
             });
         }
 
@@ -104,15 +112,16 @@ class Categories extends Component {
                 </li>
             );
         });
-
+        
         let subItems = null;
         if (this.state.activeCat) {
             subItems = this.state.catItems[this.state.activeCat].subItems.map((el, i) => {
                 return (
                     <li className="Categories__subitem" key={i}>
-                        <a href="#" className="Categories__link Categories__link--sub">
+                        <Link to={`/${this.slug(this.state.catItems[this.state.activeCat].val)}/${this.slug(el)}`} className="Categories__link Categories__link--sub">
+                            <svg className="Categories__icon Categories__icon--sub" dangerouslySetInnerHTML={{__html: use('chevron-right')}} />
                             {el}
-                        </a>
+                        </Link>
                     </li>
                 );
             });
@@ -129,19 +138,18 @@ class Categories extends Component {
                     <ul className="Categories__list">
                         {catItems}
                     </ul>
-                    {
-                        this.state.activeCat && 
-                            <div className="Categories__panel">
-                                <div className="Categories__subhead">
-                                    <h2 className="Categories__heading Categories__heading--sub">{this.state.activeCat && this.state.catItems[this.state.activeCat].val}</h2>
-                                    <button className="Categories__btn Categories__btn--sub" onClick={() => this.unsetActiveCat()}>
-                                        <svg className="Categories__icon Categories__icon--close" dangerouslySetInnerHTML={{__html: use('clear')}} />
-                                    </button>
-                                </div>
-                                <ul className="Categories__sublist">
-                                    {subItems}
-                                </ul>
+                    {this.state.activeCat && 
+                        <div className="Categories__panel">
+                            <div className="Categories__subhead">
+                                <h2 className="Categories__heading Categories__heading--sub">{this.state.activeCat && this.state.catItems[this.state.activeCat].val}</h2>
+                                <button className="Categories__btn Categories__btn--sub" onClick={() => this.unsetActiveCat()}>
+                                    <svg className="Categories__icon Categories__icon--close" dangerouslySetInnerHTML={{__html: use('x')}} />
+                                </button>
                             </div>
+                            <ul className="Categories__sublist">
+                                {subItems}
+                            </ul>
+                        </div>
                     }
                 </div>
             </React.Fragment>

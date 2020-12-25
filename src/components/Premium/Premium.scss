@@ -2,7 +2,7 @@
     background: var(--color-light-7);
 
     &__wrapper {
-        padding: 7.5rem 0;
+        padding: 4rem 0 7.5rem 0;
         width: 100%;
         display: flex;
         align-items: center;
@@ -10,7 +10,7 @@
     }
 
     &__heading {
-        font-size: 4.5rem;
+        font-size: 4rem;
         font-weight: 500;
         color: var(--color-black);
         margin-bottom: 4.5rem;
@@ -30,6 +30,8 @@
     }
 
     &__icon {
+        width: 1.8rem;
+        height: 1.8rem;
         fill: var(--color-primary);
         margin-left: .5rem;
     }

@@ -3,7 +3,7 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     lang: 'English',
     location: 'Tashkent',
-    searchLocation: 'Tashkent'
+    searchLocation: 'Whole country'
 };
 
 const reducer = (state = initialState, action) => {
