@@ -107,7 +107,7 @@ class Premium extends Component {
                 <div className="container">
                     <div className="Premium__wrapper">
                         <div>
-                            <h3 className="Premium__heading">Premuim ads</h3>
+                            <h3 className="Premium__heading">Premium ads</h3>
                             <div className="Premium__list">
                                 {popular}
                             </div>

@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper'; 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -10,9 +10,9 @@ import './Header.scss';
 import sprite from '../../assets/icons/sprite.svg';
 import Categories from '../../components/Categories/Categories';
 
-import car from '../../assets/images/devon-janse-van-rensburg-xJhma-g2cnA-unsplash.jpg';
-import int from '../../assets/images/jonathan-wolf-7sKmRRNH_1Y-unsplash.jpg';
-import int2 from '../../assets/images/taisiia-shestopal-wXwZyBhGSAc-unsplash.jpg';
+import car from '../../assets/images/devon-janse-van-rensburg-xJhma-g2cnA-unsplash-compressed (3).jpg';
+import int from '../../assets/images/jonathan-wolf-7sKmRRNH_1Y-unsplash-compressed.jpg';
+import int2 from '../../assets/images/taisiia-shestopal-wXwZyBhGSAc-unsplash-compressed.jpg';
 
 SwiperCore.use([Autoplay, Navigation, Pagination]);
 
@@ -63,4 +63,4 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default React.memo(Header);

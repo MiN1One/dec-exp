@@ -9,11 +9,19 @@
         flex-direction: column;
     }
 
+    &__head {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        // border-bottom: 1px solid rgba(#000, .07);
+    }
+    
     &__heading {
+        margin-bottom: 4.5rem;
         font-size: 4rem;
         font-weight: 500;
         color: var(--color-black);
-        margin-bottom: 4.5rem;
     }
 
     &__list {

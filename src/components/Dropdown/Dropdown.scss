@@ -39,19 +39,19 @@
         width: 100%;
         border-top: none;
         font-size: 1.4rem;
-        padding: 2.5rem 4rem;
         user-select: none;
-        box-shadow: 0 3rem 3rem rgba(#000, .07);
+    }
+
+    &--sm-s { box-shadow: 0 1rem 1.5rem rgba(#000, .035); }
     
-        &:hover {
-            opacity: 0;
-            visibility: hidden;
-        }
+    &--pad {
+        padding: 2.5rem 4rem;
+        box-shadow: 0 3rem 3rem rgba(#000, .07);
     }
 
     &--w-auto { width: auto; }
 
-    &:hover {
+    &:not(.Dropdown--pad):hover {
         opacity: 1;
         visibility: visible;
     }

@@ -4,75 +4,20 @@ import { Link } from 'react-router-dom';
 
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import sprite from '../../assets/icons/sprite.svg';
+import sprite_cats from '../../assets/icons/sprite-cat.svg';
 import './Categories.scss';
 
-const use = (svg) => `<use xlink:href="${sprite}#${svg}"></use>`;
+const use = (sprite, svg) => `<use xlink:href="${sprite}#${svg}"></use>`;
 
 class Categories extends PureComponent {
     state = {
-        catItems: {
-            kids: {
-                val: 'For kids',
-                subItems: ['Clothing', 'Furniture', 'Toys', 'Educational assets', 'Carriages', 'Food', 'Child car seats', 'Others'],
-                icon: 'Icon'
-            },
-            props: {
-                val: 'Properties',
-                subItems: ['item2', 'item2', 'item2', 'item2', 'item2'],
-                icon: 'Icon'
-            },
-            tech: {
-                val: 'Electronics',
-                subItems: ['item2', 'item2', 'item2', 'item2', 'item2'],
-                icon: 'Icon'
-            },
-            trans: {
-                val: 'Transport / Auto',
-                subItems: ['item3', 'item3', 'item3', 'item3', 'item3'],
-                icon: 'Icon'
-            },
-            jobs: {
-                val: 'Jobs',
-                subItems: ['item4', 'item4', 'item4', 'item4', 'item4'],
-                icon: 'Icon'
-            },
-            pets: {
-                val: 'Pets',
-                subItems: ['item5', 'item5', 'item5', 'item5', 'item5'],
-                icon: 'Icon'
-            },
-            home: {
-                val: 'Home & garden',
-                subItems: ['item6', 'item6', 'item6', 'item6', 'item6'],
-                icon: 'Icon'
-            },
-            business: {
-                val: 'Business & services',
-                subItems: ['item7', 'item7', 'item7', 'item7', 'item7'],
-                icon: 'Icon'
-            },
-            fashion: {
-                val: 'Fashion & style',
-                subItems: ['item8', 'item8', 'item8', 'item8', 'item8'],
-                icon: 'Icon'
-            },
-            sports: {
-                val: 'Sports / Hobby & Comfort',
-                subItems: ['item9', 'item9', 'item9', 'item9', 'item9'],
-                icon: 'Icon'
-            },
-            exchange: {
-                val: 'Exchange',
-                subItems: ['item10', 'item10', 'item10', 'item10', 'item10'],
-                icon: 'Icon'
-            },
-            give: {
-                val: 'Give away',
-                subItems: ['item11', 'item11', 'item11', 'item11', 'item11'],
-                icon: 'Icon'
-            }
-        },
+        catItems: null,
         activeCat: null,
+    }
+
+    async componentDidMount() {
+        const catsObj = await import('../../store/Categories/categories');
+        this.setState({ catItems: catsObj.default });
     }
 
     componentDidUpdate() {
@@ -82,7 +27,7 @@ class Categories extends PureComponent {
     setActiveCat = (cat) => this.setState({ activeCat: cat }, console.log('over'));
     unsetActiveCat = () => this.setState({ activeCat: null }, console.log('out'));
 
-    slug = (string) =>  slugify(string, { replacement: '-', lower: true, remove: /[*+~.()'"!:@/]/g });
+    slug = (string) =>  slugify(string, { replacement: '_', lower: true, remove: /[*+~.()'"!:@/]/g });
 
     render() {
         const catItemsArr = [];
@@ -105,9 +50,11 @@ class Categories extends PureComponent {
                     key={el.id}
                     onClick={() => this.setActiveCat(el.id)}>
                     <div className="Categories__link">
-                        {/* <svg className="Categories__icon" dangerouslySetInnerHTML={{__html: use(el.icon)}} /> */}
-                        {el.title}
-                        <svg className="Categories__icon" dangerouslySetInnerHTML={{__html: use('chevron-right')}} />
+                        <div className="Categories__group">
+                            <svg className="Categories__icon Categories__icon--cat" dangerouslySetInnerHTML={{__html: use(sprite_cats, el.icon)}} />
+                            {el.title}
+                        </div>
+                        <svg className="Categories__icon" dangerouslySetInnerHTML={{__html: use(sprite, 'chevron-right')}} />
                     </div>
                 </li>
             );
@@ -119,7 +66,7 @@ class Categories extends PureComponent {
                 return (
                     <li className="Categories__subitem" key={i}>
                         <Link to={`/${this.slug(this.state.catItems[this.state.activeCat].val)}/${this.slug(el)}`} className="Categories__link Categories__link--sub">
-                            <svg className="Categories__icon Categories__icon--sub" dangerouslySetInnerHTML={{__html: use('chevron-right')}} />
+                            <svg className="Categories__icon Categories__icon--sub" dangerouslySetInnerHTML={{__html: use(sprite, 'chevron-right')}} />
                             {el}
                         </Link>
                     </li>
@@ -133,17 +80,38 @@ class Categories extends PureComponent {
                 <div className="Categories">
                     <div className="Categories__head">
                         <h2 className="Categories__heading">Categories</h2>
-                        <a href="#seeall" className="Categories__btn">See all</a>
+                        <Link to="/cats/all" className="Categories__btn">See all</Link>
                     </div>
                     <ul className="Categories__list">
                         {catItems}
+                        <li className="Categories__item">
+                            <Link to="/exchange" className="Categories__link">
+                                <div className="Categories__group">
+                                    <svg className="Categories__icon Categories__icon--cat" dangerouslySetInnerHTML={{__html: use(sprite_cats,'handshake-o')}} />
+                                    Exchange
+                                </div>
+                                <svg className="Categories__icon" dangerouslySetInnerHTML={{__html: use(sprite, 'chevron-right')}} />
+                            </Link>
+                        </li>
+                        <li className="Categories__item">
+                            <Link to="/give_away" className="Categories__link">
+                                <div className="Categories__group">
+                                    <svg className="Categories__icon Categories__icon--cat" dangerouslySetInnerHTML={{__html: use(sprite_cats,'gift2')}} />
+                                    Give away
+                                </div>
+                                <svg className="Categories__icon" dangerouslySetInnerHTML={{__html: use(sprite, 'chevron-right')}} />
+                            </Link>
+                        </li>
                     </ul>
                     {this.state.activeCat && 
                         <div className="Categories__panel">
                             <div className="Categories__subhead">
-                                <h2 className="Categories__heading Categories__heading--sub">{this.state.activeCat && this.state.catItems[this.state.activeCat].val}</h2>
+                                <h2 className="Categories__heading Categories__heading--sub">
+                                    {this.state.catItems[this.state.activeCat].val}
+                                    <svg className="Categories__icon--large" dangerouslySetInnerHTML={{__html: use(sprite_cats, this.state.catItems[this.state.activeCat].icon)}} />
+                                </h2>
                                 <button className="Categories__btn Categories__btn--sub" onClick={() => this.unsetActiveCat()}>
-                                    <svg className="Categories__icon Categories__icon--close" dangerouslySetInnerHTML={{__html: use('x')}} />
+                                    <svg className="Categories__icon Categories__icon--close" dangerouslySetInnerHTML={{__html: use(sprite, 'x')}} />
                                 </button>
                             </div>
                             <ul className="Categories__sublist">

@@ -35,7 +35,7 @@ class Searchbar extends PureComponent {
     }
 
     render() {
-        const dropClass = ['Dropdown--right--fix Dropdown--full'];
+        const dropClass = ['Dropdown--right--fix Dropdown--full Dropdown--pad'];
         if (this.state.showDrop) dropClass.push('Dropdown--show');
 
         const locations = this.state.locations.map((el, i) => {

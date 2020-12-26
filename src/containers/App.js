@@ -7,11 +7,13 @@ import Footer from '../components/Footer.js/Footer';
 import Navigation from '../components/Navigation/Navigation';
 import './App.scss';
 import Header from './Header/Header';
-import { ResetPass } from '../components/Authorization/ResetPass';
-import AuthSignin from '../components/Authorization/AuthSignin';
-import AuthSignup from '../components/Authorization/AuthSignup';
 import Subcategory from './Subcategory/Subcategory';
-import Filter from '../components/Filter/Filter';
+import Filter from '../components/Filter/Filter-class';
+import asyncComponent from '../hoc/asyncComponent/asyncComponent';
+
+const AsyncAuthSignin = asyncComponent(() => import('../components/Authorization/AuthSignin'));
+const AsyncAuthSignup = asyncComponent(() => import('../components/Authorization/AuthSignup'));
+const AsyncResetPass = asyncComponent(() => import('../components/Authorization/ResetPass'));
 
 function App() {
   const header = (
@@ -47,9 +49,9 @@ function App() {
     <div className="App">
       <Switch>
         <Route path="/" exact render={() => header}/>
-        <Route path="/signin" exact component={AuthSignin} />
-        <Route path="/password-reset" exact component={ResetPass} />
-        <Route path="/signup" exact component={AuthSignup} />
+        <Route path="/signin" exact component={AsyncAuthSignin} />
+        <Route path="/password-reset" exact component={AsyncResetPass} />
+        <Route path="/signup" exact component={AsyncAuthSignup} />
         <Route path="/:category" exact render={() => <h1>All</h1>} />
         <Route path="/:category/:subcategory" exact render={() => subCategory} />
       </Switch>
