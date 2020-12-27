@@ -7,14 +7,17 @@ import Logo from '../Logo/Logo';
 import './Navigation.scss';
 import sprite from '../../assets/icons/sprite.svg';
 import Dropdown from '../Dropdown/Dropdown';
+import Categories from '../Categories/Categories';
+import Backdrop from '../../UI/Backdrop/Backdrop';
 
 const use = (svg) => `<use xlink:href="${sprite}#${svg}"></use>`;
 
 class Navigation extends PureComponent {
     state = {
         showNavItems: true,
-        signedIn: false,
-        inputFocused: false
+        signedIn: true,
+        inputFocused: false,
+        showCat: false
     }
 
     componentDidMount() {
@@ -37,6 +40,9 @@ class Navigation extends PureComponent {
 
     onFocus = () => this.setState({ inputFocused: true });
     onBlur = () => this.setState({ inputFocused: false });
+
+    onClickCat = () => this.setState({ showCat: true });
+    onClickCatHide = () => this.setState({ showCat: false });
 
     render() {
         const signClass = ['Navigation__item'];
@@ -108,38 +114,48 @@ class Navigation extends PureComponent {
         }
 
         return (
-            <header className="Navigation">
-                <div className="container">
-                    <nav role="navigation" className="Navigation__wrapper">
-                        <div className="Navigation__list">
-                            <Logo classOver={logoClass.join(' ')} />
+            <React.Fragment>
+                {(this.props.cat && this.state.showCat) &&
+                    <div className="container">
+                        <Backdrop z={9} class="Backdrop--white" click={this.onClickCatHide} />
+                        <Categories class="Categories--fix" clickItem={this.onClickCatHide} />
+                    </div>
+                }
+                <header className="Navigation">
+                    <div className="container">
+                        <nav role="navigation" className="Navigation__wrapper">
+                            <div className="Navigation__list">
+                                <Logo classOver={logoClass.join(' ')} />
 
-                            <Language class={langClass.join(' ')} dropClass="Dropdown--left-fix" />
-                        </div>
-                        <div className="Navigation__list">
-                            <div className={signClass.join(' ')}>
-                                <Link to="/signin" className="Navigation__link">
-                                    <svg className="Navigation__icon Navigation__icon--arrow" dangerouslySetInnerHTML={{__html: use('chevron-down')}} />
-                                    <span className="Navigation__title  Navigation__title--user">{this.state.signedIn ? 'My profile' : 'Sign in'}</span>
-                                    <div className="Navigation__iconbox">
-                                        <svg className="Navigation__icon Navigation__icon--abs Navigation__icon--white" dangerouslySetInnerHTML={{__html: use('user')}} />
-                                        {this.state.signedIn && <span></span>}
-                                    </div>
-                                </Link>
-                                {userDrop}
+                                <Language class={langClass.join(' ')} dropClass="Dropdown--left-fix" />
                             </div>
-                            <button className="btn btn__primary Navigation__btn">
-                                <span className="Navigation__title Navigation__title--white">Advert</span>
-                                <svg className="Navigation__icon Navigation__icon--white" dangerouslySetInnerHTML={{__html: use('plus')}} />
-                            </button>
-                            {this.props.cat && <button className="btn btn__primary btn__primary--green Navigation__btn">
-                                <span className="Navigation__title Navigation__title--white">Categories</span>
-                                <svg className="Navigation__icon Navigation__icon--white" dangerouslySetInnerHTML={{__html: use('menu')}} />
-                            </button>}
-                        </div>
-                    </nav>
-                </div>
-            </header>
+                            <div className="Navigation__list">
+                                <div className={signClass.join(' ')}>
+                                    <Link to="/signin" className="Navigation__link">
+                                        <svg className="Navigation__icon Navigation__icon--arrow" dangerouslySetInnerHTML={{__html: use('chevron-down')}} />
+                                        <span className="Navigation__title  Navigation__title--user">{this.state.signedIn ? 'My profile' : 'Sign in'}</span>
+                                        <div className="Navigation__iconbox">
+                                            <svg className="Navigation__icon Navigation__icon--abs Navigation__icon--white" dangerouslySetInnerHTML={{__html: use('user')}} />
+                                            {this.state.signedIn && <span></span>}
+                                        </div>
+                                    </Link>
+                                    {userDrop}
+                                </div>
+                                <button className="btn btn__primary Navigation__btn">
+                                    <span className="Navigation__title Navigation__title--white">Advert</span>
+                                    <svg className="Navigation__icon Navigation__icon--white" dangerouslySetInnerHTML={{__html: use('plus')}} />
+                                </button>
+                                {this.props.cat && 
+                                    <button className="btn btn__primary btn__primary--green Navigation__btn" onClick={() => this.onClickCat()}>
+                                        <span className="Navigation__title Navigation__title--white">Categories</span>
+                                        <svg className="Navigation__icon Navigation__icon--white" dangerouslySetInnerHTML={{__html: use('menu')}} />
+                                    </button>
+                                }
+                            </div>
+                        </nav>
+                    </div>
+                </header>
+            </React.Fragment>
         );
     }
 }

@@ -5,4 +5,8 @@
     height: 100vh;
     width: 100vw;
     background: transparent;
+
+    &--white {
+        background: var(--color-white-opaque-7);
+    }
 }

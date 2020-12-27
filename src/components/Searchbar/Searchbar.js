@@ -52,11 +52,6 @@ class Searchbar extends PureComponent {
                         {this.state.showDrop && <Backdrop z={1} click={this.onClickOutside} />}
                         <form className="Searchbar__form" onSubmit={(event) => this.onSubmit(event)}>
                             <label className="Searchbar__label" for="search">
-                                {this.props.search && 
-                                    <div className="Searchbar__btn Searchbar__btn--map Searchbar__btn--clear" onClick={(e) => this.clearInput(e)} >
-                                        <svg className="Searchbar__icon Searchbar__icon--map Searchbar__icon--clear" dangerouslySetInnerHTML={{__html: use('x')}} />
-                                    </div>
-                                }
                                 <input 
                                     className="Searchbar__input"
                                     type="text"
@@ -64,6 +59,9 @@ class Searchbar extends PureComponent {
                                     id="search"
                                     onChange={(ev) => this.props.onChangeSearchInput(ev.target.value)}
                                     value={this.props.search} />
+                                <button className="Searchbar__btn Searchbar__btn--map Searchbar__btn--clear" onClick={(e) => this.clearInput(e)} >
+                                    <svg className="Searchbar__icon Searchbar__icon--map Searchbar__icon--clear" dangerouslySetInnerHTML={{__html: use('x')}} />
+                                </button>
                             </label>
                             <div className="Searchbar__btn Searchbar__btn--map" onClick={() => this.onClick()}>
                                     <svg className="Searchbar__icon Searchbar__icon--map" dangerouslySetInnerHTML={{__html: use('map-pin')}} />

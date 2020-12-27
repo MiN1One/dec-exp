@@ -6,4 +6,3 @@ export const changeSearchInput = (input) => {
         search: input
     }
 };
-

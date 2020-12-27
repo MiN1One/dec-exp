@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import slugify from 'slugify';
 import { Link } from 'react-router-dom';
 
+import catItems from '../../store/Categories/categories';
+
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import sprite from '../../assets/icons/sprite.svg';
 import sprite_cats from '../../assets/icons/sprite-cat.svg';
@@ -11,13 +13,8 @@ const use = (sprite, svg) => `<use xlink:href="${sprite}#${svg}"></use>`;
 
 class Categories extends PureComponent {
     state = {
-        catItems: null,
+        catItems,
         activeCat: null,
-    }
-
-    async componentDidMount() {
-        const catsObj = await import('../../store/Categories/categories');
-        this.setState({ catItems: catsObj.default });
     }
 
     componentDidUpdate() {
@@ -26,6 +23,10 @@ class Categories extends PureComponent {
 
     setActiveCat = (cat) => this.setState({ activeCat: cat }, console.log('over'));
     unsetActiveCat = () => this.setState({ activeCat: null }, console.log('out'));
+
+    onClickItem = () => {
+        if (this.props.clickItem) this.props.clickItem();
+    } 
 
     slug = (string) =>  slugify(string, { replacement: '_', lower: true, remove: /[*+~.()'"!:@/]/g });
 
@@ -65,7 +66,7 @@ class Categories extends PureComponent {
             subItems = this.state.catItems[this.state.activeCat].subItems.map((el, i) => {
                 return (
                     <li className="Categories__subitem" key={i}>
-                        <Link to={`/${this.slug(this.state.catItems[this.state.activeCat].val)}/${this.slug(el)}`} className="Categories__link Categories__link--sub">
+                        <Link to={`/${this.slug(this.state.catItems[this.state.activeCat].val)}/${this.slug(el)}`} className="Categories__link Categories__link--sub" onClick={() => this.onClickItem()}>
                             <svg className="Categories__icon Categories__icon--sub" dangerouslySetInnerHTML={{__html: use(sprite, 'chevron-right')}} />
                             {el}
                         </Link>
@@ -77,7 +78,7 @@ class Categories extends PureComponent {
         return (
             <React.Fragment>
                 {this.state.activeCat && <Backdrop z={9} click={this.unsetActiveCat} />}
-                <div className="Categories">
+                <div className={`Categories ${this.props.class ? this.props.class : ''}`}>
                     <div className="Categories__head">
                         <h2 className="Categories__heading">Categories</h2>
                         <Link to="/cats/all" className="Categories__btn">See all</Link>
@@ -96,7 +97,7 @@ class Categories extends PureComponent {
                         <li className="Categories__item">
                             <Link to="/give_away" className="Categories__link">
                                 <div className="Categories__group">
-                                    <svg className="Categories__icon Categories__icon--cat" dangerouslySetInnerHTML={{__html: use(sprite_cats,'gift2')}} />
+                                    <svg className="Categories__icon Categories__icon--cat" dangerouslySetInnerHTML={{__html: use(sprite_cats, 'gift2')}} />
                                     Give away
                                 </div>
                                 <svg className="Categories__icon" dangerouslySetInnerHTML={{__html: use(sprite, 'chevron-right')}} />
@@ -125,4 +126,4 @@ class Categories extends PureComponent {
     }
 }
 
-export default Categories;
+export default React.memo(Categories);

@@ -4,6 +4,40 @@
     position: relative;
     z-index: 10;
     border-right: 1px solid rgba(#000, .07);
+    background: #fff;
+    
+    &--fix {
+        position: fixed;
+        border-left: 1px solid rgba(#000, .07);
+        top: 7rem;
+        height: calc(100vh - 7rem);
+        width: 35rem;
+
+        .Categories__panel {
+            padding: 1.5rem 2.5rem;
+            width: calc(114rem - 100%);
+        }
+
+        .Categories__list {
+            justify-content: initial;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: visible;
+
+            .Categories__item {
+                height: 4.5rem;
+                flex-grow: 0;
+                backface-visibility: initial;
+
+                .Categories__icon { backface-visibility: initial; }
+
+                &:hover {
+                    transform: translate(0) scale(1);
+                    box-shadow: none;
+                }
+            }
+        }
+    }
 
     &__head {
         display: flex;
@@ -139,6 +173,7 @@
     }
 
     &__panel {
+        width: calc(114rem - 100%);
         position: absolute;
         top: 0;
         left: 100%;
@@ -162,7 +197,6 @@
     }
 
     &__sublist {
-        width: 73rem;
         display: flex;
         flex-wrap: wrap;
     }

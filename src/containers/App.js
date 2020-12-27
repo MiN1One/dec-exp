@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch } from 'react-router-dom';
 
 import Searchbar from '../components/Searchbar/Searchbar';
 import Premium from '../components/Premium/Premium';
@@ -8,14 +8,14 @@ import Navigation from '../components/Navigation/Navigation';
 import './App.scss';
 import Header from './Header/Header';
 import Subcategory from './Subcategory/Subcategory';
-import Filter from '../components/Filter/Filter-class';
+import Filter from '../components/Filter/Filter';
 import asyncComponent from '../hoc/asyncComponent/asyncComponent';
 
 const AsyncAuthSignin = asyncComponent(() => import('../components/Authorization/AuthSignin'));
 const AsyncAuthSignup = asyncComponent(() => import('../components/Authorization/AuthSignup'));
 const AsyncResetPass = asyncComponent(() => import('../components/Authorization/ResetPass'));
 
-function App() {
+function App(props) {
   const header = (
     <React.Fragment>
       <Navigation />
@@ -30,15 +30,6 @@ function App() {
       <Navigation cat />
       <Searchbar />
       <Filter />
-      <Premium />
-      <Subcategory />
-      <Footer />
-    </React.Fragment>
-  )
-  const category = (
-    <React.Fragment>
-      <Navigation cat />
-      <Searchbar />
       <Premium />
       <Subcategory />
       <Footer />

@@ -37,6 +37,9 @@
         width: 35rem;
         border: 1px solid rgba(#000, .1);
         color: var(--color-black);
+        font-family: 'Inter', sans-serif;
+
+        &:not(:placeholder-shown) + .Searchbar__btn { visibility: visible; }
         
         &::-webkit-input-placeholder {
             font-size: 1.65rem;
@@ -104,6 +107,7 @@
             transform: translateY(-50%);
             z-index: 5;
             cursor: pointer;
+            visibility: hidden;
         }
     }
     

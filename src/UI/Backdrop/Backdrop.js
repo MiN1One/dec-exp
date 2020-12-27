@@ -3,14 +3,8 @@
 import './Backdrop.scss';
 
 const Backdrop = (props) => {
-    // useEffect(() => {
-    //     return () => {
-
-    //     }
-    // }, []);
-
     return (
-        <div className="Backdrop" onClick={() => props.click()} style={{zIndex: props.z}}></div>
+        <div className={`Backdrop ${props.class ? props.class : ''}`} onClick={() => props.click()} style={{zIndex: props.z}}></div>
     )
 };
 

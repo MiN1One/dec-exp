@@ -4,25 +4,31 @@ import reportWebVitals from './reportWebVitals';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import reduxThunk from 'redux-thunk';
 
 import localization from './store/reducers/reducer_location';
 import data from './store/reducers/reducer_data';
+import filters from './store/reducers/reducer__filter';
+
 import App from './containers/App';
 import './index.scss';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const rootReducer = combineReducers({
   localization,
-  data
+  data,
+  filters
 });
 
-const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(reduxThunk)));
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <HashRouter>
+      <BrowserRouter>
         <App />
-      </HashRouter>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
