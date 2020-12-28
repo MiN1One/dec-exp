@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions';
 import Logo from '../../components/Logo/Logo';
 
+import * as utils from '../../utilities/utilities';
+
 import sprite from '../../assets/icons/sprite.svg';
 import './Searchbar.scss';
 import Dropdown from '../Dropdown/Dropdown';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 
-const use = (svg) => `<use xlink:href="${sprite}#${svg}"></use>`;
 
 class Searchbar extends PureComponent {
     state = {
@@ -60,16 +61,16 @@ class Searchbar extends PureComponent {
                                     onChange={(ev) => this.props.onChangeSearchInput(ev.target.value)}
                                     value={this.props.search} />
                                 <button className="Searchbar__btn Searchbar__btn--map Searchbar__btn--clear" onClick={(e) => this.clearInput(e)} >
-                                    <svg className="Searchbar__icon Searchbar__icon--map Searchbar__icon--clear" dangerouslySetInnerHTML={{__html: use('x')}} />
+                                    <svg className="Searchbar__icon Searchbar__icon--map Searchbar__icon--clear" dangerouslySetInnerHTML={{__html: utils.use('x')}} />
                                 </button>
                             </label>
                             <div className="Searchbar__btn Searchbar__btn--map" onClick={() => this.onClick()}>
-                                    <svg className="Searchbar__icon Searchbar__icon--map" dangerouslySetInnerHTML={{__html: use('map-pin')}} />
+                                    <svg className="Searchbar__icon Searchbar__icon--map" dangerouslySetInnerHTML={{__html: utils.use('map-pin')}} />
                                     <span className="Searchbar__title">{this.props.searchLocation}</span>
                             </div>
                             
                             <button className="Searchbar__btn" type="submit">
-                                <svg className="Searchbar__icon" dangerouslySetInnerHTML={{__html: use('search')}} />
+                                <svg className="Searchbar__icon" dangerouslySetInnerHTML={{__html: utils.use('search')}} />
                             </button>
                             <Dropdown class={dropClass.join(' ')}>
                                 <p className="Dropdown__heading">Search in:</p>

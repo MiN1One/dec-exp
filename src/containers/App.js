@@ -7,7 +7,7 @@ import Footer from '../components/Footer.js/Footer';
 import Navigation from '../components/Navigation/Navigation';
 import './App.scss';
 import Header from './Header/Header';
-import Subcategory from './Subcategory/Subcategory';
+import Categoryview from './Categoryview/Categoryview';
 import Filter from '../components/Filter/Filter';
 import asyncComponent from '../hoc/asyncComponent/asyncComponent';
 
@@ -15,7 +15,7 @@ const AsyncAuthSignin = asyncComponent(() => import('../components/Authorization
 const AsyncAuthSignup = asyncComponent(() => import('../components/Authorization/AuthSignup'));
 const AsyncResetPass = asyncComponent(() => import('../components/Authorization/ResetPass'));
 
-function App(props) {
+function App() {
   const header = (
     <React.Fragment>
       <Navigation />
@@ -25,13 +25,13 @@ function App(props) {
       <Footer />
     </React.Fragment>
   );
-  const subCategory = (
+  const categories = (
     <React.Fragment>
       <Navigation cat />
       <Searchbar />
       <Filter />
       <Premium />
-      <Subcategory />
+      <Categoryview />
       <Footer />
     </React.Fragment>
   );
@@ -44,7 +44,7 @@ function App(props) {
         <Route path="/password-reset" exact component={AsyncResetPass} />
         <Route path="/signup" exact component={AsyncAuthSignup} />
         <Route path="/:category" exact render={() => <h1>All</h1>} />
-        <Route path="/:category/:subcategory" exact render={() => subCategory} />
+        <Route path="/:category/:subcategory" render={() => categories} />
       </Switch>
     </div>
   );

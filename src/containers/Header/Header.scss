@@ -1,7 +1,7 @@
 .Header {
     position: relative;
     z-index: 1;
-    background-color: #fff;
+    background: var(--color-white-bg);
     border-bottom: 1px solid rgba(#000, .07);
     
     &__wrapper {
@@ -22,7 +22,7 @@
             position: absolute;
             top: 0;
             right: 0;
-            background: rgb(255,255,255);
+            background: var(--color-white-bg);
             background: linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgba(0,212,255,0) 100%);
             z-index: 2;
         }

@@ -11,11 +11,8 @@ import cobalt from '../../assets/images/Chevrolet_Cobalt_2013_in_Russia.JPG';
 import lenovo from '../../assets/images/lenovo-thinkpad-x1-carbon-7th-2.jpg';
 import iphone8 from '../../assets/images/iphone-8-update-in-hand-logo-500x500.jpg';
 
-import sprite from '../../assets/icons/sprite.svg';
-
+import * as utils from '../../utilities/utilities';
 import './Premium.scss';
-
-const use = (svg) => `<use xlink:href="${sprite}#${svg}"></use>`;
 
 class Premium extends Component {
     state = {
@@ -114,7 +111,7 @@ class Premium extends Component {
                         </div>
                         <button className="btn btn__primary btn__primary--outline Premium__btn">
                             Show more
-                            <svg className="Premium__icon" dangerouslySetInnerHTML={{__html: use('chevrons-down')}} />
+                            <svg className="Premium__icon" dangerouslySetInnerHTML={{__html: utils.use('chevrons-down')}} />
                         </button>
                     </div>
                 </div>

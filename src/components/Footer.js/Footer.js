@@ -1,13 +1,12 @@
 import React from 'react';
 
 import './Footer.scss';
-import sprite from '../../assets/icons/sprite.svg';
 import Logo from '../Logo/Logo';
 import Language from '../Language/Language';
 
+import * as utils from '../../utilities/utilities';
 
 const Footer = props => {
-    const use = (svg) => `<use xlink:href="${sprite}#${svg}"></use>`;
 
     const year = new Date().getFullYear();
 
@@ -27,7 +26,7 @@ const Footer = props => {
                 <div className="container">
                     <div className="Footer__headwrap">
                         <div className="Navigation__item">
-                            <svg className="Footer__icon" dangerouslySetInnerHTML={{__html: use('home')}} />
+                            <svg className="Footer__icon" dangerouslySetInnerHTML={{__html: utils.use('home')}} />
                             <h5 className="Footer__heading">Home</h5>
                         </div>
                         <Language class="Navigation__item" dropClass="Dropdown--right-fix" />

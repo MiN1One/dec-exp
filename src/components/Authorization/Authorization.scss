@@ -12,7 +12,7 @@
         top: 47%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: #fff;
+        background: var(--color-white-bg);
         border-radius: .7rem;
         box-shadow: 0 0 3rem rgba(#000, .07);
         border: 2px solid rgba(#000, .12);
@@ -29,7 +29,7 @@
     &__lang {
         padding: 1rem 1.5rem;
         border-radius: .7rem;
-        background: #fff;
+        background: var(--color-white-bg);
         position: absolute;
         top: 3%;
         left: 2%;

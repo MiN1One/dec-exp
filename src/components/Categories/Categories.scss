@@ -4,7 +4,7 @@
     position: relative;
     z-index: 10;
     border-right: 1px solid rgba(#000, .07);
-    background: #fff;
+    background: var(--color-white-bg);
     
     &--fix {
         position: fixed;
@@ -12,6 +12,7 @@
         top: 7rem;
         height: calc(100vh - 7rem);
         width: 35rem;
+        z-index: 98;
 
         .Categories__panel {
             padding: 1.5rem 2.5rem;
@@ -177,7 +178,7 @@
         position: absolute;
         top: 0;
         left: 100%;
-        background: #fff;
+        background: var(--color-white-bg);
         height: 100%;
         padding: 4rem;
         border-left: 1px solid rgba(#000, .07);

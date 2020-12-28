@@ -72,7 +72,7 @@
         }
         
         &--map {
-            background: #fff;
+            background: var(--color-white-bg);
             display: flex;
             align-items: center;
             color: var(--color-grey-dark);

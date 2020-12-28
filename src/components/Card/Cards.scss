@@ -1,6 +1,6 @@
 .Card {
     height: 32rem;
-    background: #fff;
+    background: var(--color-white-bg);
     display: flex;
     flex-direction: column;
     justify-content: space-between;

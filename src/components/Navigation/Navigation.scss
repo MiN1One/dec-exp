@@ -1,5 +1,5 @@
 .Navigation {
-    background: #fff;
+    background: var(--color-white-bg);
     font-weight: 500;
     position: fixed;
     top: 0;
@@ -7,7 +7,7 @@
     width: 100%;
     border-bottom: 1px solid rgba(#000, .07);
     box-shadow: 0 -1.5rem 5rem rgba(#000, .07);
-    z-index: 15;
+    z-index: 99;
 
     &__wrapper {
         height: 7rem;

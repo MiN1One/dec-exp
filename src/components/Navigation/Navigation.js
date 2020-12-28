@@ -2,19 +2,17 @@ import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 
 import Language from '../Language/Language';
+import * as utils from '../../utilities/utilities';
 
 import Logo from '../Logo/Logo';
 import './Navigation.scss';
-import sprite from '../../assets/icons/sprite.svg';
 import Dropdown from '../Dropdown/Dropdown';
 import Categories from '../Categories/Categories';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 
-const use = (svg) => `<use xlink:href="${sprite}#${svg}"></use>`;
-
 class Navigation extends PureComponent {
     state = {
-        showNavItems: true,
+        toggleLogo: false,
         signedIn: true,
         inputFocused: false,
         showCat: false
@@ -25,9 +23,11 @@ class Navigation extends PureComponent {
     }
 
     onScroll = () => {
-        const scroll = document.documentElement.scrollTop;
-        if (scroll > 0) this.setState({ showNavItems: false });
-        if (scroll === 0) this.setState({ showNavItems: true });
+        if (!this.props.adView) {
+            const scroll = document.documentElement.scrollTop;
+            if (scroll > 0) this.setState({ toggleLogo: true });
+            if (scroll === 0) this.setState({ toggleLogo: false });
+        }
     };
 
     componentWillUnmount() {
@@ -35,7 +35,7 @@ class Navigation extends PureComponent {
     }
 
     componentDidUpdate() {
-        console.log('NAvigation.js update');
+        console.log('Navigation.js update');
     }
 
     onFocus = () => this.setState({ inputFocused: true });
@@ -46,12 +46,6 @@ class Navigation extends PureComponent {
 
     render() {
         const signClass = ['Navigation__item'];
-        const logoClass = ['Navigation__item'];
-        const langClass = ['Navigation__item Navigation__item--hide'];
-        if (this.state.showNavItems) {
-            langClass.push('Navigation__item--show');
-            logoClass.push('Navigation__item--hide');
-        }
         if (this.state.inputFocused) signClass.push('Navigation__item--keep');
 
         let userDrop = (
@@ -117,7 +111,7 @@ class Navigation extends PureComponent {
             <React.Fragment>
                 {(this.props.cat && this.state.showCat) &&
                     <div className="container">
-                        <Backdrop z={9} class="Backdrop--white" click={this.onClickCatHide} />
+                        <Backdrop z={96} class="Backdrop--white" click={this.onClickCatHide} />
                         <Categories class="Categories--fix" clickItem={this.onClickCatHide} />
                     </div>
                 }
@@ -125,17 +119,16 @@ class Navigation extends PureComponent {
                     <div className="container">
                         <nav role="navigation" className="Navigation__wrapper">
                             <div className="Navigation__list">
-                                <Logo classOver={logoClass.join(' ')} />
-
-                                <Language class={langClass.join(' ')} dropClass="Dropdown--left-fix" />
+                                {this.state.toggleLogo || this.props.adView ? <Logo classOver="Navigation__item" /> : null}
+                                {(!this.state.toggleLogo || this.props.adView) && <Language class="Navigation__item" dropClass="Dropdown--left-fix" />}
                             </div>
                             <div className="Navigation__list">
                                 <div className={signClass.join(' ')}>
                                     <Link to="/signin" className="Navigation__link">
-                                        <svg className="Navigation__icon Navigation__icon--arrow" dangerouslySetInnerHTML={{__html: use('chevron-down')}} />
+                                        <svg className="Navigation__icon Navigation__icon--arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
                                         <span className="Navigation__title  Navigation__title--user">{this.state.signedIn ? 'My profile' : 'Sign in'}</span>
                                         <div className="Navigation__iconbox">
-                                            <svg className="Navigation__icon Navigation__icon--abs Navigation__icon--white" dangerouslySetInnerHTML={{__html: use('user')}} />
+                                            <svg className="Navigation__icon Navigation__icon--abs Navigation__icon--white" dangerouslySetInnerHTML={{__html: utils.use('user')}} />
                                             {this.state.signedIn && <span></span>}
                                         </div>
                                     </Link>
@@ -143,12 +136,12 @@ class Navigation extends PureComponent {
                                 </div>
                                 <button className="btn btn__primary Navigation__btn">
                                     <span className="Navigation__title Navigation__title--white">Advert</span>
-                                    <svg className="Navigation__icon Navigation__icon--white" dangerouslySetInnerHTML={{__html: use('plus')}} />
+                                    <svg className="Navigation__icon Navigation__icon--white" dangerouslySetInnerHTML={{__html: utils.use('plus')}} />
                                 </button>
                                 {this.props.cat && 
                                     <button className="btn btn__primary btn__primary--green Navigation__btn" onClick={() => this.onClickCat()}>
                                         <span className="Navigation__title Navigation__title--white">Categories</span>
-                                        <svg className="Navigation__icon Navigation__icon--white" dangerouslySetInnerHTML={{__html: use('menu')}} />
+                                        <svg className="Navigation__icon Navigation__icon--white" dangerouslySetInnerHTML={{__html: utils.use('menu')}} />
                                     </button>
                                 }
                             </div>

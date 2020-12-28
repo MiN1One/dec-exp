@@ -7,8 +7,7 @@ import './Filter.scss';
 import sprite from '../../assets/icons/sprite.svg';
 import Dropdown from '../Dropdown/Dropdown';
 import * as actions from '../../store/actions';
-
-const use = (svg) => `<use xlink:href="${sprite}#${svg}"></use>`;
+import * as utils from '../../utilities/utilities';
 
 class Filter extends PureComponent {
     state = {
@@ -16,26 +15,20 @@ class Filter extends PureComponent {
     }
 
     async componentDidMount() {
-        const pathname = this.props.history.location.pathname;
-        const url = pathname.split('/').toString().replace('', '/').split(',');
-        const filter = await import(`../../store/Filters/${url[1]}`);
-        console.log(filter)
-        this.setState({ filterConfig: filter.default });
+        try {
+            const category = this.props.match.params.category;
+            const filter = await import(`../../store/Filters/${category}`);
+            this.setState({ filterConfig: filter.default });
+        } catch(er) {
+            this.setState({ filterConfig: null });
+            console.log(er);
+        }
     }
-
-    formatRouteString = (string) => {
-        let str = string.charAt(0).toUpperCase() + string.slice(1);
-        if (str.includes('_')) str = str.split('_').join(' ');
-        return str;
-    }
-
-    capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-    toLower = (str) => str.charAt(0).toLowerCase() + str.slice(1);
 
     render() {
-        const pathname = this.props.history.location.pathname;
-        const url = pathname.split('/').toString().replace('', '/').split(',');
-        const [ home, category, subCategory ] = url;
+        const pathname = this.props.location.pathname;
+        const category = this.props.match.params.category;
+        const subCategory = this.props.match.params.subcategory;
 
         let subCatItems;
         let counters;
@@ -49,15 +42,15 @@ class Filter extends PureComponent {
             subCatItems = innerSubCatItems.sub.map((obj, index) => {
 
                 const innerItems = obj.items.map((el, i) => {
-                    return <div className="Filter__dropitem" key={i} onClick={() => this.props[obj.method](this.toLower(el))}>{this.capitalize(el)}</div>
+                    return <div className="Filter__dropitem" key={i} onClick={() => this.props[obj.method](utils.toLower(el))}>{utils.capitalize(el)}</div>
                 });
 
                 return (
                     <li className="Filter__item" key={index}>
                         <p className="Filter__title">{obj.title}</p>
                         <div className="Filter__input input">
-                            {this.capitalize(this.props[this.toLower(obj.title)])}
-                            <svg className="Filter__icon Filter__icon--arrow" dangerouslySetInnerHTML={{__html: use('chevron-down')}} />
+                            {utils.capitalize(this.props[utils.toLower(obj.title)])}
+                            <svg className="Filter__icon Filter__icon--arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
                             <Dropdown class="Dropdown--full Dropdown--sm-s">
                                 {innerItems}
                             </Dropdown>
@@ -77,9 +70,9 @@ class Filter extends PureComponent {
                                     className="Filter__input Filter__input--small input" 
                                     placeholder="from" 
                                     onChange={(e) => this.props[el.method](e.target.value)} 
-                                    value={this.props[this.toLower(el.title)].from} />
+                                    value={this.props[utils.toLower(el.title)].from} />
                                 <button className="Filter__btn Filter__btn--abs" onClick={() => this.props[el.method]('')}>
-                                    <svg className="Filter__icon Filter__icon--arrow" dangerouslySetInnerHTML={{__html: use('x')}} />
+                                    <svg className="Filter__icon Filter__icon--arrow" dangerouslySetInnerHTML={{__html: utils.use('x')}} />
                                 </button>
                             </label>
                             <label className="Filter__label">
@@ -88,9 +81,9 @@ class Filter extends PureComponent {
                                     className="Filter__input Filter__input--small Filter__input--border  input" 
                                     placeholder="to" 
                                     onChange={(e) => this.props[el.methodEnd](e.target.value)} 
-                                    value={this.props[this.toLower(el.title)].to} />
+                                    value={this.props[utils.toLower(el.title)].to} />
                                 <button className="Filter__btn Filter__btn--abs" onClick={() => this.props[el.methodEnd]('')}>
-                                    <svg className="Filter__icon Filter__icon--arrow" dangerouslySetInnerHTML={{__html: use('x')}} />
+                                    <svg className="Filter__icon Filter__icon--arrow" dangerouslySetInnerHTML={{__html: utils.use('x')}} />
                                 </button>
                             </label>
                         </div>
@@ -107,13 +100,13 @@ class Filter extends PureComponent {
                             <h3 className="heading heading__3 Filter__heading">Filters</h3>
                             <div className="Filter__group">
                                 <button className="Filter__btn" onClick={() => this.props.onChangeCardView('grid')}>
-                                    <svg className="Filter__icon" dangerouslySetInnerHTML={{__html: use('grid')}} />
+                                    <svg className="Filter__icon" dangerouslySetInnerHTML={{__html: utils.use('grid')}} />
                                 </button>
                                 <button className="Filter__btn" onClick={() => this.props.onChangeCardView('list-view')}>
-                                    <svg className="Filter__icon" dangerouslySetInnerHTML={{__html: use('list')}} />
+                                    <svg className="Filter__icon" dangerouslySetInnerHTML={{__html: utils.use('list')}} />
                                 </button>
                                 <button className="Filter__btn" onClick={() => this.props.onClearFilter()}>
-                                    <svg className="Filter__icon" dangerouslySetInnerHTML={{__html: use('trash-2')}} />
+                                    <svg className="Filter__icon" dangerouslySetInnerHTML={{__html: utils.use('trash-2')}} />
                                 </button>
                             </div>
                         </div>
@@ -129,7 +122,7 @@ class Filter extends PureComponent {
                                             onChange={(e) => this.props.onFilterByPriceStart(e.target.value)} 
                                             value={this.props.price.from} />
                                         <button className="Filter__btn Filter__btn--abs" onClick={() => this.props.onFilterByPriceStart('')}>
-                                            <svg className="Filter__icon Filter__icon--arrow" dangerouslySetInnerHTML={{__html: use('x')}} />
+                                            <svg className="Filter__icon Filter__icon--arrow" dangerouslySetInnerHTML={{__html: utils.use('x')}} />
                                         </button>
                                     </label>
                                     <label className="Filter__label">
@@ -140,7 +133,7 @@ class Filter extends PureComponent {
                                             onChange={(e) => this.props.onFilterByPriceEnd(e.target.value)} 
                                             value={this.props.price.to} />
                                         <button className="Filter__btn Filter__btn--abs" onClick={() => this.props.onFilterByPriceEnd('')}>
-                                            <svg className="Filter__icon Filter__icon--arrow" dangerouslySetInnerHTML={{__html: use('x')}} />
+                                            <svg className="Filter__icon Filter__icon--arrow" dangerouslySetInnerHTML={{__html: utils.use('x')}} />
                                         </button>
                                     </label>
                                 </div>
@@ -150,8 +143,8 @@ class Filter extends PureComponent {
                             <li className="Filter__item">
                                 <p className="Filter__title">Sort by</p>
                                 <div className="Filter__input input">
-                                    {this.capitalize(this.props.sort)}
-                                    <svg className="Filter__icon Filter__icon--arrow" dangerouslySetInnerHTML={{__html: use('chevron-down')}} />
+                                    {utils.capitalize(this.props.sort)}
+                                    <svg className="Filter__icon Filter__icon--arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
                                     <Dropdown class="Dropdown--full Dropdown--sm-s">
                                         <div className="Filter__dropitem" onClick={() => this.props.onSortBy('Date')}>Date</div>
                                         <div className="Filter__dropitem" onClick={() => this.props.onSortBy('Most expensive')}>Most expensive</div>
@@ -175,9 +168,9 @@ class Filter extends PureComponent {
                             <div className="Filter__group">
                                 <Link to="/" className="Filter__link">Home</Link>
                                 <span className="Filter__link">&bull;</span>
-                                <Link to={'/' + category} className="Filter__link">{this.formatRouteString(category)}</Link>
+                                <Link to={'/' + category} className="Filter__link">{utils.formatRouteString(category)}</Link>
                                 <span className="Filter__link">&bull;</span>
-                                <Link to={pathname} className="Filter__link">{this.formatRouteString(subCategory)}</Link>
+                                <span className="Filter__link">{utils.formatRouteString(subCategory)}</span>
                             </div>
                         </div>
                     </div>
