@@ -13,19 +13,6 @@
     &__list {
         width: 70%;
         height: 100%;
-        position: relative;
-
-        &::after {
-            content: "";
-            width: 10%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: var(--color-white-bg);
-            background: linear-gradient(-90deg, rgba(255,255,255,1) 0%, rgba(0,212,255,0) 100%);
-            z-index: 2;
-        }
     }
 
     &__item {
@@ -52,27 +39,6 @@
         z-index: 1;
         font-size: 4rem;
         font-weight: 500;
-    }
-
-    &__btn {
-        position: absolute;
-        top: 50%;
-        left: 8%;
-        transform: translate(-50%, -50%);
-        z-index: 5;
-        background: rgba(#000, .5);
-        padding: .7rem;
-        border-radius: 50%;
-        transition: opacity .3s ease;
-
-        &:not(.Header__btn--disabled):hover { background: rgba(#000, .9) }
-
-        &--right { left: 92%; }
-
-        &--disabled {
-            opacity: .5;
-            cursor: initial;
-        }
     }
 
     &__icon {

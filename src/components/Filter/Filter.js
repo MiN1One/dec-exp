@@ -4,20 +4,23 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import './Filter.scss';
-import sprite from '../../assets/icons/sprite.svg';
 import Dropdown from '../Dropdown/Dropdown';
 import * as actions from '../../store/actions';
 import * as utils from '../../utilities/utilities';
 
 class Filter extends PureComponent {
-    state = {
-        filterConfig: {}
+    constructor(props) {
+        super(props);
+        this.state = {
+            filterConfig: {}
+        }
+        this.category = this.props.match.params.category;
+        this.subCategory = this.props.match.params.subcategory;
     }
 
     async componentDidMount() {
         try {
-            const category = this.props.match.params.category;
-            const filter = await import(`../../store/Filters/${category}`);
+            const filter = await import(`../../store/Filters/${this.category}`);
             this.setState({ filterConfig: filter.default });
         } catch(er) {
             this.setState({ filterConfig: null });
@@ -25,19 +28,31 @@ class Filter extends PureComponent {
         }
     }
 
+    // onChangeCardView = (list) => {
+    //     const root = document.documentElement;
+    //     root.style.setProperty('--flex-dir', 'column');
+    //     root.style.setProperty('--flex-basis', '100%');
+    //     root.style.setProperty('--mr-card', '0');
+    //     root.style.setProperty('--mb-card', '2rem');
+    //     root.style.setProperty('--wrap-card-width', '20%');
+    //     root.style.setProperty('--wrap-card-flex-dir', 'row');
+    //     root.style.setProperty('--wrap-card-flex-just', 'space-between');
+    //     root.style.setProperty('--height-card', 'max-content');
+    //     root.style.setProperty('--fav-card-pos', 'relative');
+    //     root.style.setProperty('--wrap-card-flex-align', 'center');
+    //     root.style.setProperty('--card-list-just', 'flex-end');
+    // }
+
     render() {
-        const pathname = this.props.location.pathname;
-        const category = this.props.match.params.category;
-        const subCategory = this.props.match.params.subcategory;
 
         let subCatItems;
         let counters;
         
-        const categoryObj = this.state.filterConfig[category];
+        const categoryObj = this.state.filterConfig[this.category];
         
         if (categoryObj) {
 
-            const innerSubCatItems = categoryObj.items[subCategory];
+            const innerSubCatItems = categoryObj.items[this.subCategory];
 
             subCatItems = innerSubCatItems.sub.map((obj, index) => {
 
@@ -99,12 +114,12 @@ class Filter extends PureComponent {
                         <div className="Filter__list Filter__list--headline">
                             <h3 className="heading heading__3 Filter__heading">Filters</h3>
                             <div className="Filter__group">
-                                <button className="Filter__btn" onClick={() => this.props.onChangeCardView('grid')}>
+                                {/* <button className="Filter__btn" onClick={() => this.onChangeCardView()}>
                                     <svg className="Filter__icon" dangerouslySetInnerHTML={{__html: utils.use('grid')}} />
                                 </button>
-                                <button className="Filter__btn" onClick={() => this.props.onChangeCardView('list-view')}>
+                                <button className="Filter__btn" onClick={() => this.onChangeCardView(true)}>
                                     <svg className="Filter__icon" dangerouslySetInnerHTML={{__html: utils.use('list')}} />
-                                </button>
+                                </button> */}
                                 <button className="Filter__btn" onClick={() => this.props.onClearFilter()}>
                                     <svg className="Filter__icon" dangerouslySetInnerHTML={{__html: utils.use('trash-2')}} />
                                 </button>
@@ -168,9 +183,9 @@ class Filter extends PureComponent {
                             <div className="Filter__group">
                                 <Link to="/" className="Filter__link">Home</Link>
                                 <span className="Filter__link">&bull;</span>
-                                <Link to={'/' + category} className="Filter__link">{utils.formatRouteString(category)}</Link>
+                                <Link to={'/' + this.category} className="Filter__link">{utils.formatRouteString(this.category)}</Link>
                                 <span className="Filter__link">&bull;</span>
-                                <span className="Filter__link">{utils.formatRouteString(subCategory)}</span>
+                                <span className="Filter__link">{utils.formatRouteString(this.subCategory)}</span>
                             </div>
                         </div>
                     </div>

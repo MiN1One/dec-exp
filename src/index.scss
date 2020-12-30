@@ -19,6 +19,21 @@
   --color-light-5-opaque: rgba(245,245,245, .75);
   --color-white-opaque-5: rgba(255,255,255, .5);
   --color-white-opaque-7: rgba(255,255,255, .7);
+  --color-white-bg-secondary: #fcfcfc;
+
+  // Change view 
+  --flex-dir: row;
+  --flex-basis: calc((100% - 3 * 5rem) / 4);
+  --mr-card: 5rem;
+  --mb-card: 5rem;
+  --height-card: 32rem;
+  --wrap-card-flex-dir: column;
+  --wrap-card-flex-just: space-evenly;
+  --wrap-card-align: initial;
+  --wrap-card-width: 100%;
+  --fav-card-pos: absolute;
+  --card-list-mr: 0;
+  --card-list-just: initial;
 }
 
 *,
@@ -67,6 +82,9 @@ button {
 
 svg {
   display: flex;
+  width: 2rem;
+  height: 2rem;
+  fill: var(--color-light-5)
 }
 
 input {

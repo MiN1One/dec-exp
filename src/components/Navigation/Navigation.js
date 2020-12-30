@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import Language from '../Language/Language';
 import * as utils from '../../utilities/utilities';
@@ -23,11 +23,9 @@ class Navigation extends PureComponent {
     }
 
     onScroll = () => {
-        if (!this.props.adView) {
-            const scroll = document.documentElement.scrollTop;
-            if (scroll > 0) this.setState({ toggleLogo: true });
-            if (scroll === 0) this.setState({ toggleLogo: false });
-        }
+        const scroll = document.documentElement.scrollTop;
+        if (scroll > 0) this.setState({ toggleLogo: true });
+        if (scroll === 0) this.setState({ toggleLogo: false });
     };
 
     componentWillUnmount() {
@@ -110,8 +108,8 @@ class Navigation extends PureComponent {
         return (
             <React.Fragment>
                 {(this.props.cat && this.state.showCat) &&
-                    <div className="container">
-                        <Backdrop z={96} class="Backdrop--white" click={this.onClickCatHide} />
+                    <div className="Categories__container">
+                        <Backdrop z={96} class="Backdrop--blur" click={this.onClickCatHide} />
                         <Categories class="Categories--fix" clickItem={this.onClickCatHide} />
                     </div>
                 }
@@ -119,8 +117,8 @@ class Navigation extends PureComponent {
                     <div className="container">
                         <nav role="navigation" className="Navigation__wrapper">
                             <div className="Navigation__list">
-                                {this.state.toggleLogo || this.props.adView ? <Logo classOver="Navigation__item" /> : null}
-                                {(!this.state.toggleLogo || this.props.adView) && <Language class="Navigation__item" dropClass="Dropdown--left-fix" />}
+                                {this.state.toggleLogo && <Logo classOver="Navigation__item" />}
+                                {!this.state.toggleLogo && <Language class="Navigation__item" dropClass="Dropdown--left-fix" />}
                             </div>
                             <div className="Navigation__list">
                                 <div className={signClass.join(' ')}>
@@ -153,4 +151,4 @@ class Navigation extends PureComponent {
     }
 }
 
-export default Navigation;
+export default withRouter(Navigation);

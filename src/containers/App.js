@@ -2,12 +2,11 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Searchbar from '../components/Searchbar/Searchbar';
-import Premium from '../components/Premium/Premium';
+import Main from './Main/Main';
 import Footer from '../components/Footer.js/Footer';
 import Navigation from '../components/Navigation/Navigation';
 import './App.scss';
 import Header from './Header/Header';
-import Categoryview from './Categoryview/Categoryview';
 import Filter from '../components/Filter/Filter';
 import asyncComponent from '../hoc/asyncComponent/asyncComponent';
 
@@ -21,7 +20,7 @@ function App() {
       <Navigation />
       <Searchbar />
       <Header />
-      <Premium />
+      <Main header />
       <Footer />
     </React.Fragment>
   );
@@ -30,8 +29,7 @@ function App() {
       <Navigation cat />
       <Searchbar />
       <Filter />
-      <Premium />
-      <Categoryview />
+      <Main />
       <Footer />
     </React.Fragment>
   );

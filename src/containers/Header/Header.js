@@ -43,15 +43,15 @@ class Header extends Component {
                     <div className="Header__wrapper">
                         <Categories />
                         <Swiper 
-                            className="Header__list"
+                            className="Header__list gradient gradient--right"
                             autoplay={{ delay: 3000, disableOnInteraction: false, waitForTransition: true }}
-                            navigation={{ prevEl: '.Header__btn--left', nextEl: '.Header__btn--right', disabledClass: 'Header__btn--disabled' }}
+                            navigation={{ prevEl: '.btn__rounded--left', nextEl: '.btn__rounded--right', disabledClass: 'btn__rounded--disabled' }}
                             pagination={{el: '.swiper-pagination', clickable: true}}>
                             {ads}
-                            <button className="Header__btn Header__btn--left">
+                            <button className="btn btn__rounded btn__rounded--left">
                                 <svg className="Header__icon" dangerouslySetInnerHTML={{__html: use('chevron-left')}} />
                             </button>
-                            <button className="Header__btn Header__btn--right">
+                            <button className="btn btn__rounded btn__rounded--right">
                                 <svg className="Header__icon" dangerouslySetInnerHTML={{__html: use('chevron-right')}} />
                             </button>
                             <div className="swiper-pagination"></div>
