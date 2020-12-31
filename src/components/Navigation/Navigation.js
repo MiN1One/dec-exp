@@ -109,7 +109,7 @@ class Navigation extends PureComponent {
             <React.Fragment>
                 {(this.props.cat && this.state.showCat) &&
                     <div className="Categories__container">
-                        <Backdrop z={96} class="Backdrop--blur" click={this.onClickCatHide} />
+                        <Backdrop z={96} click={this.onClickCatHide} />
                         <Categories class="Categories--fix" clickItem={this.onClickCatHide} />
                     </div>
                 }
