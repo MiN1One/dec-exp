@@ -51,25 +51,6 @@
 
         &:nth-child(5n) { margin-right: 0; }
         // &:last-child { mar }
-
-        &--types {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: max-content;
-            flex-basis: auto;
-            padding: .7rem 1.2rem;
-            background: var(--color-light-5);
-            border-radius: 2rem;
-            border: 1px solid var(--color-primary-opaque);
-
-            .Filter__link { margin: 0; }
-
-            &:hover {
-                color: #fff;
-                background: var(--color-primary);
-            }
-        }
     }
 
     &__link {

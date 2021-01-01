@@ -3,7 +3,7 @@
   --color-primary-opaque: rgba(55,66,250, .4);
   --color-primary-dark: #0549c6;
   --color-secondary: #7fdf11;
-  --color-secondary-opaque:  rgba(127,223,17, 3);
+  --color-secondary-opaque:  rgba(127,223,17, .55);
   --color-secondary-dark: #72c80f;
   --color-tertiary: #d51355;
   --color-tertiary-opaque: rgba(213,19,85, .45);
@@ -87,8 +87,10 @@ svg {
   fill: var(--color-light-5)
 }
 
-input {
+input,
+textarea {
   border: none;
+  font-family: 'Inter', sans-serif;
 
   &:focus {
     outline: none;

@@ -27,7 +27,7 @@
         border-left: 1px solid rgba(#000, .09);
         border-right: 1px solid rgba(#000, .09);
         box-shadow: 0 0 5rem rgba(#000, .07);
-        background: rgba(#fff, .85);
+        background: var(--color-white-bg);
         animation: fadeIn .75s ease;
         animation-fill-mode: backwards;
         backdrop-filter: blur(1px);

@@ -137,7 +137,7 @@ class Navigation extends PureComponent {
                                     <svg className="Navigation__icon Navigation__icon--white" dangerouslySetInnerHTML={{__html: utils.use('plus')}} />
                                 </button>
                                 {this.props.cat && 
-                                    <button className="btn btn__primary btn__primary--green Navigation__btn" onClick={() => this.onClickCat()}>
+                                    <button className="btn btn__secondary Navigation__btn" onClick={() => this.onClickCat()}>
                                         <span className="Navigation__title Navigation__title--white">Categories</span>
                                         <svg className="Navigation__icon Navigation__icon--white" dangerouslySetInnerHTML={{__html: utils.use('menu')}} />
                                     </button>

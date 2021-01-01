@@ -3,11 +3,14 @@ import actionTypes from '../actions/actionTypes';
 import scan from '../../assets/images/scania.jpg';
 import nexoa from '../../assets/images/nexia.jpg';
 import galax10 from '../../assets/images/galaxy10.jpg';
-import kitty from '../../assets/images/kitty.jpg';
+import cat_tuti from '../../assets/images/cat-tuti.jpeg';
 import galax20 from '../../assets/images/s202.jpg';
+import galax20_2 from '../../assets/images/s20-2.jpg';
 import cobalt from '../../assets/images/Chevrolet_Cobalt_2013_in_Russia.JPG';
 import lenovo from '../../assets/images/lenovo-thinkpad-x1-carbon-7th-2.jpg';
+import lenovo_2 from '../../assets/images/Lenovo-ThinkPad-T495-title.jpg';
 import iphone8 from '../../assets/images/iphone-8-update-in-hand-logo-500x500.jpg';
+import iphone8_2 from '../../assets/images/iphone-8-8-plus-hands-on-10_large.jpg';
 
 const initialState = {
     search: '',
@@ -51,7 +54,7 @@ const initialState = {
             title: 'Iphone 8',
             price: '$250,00',
             date: 'February 20',
-            img: [iphone8],
+            img: [iphone8_2, iphone8],
             location: 'Some location',
             favorite: false,
             category: '',
@@ -62,7 +65,7 @@ const initialState = {
             title: 'Lenovo Thinkpad',
             price: '$650,00',
             date: 'February 17',
-            img: [lenovo],
+            img: [lenovo, lenovo_2],
             location: 'Some location',
             favorite: true,
             category: '',
@@ -84,7 +87,7 @@ const initialState = {
             title: 'Kitty',
             price: 'Give away',
             date: 'February 15',
-            img: [kitty],
+            img: [cat_tuti],
             location: 'Some location',
             favorite: true,
             category: '',
@@ -95,7 +98,7 @@ const initialState = {
             title: 'Galaxy S20',
             price: 'Exchange',
             date: 'February 14',
-            img: [galax20],
+            img: [galax20, galax20_2],
             location: 'Some location',
             favorite: false,
             category: '',

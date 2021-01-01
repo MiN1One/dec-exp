@@ -24,7 +24,7 @@ class Main extends PureComponent {
                         <div>
                             <div className="Main__group">
                                 <h3 className="Main__heading">Premiuim ads</h3>
-                                <button className="Main__btn Main__btn--green btn btn__primary btn__primary--green btn__primary--green-outline">
+                                <button className="Main__btn Main__btn--green btn btn__secondary btn__secondary--outline">
                                     See all
                                 </button>
                             </div>

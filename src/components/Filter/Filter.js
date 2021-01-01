@@ -170,13 +170,13 @@ class Filter extends PureComponent {
                         </ul>
                         <div className="Filter__list Filter__list--headline Filter__list--bottomline">
                             <ul className="Filter__group">
-                                <li className="Filter__item Filter__item--types">
+                                <li className="tag tag__types">
                                     <a href="#" className="Filter__link">Lalaku</a>
                                 </li>
-                                <li className="Filter__item Filter__item--types">
+                                <li className="tag tag__types">
                                     <a href="#" className="Filter__link">Baby jackets</a>
                                 </li>
-                                <li className="Filter__item Filter__item--types">
+                                <li className="tag tag__types">
                                     <a href="#" className="Filter__link">Baby Jeans</a>
                                 </li>
                             </ul>

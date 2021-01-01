@@ -9,9 +9,8 @@
     font-size: 1.5rem;
     
     &__wrapper {
-        background: rgba(#000, .45);
-        padding: 3rem 0;
-        backdrop-filter: blur(5px);
+        background: rgba(#000, .55);
+        backdrop-filter: blur(3px);
         position: absolute;
         top: 7rem;
         left: 50%;
@@ -22,14 +21,12 @@
         -webkit-backface-visibility: hidden;
         -webkit-perspective: 1000;
         backface-visibility: hidden;
+        padding: 3rem 0;
         perspective: 1000;
     }
     
     &__content {
-        position: relative;
-        z-index: 16;
-        height: 200rem;
-        width: 100%;
+        height: 150rem;
     }
 
     &__head {
@@ -56,17 +53,13 @@
         font-weight: 400 !important;
         color: var(--color-black) !important;
     }
-
-    &__subheading {
-        display: flex;
-    }
     
     &__swiper {
+        width: 70rem;
         position: relative;
         border-radius: .7rem .7rem 0 0;
         background: var(--color-grey-7);
         height: 45rem;
-        overflow: hidden;
     }
     
     &__details {
@@ -92,10 +85,13 @@
         background: rgba(#fff, .85);
         display: flex;
         flex-direction: column;
+        flex-wrap: wrap;
         justify-content: center;
         flex-grow: 1;
         border-radius: .7rem;
         box-shadow: 0 0 6rem rgba(#000, .3);
+        background: rgb(255,255,255);
+        background: linear-gradient(42deg, rgba(255,255,255,1) 10%, rgba(254,254,254,0.65) 100%);
         
         &--main {
             align-items: stretch;
@@ -113,14 +109,13 @@
             flex-direction: column;
             padding: 2.5rem 4rem;
         }
-
-        &--cards {
-            height: 50rem;
-        }
         
         &--description {
-            padding: 1.5rem 2.5rem;
-            height: 35rem;
+            padding: 3.5rem 2.5rem;
+            width: 70rem;
+            justify-content: flex-start;
+            background: rgb(255,255,255);
+            background: linear-gradient(42deg, rgba(255,255,255,1) 10%, rgba(254,254,254,0.7) 75%, rgba(255,255,255,1) 100%);
         }
 
         &:not(:last-child) { margin-bottom: 2rem; }
@@ -138,14 +133,24 @@
         width: 9rem;
         height: 9rem;
         border: 4px solid var(--color-primary-opaque);
-        overflow: hidden;
         border-radius: 50%;
+        overflow: hidden;
+
+        &--card {
+            width: 17rem;
+            height: 12rem;
+            border-radius: .7rem;
+            // border-color: rgba(#000, .1);
+            border: none;
+        }
     }
 
     &__img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+
+        &--card { border-radius: .7rem; }
     }
 
     &__form {
@@ -160,11 +165,16 @@
 
     &__input {
         padding: 1rem 2rem;
-        border: 2px solid rgba(#000, .1);
+        border: 2px solid var(--color-primary-opaque);
         border-radius: .7rem;
         font-size: 1.4rem;
+        resize: none;
+        height: 4.25rem;
+        color: var(--color-grey-dark);
 
-        &:focus { border-color: var(--color-primary-opaque); }
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 
     &__item {
@@ -185,13 +195,11 @@
         }
 
         &--price {
-            font-size: 2.5rem;
+            font-size: 2.5rem !important;
             border-width: 3px !important;
             display: inline-block !important;
             font-weight: 300 !important;
             padding: 1.3rem 3rem !important;
-            height: auto !important;
-            width: auto !important;
         }
 
         &--titled {
@@ -210,9 +218,9 @@
         color: var(--color-grey-7);
         font-size: 1.3rem;
 
-        &--big {
-            font-size: 1.4rem;
-            color: var(--color-grey-dark);
+        &--mid {
+            font-size: 1.85rem;
+            color: initial;
         }
     }
 
@@ -229,9 +237,19 @@
             justify-content: space-between;
         }
 
+        &--abs {
+            position: absolute;
+            bottom: 1.5%;
+            right: 3%;
+        }
+
         &--top {
             margin-bottom: 1rem;
         }
+
+        &--col { flex-direction: column; }
+
+        &--wrap { flex-wrap: wrap; }
     }
 
     &__link {
@@ -342,14 +360,110 @@
 
     &__number {
         border-bottom: 2px solid rgba(#fff, .2);
-        font-size: 1.65rem;
+        font-size: 1.75rem;
         font-weight: 300;
     }
 
     &__numbox {
         opacity: 1 !important;
         visibility: visible !important;
-        padding: 2.5rem 1.7rem !important;
+        padding: 3rem 2rem !important;
+    }
+
+    &__rotate {
+        &--90 {
+            transform: rotate(90deg);
+            width: 45rem;
+            height: auto;
+        }
+        &--180 { transform: rotate(180deg); }
+        &--360 { transform: rotate(360deg); }
+    }
+
+    &__subhead {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid rgba(#000, .1);
+        padding-bottom: 1.15rem;
+    }
+
+    &__subheading {
+        display: flex;
+        color: var(--color-black) !important;
+
+        &--card {
+            font-size: 2rem;
+            width: 18rem;
+        }
+    }
+
+    &__text {
+        line-height: 1.5;
+        letter-spacing: .03rem;
+        color: var(--color-black);
+        font-size: 1.55rem;
+    }
+
+    &__list {
+
+    }
+
+    &__card {
+        display: flex;
+        align-items: center;
+        padding: 1.7rem;
+        width: 100%;
+        height: max-content;
+        color: var(--color-grey-dark);
+        justify-content: initial;
+        flex-direction: row;
+        background: rgb(255,255,255);
+        background: linear-gradient(-42deg, rgba(255,255,255,.95) 0%, rgba(254,254,254,0.7) 100%); 
+        transition: all .15s ease;
+        box-shadow: none;
+        
+        &:hover {
+            background: linear-gradient(-42deg, rgba(255,255,255,.95) 0%, rgba(254,254,254,0.8) 100%); 
+        }
+    }
+
+    &__cardscontainer {
+        height: 50rem;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        border-radius: .7rem;
+    }
+
+    &__gradient {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        display: inline-block;
+        background: rgb(0,0,0);
+        background: linear-gradient(0deg, rgba(0,0,0,.5) 0%, transparent 100%);
+        width: 100%;
+        height: 5rem;
+        z-index: 5;
+        transition: all .3s ease;
+
+        opacity: 0;
+        visibility: hidden;
+
+        &--show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        &--top { 
+            top: 0;
+            background: linear-gradient(-180deg, rgba(0,0,0,.5) 0%, transparent 100%);
+        }
+    }
+
+    &__cards {
+        height: max-content;
+        width: 100%;
     }
 }
 

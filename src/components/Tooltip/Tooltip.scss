@@ -21,10 +21,10 @@
     &::after {
         content: "";
         position: absolute;
-        top: 100%;
+        top: 99%;
         left: 50%;
         transform: translateX(-50%);
-        border-width: .7rem;
+        border-width: .85rem;
         border-style: solid;
         border-color: var(--color-primary) transparent transparent transparent;
         backface-visibility: hidden;
@@ -39,7 +39,7 @@
             transform: translateX(-50%) translateY(1rem);
     
             &::after {
-                bottom: 100%;
+                bottom: 99%;
                 top: initial;
                 border-color: transparent transparent var(--color-primary) transparent;
             }

@@ -12,7 +12,7 @@ const Card = (props) => {
             <Link to={`${pathname}${props.data.id}`} className="Card__wrapper">
                 <figure className="Card__fig">
                     <LazyLoadImage 
-                        src={props.data.img} 
+                        src={props.data.img[0]} 
                         effect="opacity" 
                         alt={props.data.title} 
                         className="Card__img" 
@@ -27,7 +27,7 @@ const Card = (props) => {
                     <span className="Card__item">{props.data.date}</span>
                     <p className="Card__item Card__item--location">{props.data.location}</p>
                     <div className="Card__item Card__item--space">
-                        <span className="Card__item--price">{props.data.price}</span>
+                        <span className="price-tag">{props.data.price}</span>
                     </div>
                     <button className="Card__btn" data-favorite={props.data.favorite}>
                         <svg className="Card__icon" dangerouslySetInnerHTML={{__html: utils.use('heart')}} />

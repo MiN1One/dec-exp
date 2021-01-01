@@ -89,16 +89,6 @@
 
         &:not(:last-child) { margin-bottom: .7rem; }
 
-        &--price {
-            padding: .7rem 2.5rem;
-            background: var(--color-primary);
-            border: 2.5px solid var(--color-white-opaque-7);
-            color: #fff;
-            border-radius: .7rem;
-            font-size: 1.6rem;
-            font-weight: 300;
-        }
-
         &--space {
             justify-content: space-between;
             align-items: center;
