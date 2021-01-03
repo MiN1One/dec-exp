@@ -34,7 +34,7 @@ class Main extends PureComponent {
                         </div>
                         {this.props.header && <button className="btn btn__primary btn__primary--outline Main__btn">
                             Show more
-                            <svg className="Main__icon" dangerouslySetInnerHTML={{__html: utils.use('chevrons-down')}} />
+                            <svg className="Main__icon icon" dangerouslySetInnerHTML={{__html: utils.use('chevrons-down')}} />
                         </button>}
                         <Route path="/:category/:subcategory/:id" exact render={() => <Adview data={this.props.data} />} />
                     </div>

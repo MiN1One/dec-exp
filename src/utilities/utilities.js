@@ -21,4 +21,10 @@ export const parseUrl = (string) => string.split('/').join('');
 export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 export const toLower = (str) => str.charAt(0).toLowerCase() + str.slice(1);
 
-export const slug = (string) =>  slugify(string, { replacement: '_', lower: true, remove: /[*+~.()'"!:@/]/g });
+export const slug = (string) =>  {
+    let outputStr = string;
+    if (string.includes('-')) outputStr = string.split('-').join(' ');
+    if (string.includes(',')) outputStr = string.split(',').join(' ');
+    outputStr = slugify(outputStr, { replacement: '_', lower: true, remove: /[*+~.()'"!:@/]/g });
+    return outputStr;
+};

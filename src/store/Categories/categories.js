@@ -4,14 +4,14 @@ const categories = {
         subItems: ['Clothing', 'Furniture', 'Toys', 'Educational assets', 'Carriages', 'Food', 'Child car seats', 'Others'],
         icon: 'child_friendly'
     },
-    props: {
-        val: 'Properties',
+    real: {
+        val: 'Real estate',
         subItems: ['Apartments', 'Houses', 'Areas / Fields', 'Commercial premises', 'Garages'],
         icon: 'home'
     },
     tech: {
         val: 'Electronics',
-        subItems: ['Mobile phones', 'Computers', 'Laptops', 'Media devices', 'Games / Consoles', 'TV / video equipment', 'Home Appliances', 'Kitchen appliances', 'Climatic equipment', 'Accessories and components'],
+        subItems: ['Mobile phones', 'Computers', 'Media devices', 'Games / Consoles', 'TV / video equipment', 'Home Appliances', 'Kitchen appliances', 'Climatic equipment', 'Accessories and components'],
         icon: 'devices'
     },
     trans: {
@@ -39,10 +39,9 @@ const categories = {
         subItems: ['Construction / renovation / cleaning', 'Financial services / partnership', 'Transportation / transport rental', 'Advertising / printing / marketing / internet', 'Babysitters / Nurses', 'Raw materials / materials', 'Beauty / health', 'Equipment', 'Education / Sports', 'Services for animals', 'Business sale', 'Entertainment / Arts / Photo / Video', 'Tourism', 'Translation services / typing', 'Auto / moto services', 'Maintenance, repair of equipment', 'Legal services', 'Rental of goods', 'Other services'],
         icon: 'truck2'
     },
-    
     fashion: {
-        val: 'Fashion & style',
-        subItems: ['Clothes, shoes','For the wedding','Fashion miscellaneous','Wrist Watch','Accessories','Presents','Beauty / health'],
+        val: 'Fashion and style',
+        subItems: ['Clothes, shoes','For wedding','Fashion miscellaneous','Wrist Watch','Accessories','Presents','Beauty / health'],
         icon: 'black-tie'
     },
     sports: {

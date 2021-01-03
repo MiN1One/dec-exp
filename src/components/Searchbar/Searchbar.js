@@ -52,7 +52,7 @@ class Searchbar extends PureComponent {
                         <Logo class="Searchbar__logo" />
                         {this.state.showDrop && <Backdrop z={1} click={this.onClickOutside} />}
                         <form className="Searchbar__form" onSubmit={(event) => this.onSubmit(event)}>
-                            <label className="Searchbar__label" for="search">
+                            <label className="Searchbar__label" htmlFor="search">
                                 <input 
                                     className="Searchbar__input"
                                     type="text"

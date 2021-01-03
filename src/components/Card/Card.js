@@ -29,11 +29,11 @@ const Card = (props) => {
                     <div className="Card__item Card__item--space">
                         <span className="price-tag">{props.data.price}</span>
                     </div>
-                    <button className="Card__btn" data-favorite={props.data.favorite}>
-                        <svg className="Card__icon" dangerouslySetInnerHTML={{__html: utils.use('heart')}} />
-                    </button>
                 </div>
             </Link>
+            <button className="Card__btn" data-favorite={props.data.favorite}>
+                <svg className="Card__icon" dangerouslySetInnerHTML={{__html: utils.use('heart')}} />
+            </button>
         </div>
     );
 }
