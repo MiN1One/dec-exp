@@ -1,48 +1,71 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Searchbar from '../components/Searchbar/Searchbar';
-import Main from './Main/Main';
-import Footer from '../components/Footer.js/Footer';
-import Navigation from '../components/Navigation/Navigation';
-import './App.scss';
-import Header from './Header/Header';
-import Filter from '../components/Filter/Filter';
+// import Searchbar from '../components/Searchbar';
+import Main from './Main';
+// import Footer from '../components/Footer';
+// import Navigation from '../components/Navigation';
+import Header from './Header';
+// import Filter from '../components/Filter';
 import asyncComponent from '../hoc/asyncComponent/asyncComponent';
+// import LoadingScreen from '../UI/LoadingScreen';
+import Layout from './Layout';
 
-const AsyncAuthSignin = asyncComponent(() => import('../components/Authorization/AuthSignin'));
-const AsyncAuthSignup = asyncComponent(() => import('../components/Authorization/AuthSignup'));
-const AsyncResetPass = asyncComponent(() => import('../components/Authorization/ResetPass'));
+const AsyncAuthSignin = asyncComponent(() => import('./AuthSignin'));
+const AsyncAuthSignup = asyncComponent(() => import('./AuthSignup'));
+const AsyncResetPass = asyncComponent(() => import('./ResetPass'));
 
 function App() {
+  // routes = (
+  //   <React.Fragment>
+  //     <Navigation />
+  //     <Searchbar />
+  //     <Header />
+  //     <Main header />
+  //     <Footer />
+  //   </React.Fragment>
+  // );
+  // routes = (
+  //   <React.Fragment>
+  //     <Navigation cat />
+  //     <Searchbar />
+  //     <Filter />
+  //     <Main />
+  //     <Footer />
+  //   </React.Fragment>
+  // );
+  // <div className="App">
+  //   <Switch>
+  //     <Route path="/" exact render={() => header}/>
+  //   </Switch>
+  // </div>
   const header = (
-    <React.Fragment>
-      <Navigation />
-      <Searchbar />
+    <Layout>
       <Header />
-      <Main header />
-      <Footer />
-    </React.Fragment>
-  );
-  const categories = (
-    <React.Fragment>
-      <Navigation cat />
-      <Searchbar />
-      <Filter />
-      <Main />
-      <Footer />
-    </React.Fragment>
+    </Layout>
   );
 
+  const main = (
+    <Layout>
+      <Main />
+    </Layout>
+  );
+
+  const singleCategory = (
+    <Layout>
+       <h1>All</h1>
+    </Layout>
+  );
+  
   return (
     <div className="App">
       <Switch>
-        <Route path="/" exact render={() => header}/>
+        <Route path="/" exact render={() => header} />
         <Route path="/signin" exact component={AsyncAuthSignin} />
         <Route path="/password-reset" exact component={AsyncResetPass} />
         <Route path="/signup" exact component={AsyncAuthSignup} />
-        <Route path="/:category" exact render={() => <h1>All</h1>} />
-        <Route path="/:category/:subcategory" render={() => categories} />
+        <Route path="/:category" exact render={() => singleCategory} />
+        <Route path="/:category/:subcategory" render={() => main} />
       </Switch>
     </div>
   );

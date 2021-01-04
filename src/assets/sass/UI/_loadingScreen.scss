@@ -1,0 +1,14 @@
+.loadingScreen {
+    position: fixed;
+    width: 100vw;
+    height: calc(100vh - 7rem);
+    top: 7rem;
+    left: 0;
+    background: var(--color-light-5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    animation: fadeIn .4s ease;
+    animation-fill-mode: backwards;
+}

@@ -1,114 +1,46 @@
-:root {
-  --color-primary: #0652DD;
-  --color-primary-opaque: rgba(55,66,250, .4);
-  --color-primary-dark: #0549c6;
-  --color-secondary: #7fdf11;
-  --color-secondary-opaque:  rgba(127,223,17, .55);
-  --color-secondary-dark: #72c80f;
-  --color-tertiary: #d51355;
-  --color-tertiary-opaque: rgba(213,19,85, .45);
-  --color-tertiary-dark: #bf114c;
-  --color-red: #e55039;
-  --color-black: #444;
-  --color-grey-dark: #616161;
-  --color-grey-7: #777;
-  --color-grey-a5: #a5a5a5;
-  --color-white-bg: #fff;
-  --color-light-5: #f5f5f5;
-  --color-light-7: #f7f7f7;
-  --color-light-5-opaque: rgba(245,245,245, .75);
-  --color-white-opaque-5: rgba(255,255,255, .5);
-  --color-white-opaque-7: rgba(255,255,255, .7);
-  --color-white-bg-secondary: #fbfbfb;
+// ---------- ABSTRACTS ----------
 
-  // Change view 
-  --flex-dir: row;
-  --flex-basis: calc((100% - 3 * 5rem) / 4);
-  --mr-card: 5rem;
-  --mb-card: 5rem;
-  --height-card: 32rem;
-  --wrap-card-flex-dir: column;
-  --wrap-card-flex-just: space-evenly;
-  --wrap-card-align: initial;
-  --wrap-card-width: 100%;
-  --fav-card-pos: absolute;
-  --card-list-mr: 0;
-  --card-list-just: initial;
-}
+@import './assets/sass/abstracts/variables';
+@import './assets/sass/abstracts/base';
+@import './assets/sass/abstracts/animations';
+@import './assets/sass/abstracts/typography';
+@import './assets/sass/abstracts/mixins';
 
-*,
-*::after,
-*::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+// ---------- VENDORS ----------
 
-html {
-  font-size: 62.5%;
-}
+@import './assets/sass/vendor/css-dots';
 
-body {
-  font-weight: 400;
-  font-family: 'Inter', sans-serif;
-  background-color: #ecf0f1;
-  text-rendering: optimizeLegibility;
-}
+// ---------- CUSTOM ----------
 
-a {
-  text-decoration: none;
-  color: currentColor;
+@import './assets/sass/custom/styles';
 
-  &:focus { outline: none; }
-}
+// ---------- UI ----------
 
-ul {
-  list-style: none;
-}
+@import './assets/sass/UI/backdrop';
+@import './assets/sass/UI/button';
+@import './assets/sass/UI/loadingScreen';
+@import './assets/sass/UI/tooltip';
 
-button {
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  color: #616161;
-  align-items: center;
-  
-  &:focus {
-    outline: none;
-  }
-}
+// ---------- COMPONENTS ----------
 
-svg {
-  display: flex;
-  width: 2rem;
-  height: 2rem;
-  fill: var(--color-light-5)
-}
+@import './assets/sass/components/adview';
+@import './assets/sass/components/card';
+@import './assets/sass/components/categories';
+@import './assets/sass/components/dropdown';
+@import './assets/sass/components/filter';
+@import './assets/sass/components/logo';
+@import './assets/sass/components/pagination';
+@import './assets/sass/components/searchbar';
 
-input,
-textarea {
-  border: none;
-  font-family: 'Inter', sans-serif;
+// ---------- LAYOUT ----------
 
-  &:focus {
-    outline: none;
-  }
+@import './assets/sass/layout/navigation';
+@import './assets/sass/layout/header';
+@import './assets/sass/layout/main';
+@import './assets/sass/layout/authorization';
+@import './assets/sass/layout/footer';
 
-  &::-webkit-input-placeholder {
-    font-family: 'Inter', sans-serif;
-  }
-  
-  &:-ms-input-placeholder {
-    font-family: 'Inter', sans-serif;
-  }
-  
-  &:-moz-placeholder {
-    font-family: 'Inter', sans-serif;
-  }
-  
-  &::-moz-placeholder {
-    font-family: 'Inter', sans-serif;
-  }
-}
+
+@import './assets/sass/abstracts/utilities';
+
+

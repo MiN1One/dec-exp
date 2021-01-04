@@ -12,8 +12,43 @@ import lenovo_2 from '../../assets/images/Lenovo-ThinkPad-T495-title.jpg';
 import iphone8 from '../../assets/images/iphone-8-update-in-hand-logo-500x500.jpg';
 import iphone8_2 from '../../assets/images/iphone-8-8-plus-hands-on-10_large.jpg';
 
+import car from '../../assets/images/devon-janse-van-rensburg-xJhma-g2cnA-unsplash-compressed (3).jpg';
+import int from '../../assets/images/jonathan-wolf-7sKmRRNH_1Y-unsplash-compressed.jpg';
+import int2 from '../../assets/images/taisiia-shestopal-wXwZyBhGSAc-unsplash-compressed.jpg';
+
 const initialState = {
+    vendorAds: [
+        { title: 'Discover Everything', img: car },
+        { title: 'Discover Everything', img: int },
+        { title: 'Discover Everything', img: int2 }
+    ],
+    loading: false,
     search: '',
+    premium: [
+        {
+            id: 'someId_4',
+            title: 'Iphone 8',
+            price: '$250,00',
+            date: 'February 20',
+            img: [iphone8_2, iphone8],
+            location: 'Some location',
+            favorite: false,
+            category: '',
+            premium: true,
+        },
+        {
+            id: 'someId_6',
+            title: 'Cobalt 2019',
+            price: '$8,000,00',
+            date: 'February 16',
+            img: [cobalt],
+            location: 'Some location',
+            favorite: false,
+            category: '',
+            premium: true,
+        }
+
+    ],
     data: [
         {
             id: 'someId_1',
@@ -50,17 +85,6 @@ const initialState = {
             premium: false,            
         },
         {
-            id: 'someId_4',
-            title: 'Iphone 8',
-            price: '$250,00',
-            date: 'February 20',
-            img: [iphone8_2, iphone8],
-            location: 'Some location',
-            favorite: false,
-            category: '',
-            premium: true,
-        },
-        {
             id: 'someId_5',
             title: 'Lenovo Thinkpad',
             price: '$650,00',
@@ -70,17 +94,6 @@ const initialState = {
             favorite: true,
             category: '',
             premium: false,            
-        },
-        {
-            id: 'someId_6',
-            title: 'Cobalt 2019',
-            price: '$8,000,00',
-            date: 'February 16',
-            img: [cobalt],
-            location: 'Some location',
-            favorite: false,
-            category: '',
-            premium: true,
         },
         {
             id: 'someId_7',
