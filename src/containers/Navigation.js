@@ -108,6 +108,8 @@ class Navigation extends PureComponent {
             );
         }
 
+        
+
         return (
             <React.Fragment>
                 {this.state.showCat &&
@@ -137,7 +139,7 @@ class Navigation extends PureComponent {
                                     </Link>
                                     {userDrop}
                                 </div>
-                                {/* {!this.state.signedIn && <Link to="/signup" className="btn btn__tertiary navigation__btn">Sign up</Link>} */}
+                                {/* {!this.state.signedIn && <Link to="/signup" className="btn btn__secondary btn__secondary--outline navigation__btn">Sign up</Link>} */}
                                 
                                 <Link to="/publish" className="btn btn__primary navigation__btn">
                                     <span className="navigation__title navigation__title--white">Advert</span>

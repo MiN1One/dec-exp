@@ -46,7 +46,7 @@
     &:focus {
         border-color: var(--color-primary-opaque);
         
-        &:invalid { border-color: var(--color-red); }
+        &:invalid { border-color: var(--color-red-opaque); }
     }
 }
 
