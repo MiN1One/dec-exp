@@ -18,32 +18,63 @@ class AuthSignin extends Component {
         }
 
         this.checkboxRef = React.createRef();
-        this.phoneRef = React.createRef();
+        this.loginRef = React.createRef();
         this.passRef = React.createRef();
+    }
+
+    clearErrorHighlight = () => {
+        this.loginRef.current.setCustomValidity('');
+        this.passRef.current.setCustomValidity('');
+        this.setState({ error: null });
+    }
+
+    validated = (validEmail, filled) => {
+        if (filled) {
+            if (!validEmail) {
+                this.loginRef.current.setCustomValidity('Invalid email');
+                this.loginRef.current.focus();
+                this.setState({ error: 'Please enter valid email address' });
+                return false;
+            } else {
+                this.clearErrorHighlight();
+                return true;
+            }
+        } else {
+            this.loginRef.current.setCustomValidity('Empty');
+            this.passRef.current.setCustomValidity('Empty');
+            this.loginRef.current.focus();
+            this.setState({ error: 'Please fill out all of the fields' });
+        }
     }
 
     onProceed = (e) => {
         e.preventDefault();
-        const phoneNum = this.phoneRef.current.value;
-        const password = this.passRef.current.value;
+        const mainInput = this.loginRef.current;
+        const password = this.passRef.current;
         const remember = this.checkboxRef.current.checked;
-        if (((phoneNum && password) !== '') && (phoneNum && password)) {
-            let isNum = /^\d+$/.test(phoneNum);
-            if (phoneNum.includes('+')) isNum = true;
 
-            let query = isNum ? 'number' : 'email';
-            if (!isNum) {
-                if (!emailValidator.validate(phoneNum)) return this.setState({ error: 'Please, enter valid email address' });
+        if ((mainInput.value && password.value) !== '') {
+            let isNum = /^\d+$/.test(mainInput.value);
+            if (mainInput.value.includes('+')) isNum = true;
+            let query = 'email';
+            if (isNum) query = 'phone';
+
+            let validEmail = true;
+            if (!isNum) validEmail = emailValidator.validate(mainInput.value);
+
+            if (this.validated(validEmail, true)) {
+                console.log(mainInput.value);
+                console.log(password.value);
+                console.log(remember);
+
+                // --------------------------------------------
+
+                // ..........
             }
-
-            console.log(phoneNum);
-            console.log(password);
-            console.log(remember);
-        }
+        } else this.validated(null, false);
     }
 
     onTogglePass = (e) => {
-        e.preventDefault();
         if (this.passRef.current.value !== '') {
             if (this.passRef.current.type === 'password') this.passRef.current.type = 'text';
             else this.passRef.current.type = 'password';
@@ -76,7 +107,7 @@ class AuthSignin extends Component {
                             className="authorization__input input" 
                             type="text" 
                             placeholder="Your number or email"
-                            ref={this.phoneRef} />
+                            ref={this.loginRef} />
                         <p className="authorization__label authorization__label--abs">Your number or email</p>
                     </label>
                     <label className="authorization__label">
@@ -85,18 +116,18 @@ class AuthSignin extends Component {
                             type="password" 
                             placeholder="Enter your password"
                             ref={this.passRef} />
-                        <button className="authorization__btn--abs" onClick={(e) => this.onTogglePass(e)}>
+                        <button type="button" className="authorization__btn--abs" onClick={(e) => this.onTogglePass(e)}>
                             <svg className="authorization__icon" dangerouslySetInnerHTML={{__html: utils.use('eye-off')}} />
                         </button>
                         <p className="authorization__label authorization__label--abs">Your password</p>
                     </label>
-                        <div className="authorization__item">
-                            <input type="checkbox" id="remember" className="checkbox" ref={this.checkboxRef} />
-                            <label htmlFor="remember" className="label">
-                                <span></span>
-                                Stay logged in
-                            </label>
-                        </div>
+                    <div className="authorization__item">
+                        <input type="checkbox" id="remember" className="checkbox" ref={this.checkboxRef} />
+                        <label htmlFor="remember" className="label">
+                            <span></span>
+                            Stay logged in
+                        </label>
+                    </div>
                     <button className="btn btn__primary authorization__btn mb-1" onClick={(e) => this.onProceed(e)}>
                         Sign in
                         <svg className="icon ml-5 icon--8" dangerouslySetInnerHTML={{__html: utils.use('log-in')}} />

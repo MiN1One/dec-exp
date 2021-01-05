@@ -119,16 +119,17 @@
 
         &--d {
             color: var(--color-grey-7);
-            
+            cursor: pointer;
+
             &:hover,
+            &:focus { border-color: var(--color-primary-opaque); }
+
             &:focus {
-                border-color: var(--color-primary-opaque);
                 border-radius: .7rem .7rem 0 0;
                 outline: none;
             }
         }
         
-        &:hover,
         &:focus {
             background: var(--color-white-bg);
             

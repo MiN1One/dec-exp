@@ -24,7 +24,19 @@ const initialState = {
     ],
     loading: false,
     search: '',
-    premium: [
+    data: [
+        {
+            id: 'someId_1',
+            title: 'Scania 830',
+            price: '$230,000,00',
+            date: 'February 20',
+            img: [scan],
+            location: 'Berlin, 20',
+            favorite: false,
+            category: '',
+            premium: false,
+            mileage: '1,006,286',
+        },
         {
             id: 'someId_4',
             title: 'Iphone 8',
@@ -46,21 +58,6 @@ const initialState = {
             favorite: false,
             category: '',
             premium: true,
-        }
-
-    ],
-    data: [
-        {
-            id: 'someId_1',
-            title: 'Scania 830',
-            price: '$230,000,00',
-            date: 'February 20',
-            img: [scan],
-            location: 'Berlin, 20',
-            favorite: false,
-            category: '',
-            premium: false,
-            mileage: '1,006,286',
         },
         {
             id: 'someId_2',

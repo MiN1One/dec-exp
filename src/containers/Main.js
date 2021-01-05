@@ -5,17 +5,21 @@ import { connect } from 'react-redux';
 import Filter from '../components/Filter';
 import Adview from '../components/Adview';
 import Card from '../components/Card';
-
+import Searchbar from '../components/Searchbar';
 import * as utils from '../utilities/utilities';
 
 class Main extends PureComponent {
 
     render() {
-        const premium = this.props.premium.map((el, i) => <Card data={el} key={i} />);
-        const allAds = this.props.data.map((el, i) => <Card data={el} key={i} />);
+        const premiumArr = this.props.data.filter(el => el.premium === true);
+        const premium = premiumArr.map((el, i) => <Card data={el} key={i} />);
+
+        const usualAdsArr = this.props.data.filter(el => el.premium === false);
+        const usualAds = usualAdsArr.map((el, i) => <Card data={el} key={i} />);
 
         return (
             <React.Fragment>
+                <Searchbar />
                 <Filter />
                 <Route path="/:category/:subcategory/:id" exact render={() => <Adview {...this.props} data={this.props.data} />} />
                 <section className="main">
@@ -35,7 +39,7 @@ class Main extends PureComponent {
                                     <p className="main__subhead">Found 4,635 ads in this category</p>
                                 </div>
                             </div>
-                            <div className="main__list">{allAds}</div>
+                            <div className="main__list">{usualAds}</div>
                         </div>
                     </div>
                 </section>
@@ -47,7 +51,6 @@ class Main extends PureComponent {
 const mapStateToProps = (state) => {
     return {
         data: state.data.data,
-        premium: state.data.premium
     }
 };
 

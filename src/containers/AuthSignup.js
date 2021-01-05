@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import emailValidator from 'email-validator';
 
 import Backdrop from '../UI/Backdrop';
 import Language from '../components/Language';
-
 import Logo from '../components/Logo';
 import * as utils from '../utilities/utilities';
 
@@ -13,51 +13,86 @@ class AuthSignup extends Component {
         
         this.state = {
             inputFocused: false,
-            error: null
+            error: null,
+            success: false
         }
 
         this.checkboxRef = React.createRef();
-        this.phoneRef = React.createRef();
+        this.loginRef = React.createRef();
         this.passRef = React.createRef();
         this.passConfirmRef = React.createRef();
     }
 
-    onProceed = (e) => {
-        e.preventDefault();
-        const phoneNum = this.phoneRef.current.value;
-        const password = this.passRef.current.value;
-        const passwordConf = this.passConfirmRef.current.value;
-        const agree = this.checkboxRef.current.checked;
-        if (((phoneNum && password && passwordConf) !== '') && (phoneNum && password && passwordConf)) {
-            let isNum = /^\d+$/.test(phoneNum);
-            if (phoneNum.includes('+')) isNum = true;
+    clearErrorHighlight = () => {
+        this.loginRef.current.setCustomValidity('');
+        this.passRef.current.setCustomValidity('');
+        this.passConfirmRef.current.setCustomValidity('');
+        this.setState({ error: null });
+    }
 
-            let query = 'email';
-            if (isNum) query = 'phone';
-
-            if (password !== passwordConf) {
+    validated = (agree, passwordsMatch, validEmail, filled) => {
+        if (filled) {
+            if (!validEmail) {
+                this.loginRef.current.setCustomValidity('Invalid email');
+                this.loginRef.current.focus();
+                this.setState({ error: 'PLease enter valid email address' });
+                return false;
+            } else if (!passwordsMatch) {
                 this.passRef.current.setCustomValidity('Passwords do not match');
                 this.passConfirmRef.current.setCustomValidity('Passwords do not match');
                 this.passRef.current.focus();
                 this.setState({ error: 'Passwords do not match' });
+                return false
+            } else if (!agree) {
+                this.setState({ error: 'You you have to accept website terms of use' });
+                return false
             } else {
-                if (!agree) this.setState({ error: 'You have to agree to website terms' });
-                else {
-                    this.passRef.current.setCustomValidity('');
-                    this.passConfirmRef.current.setCustomValidity('');
-                    this.setState({ error: null });
-                }
+                this.clearErrorHighlight();
+                return true;
             }
-
-            console.log(isNum);
-            console.log(phoneNum);
-            console.log(password);
-            console.log(passwordConf);
-            console.log(agree);
-            this.props.history.push(`#confirm`);
         } else {
-
+            this.loginRef.current.setCustomValidity('Empty');
+            this.passRef.current.setCustomValidity('Empty');
+            this.passConfirmRef.current.setCustomValidity('Empty');
+            this.loginRef.current.focus();
+            this.setState({ error: 'Please fill out all of the fields' });
         }
+    }
+
+    onProceed = (e) => {
+        e.preventDefault();
+        const mainInput = this.loginRef.current;
+        const password = this.passRef.current;
+        const passwordConf = this.passConfirmRef.current;
+        const agree = this.checkboxRef.current.checked;
+
+        if ((mainInput.value && password.value && passwordConf.value) !== '') {
+
+            let isNum = /^\d+$/.test(mainInput.value);
+            if (mainInput.value.includes('+')) isNum = true;
+            let query = 'email';
+            if (isNum) query = 'phone';
+
+            let passwordsMatch = true;
+            passwordsMatch = password.value === passwordConf.value;
+
+            let validEmail = true;
+            if (!isNum) validEmail = emailValidator.validate(mainInput.value);
+
+            if (this.validated(agree, passwordsMatch, validEmail, true)) {
+                console.log(isNum);
+                console.log(mainInput.value);
+                console.log(password.value);
+                console.log(passwordConf.value);
+                console.log(agree);
+
+                // ---------------------------------
+
+                // ........
+
+                this.props.history.push(`#confirm`);
+            }
+        } else this.validated(null, null, null, false);
     }
 
     onFocus = () => this.setState({ inputFocused: true });
@@ -86,7 +121,7 @@ class AuthSignup extends Component {
                                 className="authorization__input input" 
                                 type="text" 
                                 placeholder="Your number or email" 
-                                ref={this.phoneRef} />
+                                ref={this.loginRef} />
                             <p className="authorization__label authorization__label--abs">Your number or email</p>
                         </label>
                         <label className="authorization__label">

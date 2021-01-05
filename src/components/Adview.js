@@ -159,6 +159,7 @@ class adview extends PureComponent {
     render() {
         const category = `/${this.props.match.params.category}`;
         const subcategory = this.props.match.params.subcategory;
+        console.log(subcategory, category);
 
         let rotateDegClass = '';
         if (this.state.rotate) rotateDegClass = `adview__rotate--${this.state.rotate}`;

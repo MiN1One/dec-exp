@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as emailValidator from 'email-validator';
+import { withRouter } from 'react-router';
 
 import Backdrop from '../UI/Backdrop';
 import Language from '../components/Language';
@@ -14,8 +15,9 @@ class ResetPass extends Component {
             showNextStep: false,
             error: null,
             success: false,
+            attempted: false,
             number: false,
-            time: 300
+            time: 20
         }
 
         this.phoneRef = React.createRef();
@@ -25,36 +27,55 @@ class ResetPass extends Component {
     onFocus = () => this.setState({ inputFocused: true });
     onBlur = () => this.setState({ inputFocused: false });
 
-    timerWait = () => this.setState((prevState) => {
-        return { time: prevState.time - 1 }
-    });
+    timerWait = () => {
+        if (this.state.time > 0) 
+            this.setState((prevState) => {
+                return { time: prevState.time - 1 }
+            });
+    }
+
+    makeHttp = (login, query) => {
+        this.props.history.push('#reset');
+    }
 
     onProceed = (e) => {
         e.preventDefault();
         const mainInput = this.phoneRef.current;
-        const code = this.codeFieldRef;
+        const code = this.codeFieldRef.current;
 
         if (mainInput.value !== '') {
-            if (!this.state.success) {
-                let isNum = /^\d+$/.test(mainInput.value);
-                if (mainInput.value.includes('+')) isNum = true;
+            let isNum = /^\d+$/.test(mainInput.value);
+            if (mainInput.value.includes('+')) isNum = true;
+            let query = isNum ? 'number' : 'email';
+
+            if (!this.state.attempted) {
     
                 if (isNum) this.setState({ number: true });
                 
-                let query = isNum ? 'number' : 'email';
                 if (!isNum && !emailValidator.validate(mainInput.value)) {
                     mainInput.setCustomValidity('Please, enter valid email address');
                     return this.setState({ error: 'Please, enter valid email address' });
-                } else mainInput.setCustomValidity('');
-    
-                const timer = setInterval(this.timerWait, 1000);
-
+                } else {
+                    mainInput.setCustomValidity('');
+                    this.setState({ error: null })
+                }
+                
+                setInterval(this.timerWait, 1000);
                 this.setState({ showNextStep: true });
-                this.setState({ success: true });
-            } else if (this.state.success) {
+                this.setState({ attempted: true });
 
+            } else if (this.state.attempted && this.state.time === 0) {
+                if (code.value !== '') this.makeHttp(mainInput.value, query);
+                else {
+                    this.setState({ time: 20 });
+                    code.focus();
+                }
             }
-        } 
+        } else {
+            mainInput.focus();
+            mainInput.setCustomValidity('Please, enter valid email address');
+            return this.setState({ error: 'Please, enter valid email address' });
+        }
     }
 
     render() {
@@ -69,13 +90,13 @@ class ResetPass extends Component {
                     <Logo />
                     <form className="authorization__form authorization__form--res mt-2">
                         <p className="authorization__info authorization__info--res mb-1">Reset password</p>
-                        {this.state.success && 
+                        {this.state.attempted && 
                             <p className="authorization__error authorization__error--success mb-2">
                                 <svg className="authorization__icon" dangerouslySetInnerHTML={{__html: utils.use(this.state.number ? 'phone' : 'mail')}} />
                                 The code is sent to your {this.state.number ? 'phone number' : 'email'}
                             </p>
                             }
-                        {(this.state.error && !this.state.success) && <p className="authorization__error mb-1">{this.state.error}</p>}
+                        {this.state.error && <p className="authorization__error mb-1">{this.state.error}</p>}
                         <label className="authorization__label">
                             <input 
                                 className="authorization__input authorization__input--res input" 
@@ -99,10 +120,10 @@ class ResetPass extends Component {
                             </React.Fragment>
                             }
                         <button className="btn btn__primary btn__primary--green authorization__btn" onClick={(e) => this.onProceed(e)}>
-                            {this.state.success ? 'Try again' : 'Reset password'}
+                            Reset Password
                             <svg className="icon ml-5 icon--8" dangerouslySetInnerHTML={{__html: utils.use('key')}} />
                         </button>
-                        {(this.state.success && this.state.time > 0) && <p className="authorization__label authorization__label--timer mt-1">You can request another code in {this.state.time}</p>}
+                        {(this.state.attempted && this.state.time > 0) && <p className="authorization__label authorization__label--timer mt-1">You can request another code in {this.state.time}</p>}
                     </form>
                 </div>
             </div>
@@ -110,7 +131,7 @@ class ResetPass extends Component {
     }
 }
 
-export default ResetPass;
+export default withRouter(ResetPass);
 
 // {/* <label className="authorization__label mb-1" htmlFor="num">Enter your phone number</label> */}
 //                         {/* <div className="aduthorization__group">

@@ -8,7 +8,6 @@ const Layout = (props) => {
     return (
         <React.Fragment>
             <Navigation />
-            <Searchbar />
                 {props.children}
             <Footer />
         </React.Fragment>

@@ -35,10 +35,10 @@
                 background: var(--color-primary);
                 border-color: var(--color-white-opaque-5);
 
-                .icon { fill: #fff; }
+                .icon { fill: #fff !important; }
             }
 
-            .icon { fill: var(--color-grey-dark); }
+            .icon { fill: var(--color-grey-dark) !important; }
         }
     }
     
@@ -52,24 +52,29 @@
         &--outline {
             background: none;
             border-color: var(--color-secondary-opaque);
-            color: var(--color-secondary);
+            color: var(--color-grey-dark);
             
             &:hover,
             &:active,
             &:focus {
                 color: #fff;
                 background-color: var(--color-secondary);
+                border-color: var(--color-white-opaque-5);
+
+                .icon { fill: #fff !important; }
             }
+
+            .icon { fill: var(--color-grey-dark) !important; }
         }
     }
 
     &__tertiary {
         background: var(--color-tertiary);
-
+        
         &:hover,
         &:focus,
         &:active { background: var(--color-tertiary-dark); }
-
+        
         &--outline {
             background: none;
             border-color: var(--color-tertiary-opaque);
@@ -80,7 +85,12 @@
             &:focus {
                 color: #fff;
                 background-color: var(--color-tertiary);
+                border-color: var(--color-white-opaque-5);
+                
+                .icon { fill: #fff !important; }
             }
+
+            .icon { fill: var(--color-grey-dark) !important; }
         }
     }
 

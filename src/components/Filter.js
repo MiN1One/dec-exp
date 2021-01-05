@@ -149,7 +149,7 @@ class Filter extends PureComponent {
                                 {subCatItems}
                                 <li className="filter__item">
                                     <p className="filter__title">Sort by</p>
-                                    <div className="filter__input filter__input--d input">
+                                    <div className="filter__input filter__input--d input" tabIndex="0">
                                         {utils.capitalize(this.props.sort)}
                                         <svg className="filter__icon filter__icon--arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
                                         <Dropdown class="dropdown--full dropdown--sm-s">
