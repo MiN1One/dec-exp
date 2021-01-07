@@ -24,7 +24,7 @@
         }
 
         &--outline {
-            background: none;
+            background: #fff;
             border-color: var(--color-primary-opaque);
             color: var(--color-grey-dark);
             
@@ -50,7 +50,7 @@
         &:active { background: var(--color-secondary-dark); }
 
         &--outline {
-            background: none;
+            background: #fff;
             border-color: var(--color-secondary-opaque);
             color: var(--color-grey-dark);
             
@@ -76,7 +76,7 @@
         &:active { background: var(--color-tertiary-dark); }
         
         &--outline {
-            background: none;
+            background: #fff;
             border-color: var(--color-tertiary-opaque);
             color: var(--color-grey-dark);
             

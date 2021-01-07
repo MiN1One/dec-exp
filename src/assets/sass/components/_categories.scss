@@ -64,6 +64,10 @@
             flex-direction: row;
             flex-wrap: wrap;
             width: 100%;
+
+            &--select {
+                height: 60rem;
+            }
             
             .categories__item {
                 flex-grow: 0;

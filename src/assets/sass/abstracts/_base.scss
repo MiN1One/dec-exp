@@ -51,3 +51,5 @@ textarea {
   
   &::-moz-placeholder { font-family: 'Inter', sans-serif; }
 }
+
+div:focus { outline: none; }

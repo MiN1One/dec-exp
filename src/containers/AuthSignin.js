@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as emailValidator from 'email-validator';
+import axios from 'axios';
 
 import Backdrop from '../UI/Backdrop';
 import Language from '../components/Language';
-
 import Logo from '../components/Logo';
 import * as utils from '../utilities/utilities';
 
@@ -68,7 +68,7 @@ class AuthSignin extends Component {
                 console.log(remember);
 
                 // --------------------------------------------
-
+                
                 // ..........
             }
         } else this.validated(null, false);
@@ -102,38 +102,38 @@ class AuthSignin extends Component {
                     </div>
                     {this.state.error && <p className="authorization__error mb-1">{this.state.error}</p>}
                     <form className="authorization__form">
-                    <label className="authorization__label">
-                        <input 
-                            className="authorization__input input" 
-                            type="text" 
-                            placeholder="Your number or email"
-                            ref={this.loginRef} />
-                        <p className="authorization__label authorization__label--abs">Your number or email</p>
-                    </label>
-                    <label className="authorization__label">
-                        <input 
-                            className="authorization__input input" 
-                            type="password" 
-                            placeholder="Enter your password"
-                            ref={this.passRef} />
-                        <button type="button" className="authorization__btn--abs" onClick={(e) => this.onTogglePass(e)}>
-                            <svg className="authorization__icon" dangerouslySetInnerHTML={{__html: utils.use('eye-off')}} />
-                        </button>
-                        <p className="authorization__label authorization__label--abs">Your password</p>
-                    </label>
-                    <div className="authorization__item">
-                        <input type="checkbox" id="remember" className="checkbox" ref={this.checkboxRef} />
-                        <label htmlFor="remember" className="label">
-                            <span></span>
-                            Stay logged in
+                        <label className="authorization__label">
+                            <input 
+                                className="authorization__input input" 
+                                type="text" 
+                                placeholder="Your number or email"
+                                ref={this.loginRef} />
+                            <p className="authorization__label authorization__label--abs">Your number or email</p>
                         </label>
-                    </div>
-                    <button className="btn btn__primary authorization__btn mb-1" onClick={(e) => this.onProceed(e)}>
-                        Sign in
-                        <svg className="icon ml-5 icon--8" dangerouslySetInnerHTML={{__html: utils.use('log-in')}} />
-                    </button>
-                    <Link to="/password-reset" className="authorization__info mb-15">Reset password</Link>
-                    <p className="authorization__info">Do not have an account? <Link to="/signup" className="authorization__info--high">Sign up</Link></p>
+                        <label className="authorization__label">
+                            <input 
+                                className="authorization__input input" 
+                                type="password" 
+                                placeholder="Enter your password"
+                                ref={this.passRef} />
+                            <button type="button" className="authorization__btn--abs" onClick={(e) => this.onTogglePass(e)}>
+                                <svg className="authorization__icon" dangerouslySetInnerHTML={{__html: utils.use('eye-off')}} />
+                            </button>
+                            <p className="authorization__label authorization__label--abs">Your password</p>
+                        </label>
+                        <div className="authorization__item">
+                            <input type="checkbox" id="remember" className="checkbox" ref={this.checkboxRef} />
+                            <label htmlFor="remember" className="label">
+                                <span></span>
+                                Stay logged in
+                            </label>
+                        </div>
+                        <button className="btn btn__primary authorization__btn mb-1" onClick={(e) => this.onProceed(e)}>
+                            Sign in
+                            <svg className="icon ml-5 icon--8" dangerouslySetInnerHTML={{__html: utils.use('log-in')}} />
+                        </button>
+                        <Link to="/password-reset" className="authorization__info mb-15">Reset password</Link>
+                        <p className="authorization__info">Do not have an account? <Link to="/signup" className="authorization__info--high">Sign up</Link></p>
                 </form>
                 </div>
             </div>

@@ -15,7 +15,12 @@ const asyncComponent = importedComponent => {
 
         render() {
             const C = this.state.component;
-            return C && <C {...this.props} />;
+            return (
+                <React.Fragment>
+                    {C && <C {...this.props} />}
+                </React.Fragment>
+            )
+
         }
     }
 };

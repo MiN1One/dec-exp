@@ -41,12 +41,12 @@ class Navigation extends PureComponent {
     onCloseCategories = () => this.setState({ showCat: false });
 
     render() {
-        const signClass = ['navigation__item'];
+        const signClass = ['navigation__item navigation__item--h'];
         if (this.state.inputFocused) signClass.push('navigation__item--keep');
 
         const pathname = this.props.location.pathname;
         console.log(pathname)
-        const isNotHome = pathname !== '/' || pathname === '#';
+        const isNotHome = pathname !== '/' && pathname !== '/post-new' && pathname !== '#';
         console.log(isNotHome);
 
         let userDrop = (
@@ -121,7 +121,7 @@ class Navigation extends PureComponent {
                         <nav role="navigation" className="navigation__wrapper">
                             <div className="navigation__list">
                                 <Logo classOver="navigation__item" />
-                                <Language class="navigation__item" dropClass="dropdown--left-fix" />
+                                <Language class="navigation__item navigation__item--drop" dropClass="dropdown--left-fix" />
                                 {/* {this.state.toggleLogo && <Logo classOver="navigation__item" />}
                                 {!this.state.toggleLogo && <Language class="navigation__item" dropClass="Dropdown--left-fix" />} */}
                             </div>

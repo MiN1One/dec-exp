@@ -28,7 +28,7 @@ const Footer = props => {
                             <svg className="footer__icon" dangerouslySetInnerHTML={{__html: utils.use('home')}} />
                             <h5 className="footer__heading">Home</h5>
                         </div>
-                        <Language class="navigation__item" dropClass="dropdown--right-fix" />
+                        <Language class="navigation__item navigation__item--drop" dropClass="dropdown--right-fix" />
                     </div>
                 </div>
             </div>

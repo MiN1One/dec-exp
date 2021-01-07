@@ -37,7 +37,7 @@
             margin-right: 2rem;
         }
 
-        &:hover {
+        &--h:hover {
             .navigation__icon--arrow {
                 transform: rotate(180deg);
             }
@@ -51,6 +51,17 @@
         &--keep .dropdown {
             opacity: 1;
             visibility: visible;
+        }
+
+        &--drop:focus {
+            .navigation__icon--arrow {
+                transform: rotate(180deg);
+            }
+
+            .dropdown {
+                opacity: 1;
+                visibility: visible;
+            }
         }
 
         &--hide {

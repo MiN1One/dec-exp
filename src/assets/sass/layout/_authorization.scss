@@ -1,17 +1,20 @@
 .authorization {
     height: 100vh;
-    width: 100vw;
-    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-size: cover;
     background: var(--color-light-5);
     backface-visibility: hidden;
+    position: relative;
     
     &__wrapper {
         padding: 3rem 3.5rem;
-        position: absolute;
-        top: 47%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        position: relative;
+        // top: 47%;
+        // left: 50%;
+        // transform: translate(-50%, -50%);
         background: var(--color-white-bg);
         border-radius: .7rem;
         box-shadow: 0 0 3rem rgba(#000, .07);
@@ -21,7 +24,7 @@
         
         &--animate {
             box-shadow: 0 3rem 5rem rgba(#000, .07);
-            transform: translate(-50%, -50%) translateY(-3rem);
+            transform: translateY(-3rem);
             // border-color: var(--color-primary-opaque);
         }
     }
@@ -125,9 +128,10 @@
     &__input {
         margin-bottom: 1.5rem;
         font-size: 1.45rem;
-        padding: 1.5rem 2rem;
+        padding: 1rem 2rem;
         width: 26rem;
         color: var(--color-black);
+        border: 2px solid rgba(#000, .07);
 
         &--res { padding: 1rem 1.5rem; }
 

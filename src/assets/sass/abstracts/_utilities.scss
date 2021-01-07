@@ -67,13 +67,15 @@
 }
 
 .icon {
-    transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out !important;
     
-    &--dark { fill: var(--color-grey-dark); }
+    &--dark { fill: var(--color-grey-dark) !important; }
 
     &--8 {
-        width: 1.8rem;
-        height: 1.8rem;
+        width: 1.8rem !important;
+        height: 1.8rem !important;
     }
 }
+
+.tc { text-align: center; }
 

@@ -8,7 +8,7 @@ import reduxThunk from 'redux-thunk';
 
 import localization from './store/reducers/reducer_location';
 import data from './store/reducers/reducer_data';
-import filters from './store/reducers/reducer__filter';
+import filters from './store/reducers/reducer_filter';
 
 import App from './containers/App';
 import './index.scss';

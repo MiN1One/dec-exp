@@ -17,7 +17,7 @@ const Language = (props) => {
     });
 
     return (
-        <div className={`language ${props.class ? props.class : ''}`}>
+        <div className={`language ${props.class ? props.class : ''}`} tabIndex="0">
             <svg className="navigation__icon" dangerouslySetInnerHTML={{__html: utils.use('globe')}} />
             <span className="navigation__title">{props.lang}</span>
             <svg className="navigation__icon navigation__icon--arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />

@@ -10,6 +10,7 @@ import Post from './Post';
 const AsyncAuthSignin = asyncComponent(() => import('./AuthSignin'));
 const AsyncAuthSignup = asyncComponent(() => import('./AuthSignup'));
 const AsyncResetPass = asyncComponent(() => import('./ResetPass'));
+const AsyncPost = asyncComponent(() => import('./Post'));
 
 function App() {
   const header = (
@@ -32,7 +33,7 @@ function App() {
 
   const post = (
     <Layout>
-      <Post />
+      <AsyncPost />
     </Layout>
   )
   
