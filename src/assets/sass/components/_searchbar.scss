@@ -137,4 +137,9 @@
             margin: 0;
         }
     }
+
+    &__dropdown {
+        padding: 2.5rem 4rem;
+        box-shadow: 0 3rem 3rem rgba(#000, .07);
+    }
 }

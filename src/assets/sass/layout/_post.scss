@@ -18,6 +18,12 @@
         }
     }
 
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
     &__text {
         font-size: 1.45rem;
         color: var(--color-grey-dark);
@@ -95,7 +101,7 @@
 
         &--cat-main {
             height: auto;
-            padding: 1.3rem 2.5rem;
+            padding: 1.5rem 2.5rem;
         }
 
         &--singlebtn { width: 23rem; }
@@ -110,7 +116,6 @@
 
         &--title {
             transition: all .3s ease;
-            font-size: 2rem;
 
             &:focus {
                 box-shadow: .5rem 1rem 2rem rgba(#000,.1);
@@ -139,17 +144,26 @@
 
             &:focus {
                 border-radius: .7rem .7rem 0 0;
-
-                .dropdown {
-                    opacity: 1;
-                    visibility: visible;
-                }
             }
         }
+
+        &--btn:focus { border-radius: .7rem; }
     }
     
+    &__input--cat:focus + &__dropdown {
+        opacity: 1;
+        visibility: visible;
+    }
     &__input:focus &__icon--cat-arrow { transform: rotate(180deg); }
+    &__input--btn:focus &__icon--cat-arrow { transform: rotate(0); }
     &__input:placeholder-shown + &__counter { display: none; }
+
+    &__box {
+        width: 100%;
+        position: relative;
+
+        &:not(:last-child) { margin-bottom: 1.5rem; }
+    }
 
     &__counter {
         font-size: 1.5rem;
@@ -212,7 +226,7 @@
         fill: var(--color-primary-opaque);
     }
 
-    &__price-form {
+    &__double-form {
         display: flex;
 
         &:not(:last-child) { margin-bottom: 1.5rem; }
@@ -250,11 +264,13 @@
 
     &__row {
         display: flex;
+        flex-wrap: wrap;
         width: 100%;
     }
 
     &__figure {
         background: #fff;
+        width: calc(100% / 2);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -291,6 +307,7 @@
         border-top: 1px solid rgba(#000,.1);
         width: 100%;
         background: var(--color-light-7);
+        box-shadow: 0 -1rem 3rem rgba(#000,.02);
     }
 
     &__footwrap {
@@ -304,10 +321,7 @@
         font-size: 1.5rem;
     }
 
-    &__dropdown {
-        border: 1px solid var(--color-primary-opaque);
-        width: calc(100% + 2px);
-    }
+    &__dropdown { border: 1px solid var(--color-primary-opaque); }
 
     &__dropitem {
         padding: 1.5rem 2rem;

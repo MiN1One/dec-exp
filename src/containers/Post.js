@@ -18,40 +18,54 @@ class Publish extends PureComponent {
             },
             business_type: 'Individual',
             type: 'sell',
+            mainTitle: '',
+            description: '',
             currency: 'uzsom',
             categories,
             showCat: false,
             selectedCat: null,
             activeAfter: null,
-            images: [],
-            numbers: ['+998994886928'],
+            numbers: ['+998994886928', '+998976852565'],
             activeCat: null,
-            filterObj: null
+            filterObj: null,
         };
 
         this.fileRef = React.createRef();
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.activeAfter) {
-            if (this.state.activeAfter !== prevState.activeAfter) {
-                console.log(this.state.activeAfter);
-                const category = utils.slug(this.state.categories[this.state.activeAfter].val);
-                console.log(category);
-        
-                import(`../store/Filters/${category}`)
+        if (this.state.activeAfter !== prevState.activeAfter) {
+            const category = utils.slug(this.state.categories[this.state.activeAfter].val);
+
+            this.setState({ selectedCat: null }, 
+                () => {
+                    import(`../store/Filters/${category}`)
                     .then(filter => {
-                        this.setState({ filterObj: filter.default }, () => console.log(this.state.filterObj))
+                        this.setState({ filterObj: filter.default[category] });
                     })
                     .catch(er => {
                         
                     });
-            }
+                });
         }
     }
 
+    onInputDescription = (e) => this.setState({ description: e.target.value });
+    onInputTitle = (e) => this.setState({ mainTitle: e.target.value });
+
+    onInputNumber = (e, index) => {
+        this.setState(prevState => {
+            console.log(prevState.numbers)
+            const numbers = prevState.numbers.map((el, i) => {
+                if (i === index) return el = e.target.value;
+                else return el;
+            });
+            return { numbers };
+        });
+    }
+
     onChangeCurrency = (c) => this.setState({ currency: c });
-    onChangeBusinessType = (type) => this.setState({ business_type: type })
+    onChangeBusinessType = (type) => this.setState({ business_type: type });
     onChangeAdType = (type) => this.setState({ type });
 
     onOpenCatPop = () => this.setState({ showCat: true });
@@ -63,7 +77,7 @@ class Publish extends PureComponent {
     onSelectCat = (subCat) => {
         this.setState({
             selectedCat: subCat
-        }, () => this.setState({ showCat: false, activeCat: null }, console.log(this.state.activeAfter)));
+        }, () => this.setState({ showCat: false, activeCat: null }));
     }
 
     onImageUpload = () => {
@@ -78,13 +92,6 @@ class Publish extends PureComponent {
     }
 
     render() {
-        const images = this.state.images.map((el, i) => {
-            return (
-                <figure className="post__figure post__figure--main">
-                                
-                </figure>
-            )
-        });
 
         const typesArr = [];
         for (let key in this.state.types) {
@@ -126,6 +133,34 @@ class Publish extends PureComponent {
                 </div>
             );
         });
+
+        let subOptions = null
+        if (this.state.filterObj && this.state.selectedCat) {
+            subOptions = this.state.filterObj.items[utils.slug(this.state.selectedCat)].sub.map((cat, catIndex) => {
+                const dropItems = cat.items.map((el, i) => {
+                    return (
+                        <div className="dropdown__item" key={i}>
+                            <div className="dropdown__link post__dropitem">{utils.capitalize(el)}</div>
+                        </div>
+                    );
+                });
+
+                return (
+                    <React.Fragment key={catIndex}>
+                        <p className="post__title mb-1">{cat.title}</p>
+                        <div className="post__box">
+                            <div className="post__input post__input--cat" tabIndex="0">
+                                {cat.title}
+                                <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
+                            </div>
+                            <Dropdown class="dropdown--full dropdown--close dropdown--sm-s post__dropdown">
+                                {dropItems}
+                            </Dropdown>
+                        </div>
+                    </React.Fragment>
+                )
+            });
+        }
         
         let subItems = null;
         if (this.state.activeCat) {
@@ -156,10 +191,16 @@ class Publish extends PureComponent {
                                 <div className="post__group">
                                     <p className="post__title mb-1">Add photos</p>
                                     <div className="post__uploadbox" onClick={() => this.fileRef.current.click()}>
-                                        <input className="post__input post__input--hide" type="file" multiple ref={this.fileRef} />
+                                        <input 
+                                            className="post__input post__input--hide" 
+                                            type="file" 
+                                            multiple 
+                                            ref={this.fileRef} 
+                                            onChange={() => this.onImageUpload()} />
                                         <figure className="post__figure post__figure--main">
                                             <svg className="post__icon post__icon--main mb-1" dangerouslySetInnerHTML={{__html: utils.use('camera')}} />
                                             <span className="post__prompt">Click or drag here to uload main photo</span>
+                                            {/* <img src={audi} className="post__img" alt="audi" /> */}
                                         </figure>
                                         <div className="post__row">
                                             <figure className="post__figure post__figure--small">
@@ -168,8 +209,12 @@ class Publish extends PureComponent {
                                             <figure className="post__figure post__figure--small">
                                                 <svg className="post__icon" dangerouslySetInnerHTML={{__html: utils.use('plus')}} />
                                             </figure>
-                                        </div>
-                                        <div className="post__row">
+                                            <figure className="post__figure post__figure--small">
+                                                <svg className="post__icon" dangerouslySetInnerHTML={{__html: utils.use('plus')}} />
+                                            </figure>
+                                            <figure className="post__figure post__figure--small">
+                                                <svg className="post__icon" dangerouslySetInnerHTML={{__html: utils.use('plus')}} />
+                                            </figure>
                                             <figure className="post__figure post__figure--small">
                                                 <svg className="post__icon" dangerouslySetInnerHTML={{__html: utils.use('plus')}} />
                                             </figure>
@@ -185,8 +230,14 @@ class Publish extends PureComponent {
                                 <div className="post__group">
                                     <p className="post__title mb-1">Main title</p>
                                     <label className="post__label">
-                                        <input type="text" className="post__input post__input--title" placeholder="Enter Ad title" />
-                                        <span className="post__counter mt-1">60 characters left</span>
+                                        <input
+                                            type="text"
+                                            className="post__input post__input--title"
+                                            placeholder="Enter Ad title"
+                                            onChange={(e) => this.onInputTitle(e)}
+                                            value={this.state.mainTitle} 
+                                            maxLength="30" />
+                                        <span className="post__counter mt-1">{30 - this.state.mainTitle.length} characters left</span>
                                     </label>
                                     <p className="post__hint mt-1">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam maximus nibh vel hendrerit maximus. Proin imperdiet elit ipsum, in maximus lectus faucibus in. Praesent eu nunc ut quam mattis rhoncus.
@@ -218,37 +269,46 @@ class Publish extends PureComponent {
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt nec nibh non porta. Donec.
                                     </p>
                                 </div>
-                                <div className="post__group post__group--details">
+                                <div className="post__group post__group--details m-0">
                                     <div className="post__group">
-                                        
-                                        <p className="post__title mb-1">Price</p>
-                                        <div className="post__input post__input--cat mb-1" tabIndex="0">
-                                            {this.state.types[this.state.type]}
-                                            <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
-                                            <Dropdown class="dropdown--full dropdown--sm-s post__dropdown">
-                                                {types}
-                                            </Dropdown>
-                                        </div>
-                                        <div className="post__price-form mb-1">
-                                            <input type="text" placeholder="Price" className="post__input post__input--price mr-1" />
-                                            <div className="post__input post__input--cat post__input--cur" tabIndex="0">
-                                                {this.state.currency.toUpperCase()}
-                                                <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
-                                                <Dropdown class="dropdown--full dropdown--sm-s post__dropdown">
-                                                    <div className="dropdown__item" onClick={() => this.onChangeCurrency('usd')}>
-                                                        <div className="dropdown__link post__dropitem">USD</div>
-                                                    </div>
-                                                    <div className="dropdown__item" onClick={() => this.onChangeCurrency('uzsom')}>
-                                                        <div className="dropdown__link post__dropitem">UZSOM</div>
-                                                    </div>
+                                        <div className="mb-15">
+                                            <p className="post__title mb-1">Price</p>
+                                            <div className="post__box">
+                                                <div className="post__input post__input--cat" tabIndex="0">
+                                                    {this.state.types[this.state.type]}
+                                                    <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
+                                                </div>
+                                                <Dropdown class="dropdown--full dropdown--close dropdown--sm-s post__dropdown">
+                                                    {types}
                                                 </Dropdown>
                                             </div>
+                                            {this.state.type === 'sell' &&
+                                                <div className="post__double-form mb-1">
+                                                    <input type="text" placeholder="Price" className="post__input post__input--price mr-1" />
+                                                    <div className="post__box">
+                                                        <div className="post__input post__input--cat post__input--cur" tabIndex="0">
+                                                            {this.state.currency.toUpperCase()}
+                                                            <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
+                                                        </div>
+                                                        <Dropdown class="dropdown--full dropdown--close dropdown--sm-s post__dropdown">
+                                                            <div className="dropdown__item" onClick={() => this.onChangeCurrency('usd')}>
+                                                                <div className="dropdown__link post__dropitem">USD</div>
+                                                            </div>
+                                                            <div className="dropdown__item" onClick={() => this.onChangeCurrency('uzsom')}>
+                                                                <div className="dropdown__link post__dropitem">UZSOM</div>
+                                                            </div>
+                                                        </Dropdown>
+                                                    </div>
+                                                </div>
+                                            }
                                         </div>
-                                        <p className="post__title mt-1 mb-1">Type of business</p>
-                                        <div className="post__input post__input--cat mb-1" tabIndex="0">
-                                            {utils.capitalize(this.state.business_type)}
-                                            <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
-                                            <Dropdown class="dropdown--full dropdown--sm-s post__dropdown">
+                                        <p className="post__title mb-1">Type of business</p>
+                                        <div className="post__box">
+                                            <div className="post__input post__input--cat" tabIndex="0">
+                                                {utils.capitalize(this.state.business_type)}
+                                                <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
+                                            </div>
+                                            <Dropdown class="dropdown--full dropdown--close dropdown--sm-s post__dropdown">
                                                 <div className="dropdown__item" onClick={() => this.onChangeBusinessType('individual')}>
                                                     <div className="dropdown__link post__dropitem">Individual</div>
                                                 </div>
@@ -259,25 +319,15 @@ class Publish extends PureComponent {
                                         </div>
                                     </div>
                                     <div className="post__group">
-                                        <p className="post__title mb-1">Model</p>
-                                        <div className="post__input post__input--cat mb-15" tabIndex="0">
-                                            Cevrolet
-                                            <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
+                                        {subOptions}
+                                        <div className="mb-15">
+                                            <p className="post__title mb-1">Engine volume</p>
+                                            <input type="text" placeholder="Engine volume" className="post__input" />
                                         </div>
-                                        <p className="post__title mb-1">Transmission</p>
-                                        <div className="post__input post__input--cat mb-15" tabIndex="0">
-                                            Manual
-                                            <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
+                                        <div className="mb-15">
+                                            <p className="post__title mb-1">Year of manufacture</p>
+                                            <input type="text" placeholder="Year of manufacture" className="post__input mb-1" />
                                         </div>
-                                        <p className="post__title mb-1">Type</p>
-                                        <div className="post__input post__input--cat mb-15" tabIndex="0">
-                                            Hatchback
-                                            <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
-                                        </div>
-                                        <p className="post__title mb-1">Engine volume</p>
-                                        <input type="text" placeholder="Engine volume" className="post__input mb-1" />
-                                        <p className="post__title mb-1">Year of manufacture</p>
-                                        <input type="text" placeholder="Year of manufacture" className="post__input mb-1" />
                                     </div>
                                     <div className="post__group">
                                         <p className="post__title mb-1">Color</p>
@@ -295,8 +345,13 @@ class Publish extends PureComponent {
                                 <div className="post__group post__group--des">
                                     <p className="post__title mb-1">Personalized description</p>
                                     <label className="post__label">
-                                        <textarea className="post__input post__input--des" placeholder=" "></textarea>
-                                        <span className="post__counter mt-1">4500 characters left</span>
+                                        <textarea 
+                                            className="post__input post__input--des" 
+                                            placeholder=" " 
+                                            value={this.state.description}
+                                            onChange={(e) => this.onInputDescription(e)}
+                                            maxLength="4500"></textarea>
+                                        <span className="post__counter mt-1">{4500 - this.state.description.length} characters left</span>
                                     </label>
                                     <p className="post__hint mt-1">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id nulla porta, rutrum enim eget, luctus neque. Cras scelerisque imperdiet.
@@ -311,43 +366,39 @@ class Publish extends PureComponent {
                             </div>
                             <div className="post__main">
                                 <div className="post__group">
-                                    <p className="post__title mb-1">Contact number</p>
-                                    <div className="post__price-form">
-                                        <label className="post__label">
-                                            <input type="text" placeholder="Your contact number" className="post__input post__input--singlebtn mr-1" value={this.state.numbers[0]} />
-                                            <span className="post__counter mt-5">Phone number 1</span>
-                                        </label>
-                                        <button className="post__input post__input--cat mb-1">
+                                    <p className="post__title mb-1">Contact numbers</p>
+                                    <div className="post__double-form">
+                                        <input 
+                                            type="text" 
+                                            placeholder="Your contact number" 
+                                            className="post__input post__input--singlebtn mr-1" 
+                                            value={this.state.numbers[0]} 
+                                            onChange={(e) => this.onInputNumber(e, 0)} 
+                                            maxLength={12} />
+                                        <button className="post__input post__input--btn post__input--cat">
                                             Add
                                             <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('plus')}} />
                                         </button>
                                     </div>
-                                    <div className="post__price-form">
-                                        <label className="post__label">
-                                            <input type="text" placeholder="Your contact number" className="post__input post__input--singlebtn mr-1" value={this.state.numbers[0]} />
-                                            <span className="post__counter mt-5">Phone number 2</span>
-                                        </label>
-                                    </div>
+                                    <input 
+                                        type="text" 
+                                        placeholder="Your contact number" 
+                                        className="post__input post__input--singlebtn mb-15" 
+                                        value={this.state.numbers[1]} 
+                                        onChange={(e) => this.onInputNumber(e, 1)} 
+                                        maxLength={12} />
                                     <p className="post__title mb-1 mt-15">Email address</p>
-                                    <input type="text" placeholder="Your email address (optional)" className="post__input mr-1" />
-                                    <p className="post__title mb-1 mt-1">Contact Name</p>
-                                    <input type="text" placeholder="Your contact name" className="post__input mr-1" />
-                                    <p className="post__title mb-1 mt-1">Region</p>
-                                    <input type="text" placeholder="Your region" className="post__input mr-1" />
+                                    <input type="text" placeholder="Your email address (optional)" className="post__input mb-15" />
+                                    <p className="post__title mb-1">Contact Name</p>
+                                    <input type="text" placeholder="Your contact name" className="post__input mb-15" />
+                                    <p className="post__title mb-1">Region</p>
+                                    <input type="text" placeholder="Your region" className="post__input mb-15" />
                                 </div>
                             </div>
                         </div>
                         <div className="post__footer">
                             <div className="container">
                                 <div className="post__footwrap">
-                                    {/* <button className="btn post__btn-main btn__primary btn__primary--outline mr-1">
-                                        Save for later post
-                                        <svg className="icon ml-5" dangerouslySetInnerHTML={{__html: utils.use('save')}} />
-                                    </button>
-                                    <button className="btn post__btn-main btn__secondary btn__secondary--outline mr-1">
-                                        Preview
-                                        <svg className="icon ml-5" dangerouslySetInnerHTML={{__html: utils.use('clipboard')}} />
-                                    </button> */}
                                     <button className="btn post__btn-main btn__primary">
                                         Post
                                         <svg className="icon ml-5" dangerouslySetInnerHTML={{__html: utils.use('check-circle')}} />
@@ -472,3 +523,40 @@ export default Publish;
 //     }
 //   }
   
+
+
+
+
+/* <div className="post__group">
+    <p className="post__title mb-1">Model</p>
+    <div className="post__input post__input--cat mb-15" tabIndex="0">
+        Cevrolet
+        <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
+    </div>
+    <p className="post__title mb-1">Transmission</p>
+    <div className="post__input post__input--cat mb-15" tabIndex="0">
+        Manual
+        <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
+    </div>
+    <p className="post__title mb-1">Type</p>
+    <div className="post__input post__input--cat mb-15" tabIndex="0">
+        Hatchback
+        <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
+    </div>
+    <p className="post__title mb-1">Engine volume</p>
+    <input type="text" placeholder="Engine volume" className="post__input mb-1" />
+    <p className="post__title mb-1">Year of manufacture</p>
+    <input type="text" placeholder="Year of manufacture" className="post__input mb-1" />
+</div>
+<div className="post__group">
+    <p className="post__title mb-1">Color</p>
+    <div className="post__input post__input--cat mb-15" tabIndex="0">
+        White
+        <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
+    </div>
+    <p className="post__title mb-1">Condition</p>
+    <div className="post__input post__input--cat mb-15" tabIndex="0">
+        Medium
+        <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
+    </div>
+</div> */
