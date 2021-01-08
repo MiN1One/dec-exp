@@ -1,161 +1,152 @@
 const filter = {
-    transport_auto: {
-        title: 'Transport / auto',
-        items: {
-            cars: {
-                title: 'Cars',
-                counters: [
-                    {
-                        title: 'Size', 
-                        method: 'onFilterBySizeStart',
-                        methodEnd: 'onFilterBySizeEnd'
-                    }
-                ],
-                sub: [
-                    {
-                        title: 'Condition', 
-                        items: ['used', 'new', 'all'],
-                        method: 'onFilterByCondition'
-                    },
-                    {
-                        title: 'Type',
-                        items: ['for boys', 'for girls', 'all'],
-                        method: 'onFilterByType'
-                    }
-                ]
-            },
-            parts_and_accessories: {
-                title: 'Parts and accessories',
-                counters: [
-                    {
-                        title: 'Size', 
-                        method: 'onFilterBySizeStart',
-                        methodEnd: 'onFilterBySizeEnd'
-                    }
-                ],
-                sub: [
-                    {
-                        title: 'Condition', 
-                        items: ['used', 'new', 'all'],
-                        method: 'onFilterByCondition'
-                    },
-                    {
-                        title: 'Type',
-                        items: ['for boys', 'for girls', 'all'],
-                        method: 'onFilterByType'
-                    }
-                ]
-            },
-            tires_disks_and_wheels: {
-                title: 'Tires, disks and wheels',
-                counters: [],
-                sub: [
-                    {
-                        title: 'Condition', 
-                        items: ['used', 'new', 'all'], 
-                        method: 'onFilterByCondition'
-                    }
-                ]
-            },
-            buses: {
-                title: 'Buses',
-                counters: [],
-                sub: [
-                    { 
-                        title: 'Condition', 
-                        items: ['used', 'new', 'all'], 
-                        method: 'onFilterByCondition'
-                    }
-                ]
-            },
-            motorcycle_parts_and_accessories: {
-                title: 'Motorcycle parts and accessories',
-                counters: [],
-                sub: [
-                    { 
-                        title: 'Condition', 
-                        items: ['used', 'new', 'all'], 
-                        method: 'onFilterByCondition'
-                    }
-                ]
-            },
-            moto: {
-                title: 'Moto',
-                counters: [],
-                sub: [
-                    { 
-                        title: 'Condition', 
-                        items: ['used', 'new', 'all'], 
-                        method: 'onFilterByCondition'
-                    }
-                ]
-            },
-            other_transport: {
-                title: 'Other transport',
-                counters: [],
-                sub: [
-                    {
-                        title: 'Condition',
-                        items: ['used', 'new', 'all'],
-                        method: 'onFilterByCondition'
-                    }
-                ]
-            },
-            trucks: {
-                title: 'Trucks',
-                counters: [],
-                sub: [
-                    {
-                        title: 'Condition',
-                        items: ['used', 'new', 'all'],
-                        method: 'onFilterByCondition'
-                    }
-                ]
-            },
-            trailers: {
-                title: 'Trailers',
-                counters: [],
-                sub: [
-                    {
-                        title: 'Condition',
-                        items: ['used', 'new', 'all'],
-                        method: 'onFilterByCondition'
-                    }
-                ]
-            },
-            special_equipment: {
-                title: 'Special equipment',
-                counters: [],
-                sub: [
-                    {
-                        title: 'Condition',
-                        items: ['used', 'new', 'all'],
-                        method: 'onFilterByCondition'
-                    }
-                ]
-            },
-            agricultural_machinery: {
-                title: 'Agricultural machinery',
-                counters: [],
-                sub: [
-                    {
-                        title: 'Condition',
-                        items: ['used', 'new', 'all'],
-                        method: 'onFilterByCondition'
-                    }
-                ]
-            },
-            water_transport: {
-                title: 'Water transport',
-                counters: [],
-                sub: [
-                    {
-                        title: 'Condition',
-                        items: ['used', 'new', 'all'],
-                        method: 'onFilterByCondition'
-                    }
-                ]
-            }
+    items: {
+        cars: {
+            inputs: [
+                {
+                    title: 'Year of manufacture',
+                    method: 'onInputYearOfManufacture'
+                },
+                {
+                    title: 'Mileage',
+                    method: 'onInputMileage'
+                }
+            ],
+            sub: [
+                {
+                    title: 'Condition', 
+                    items: ['used', 'new', 'all'],
+                    method: 'onFilterByCondition'
+                },
+                {
+                    title: 'Type',
+                    items: ['for boys', 'for girls', 'all'],
+                    method: 'onFilterByType'
+                }
+            ]
+        },
+        parts_and_accessories: {
+            inputs: [
+                {
+                    title: 'Year of manufacture',
+                    method: 'onInputYearOfManufacture'
+                },
+                {
+                    title: 'Mileage',
+                    method: 'onInputMileage'
+                }
+            ],
+            sub: [
+                {
+                    title: 'Condition', 
+                    items: ['used', 'new', 'all'],
+                    method: 'onFilterByCondition'
+                },
+                {
+                    title: 'Type',
+                    items: ['for boys', 'for girls', 'all'],
+                    method: 'onFilterByType'
+                }
+            ]
+        },
+        tires_disks_and_wheels: {
+            inputs: [],
+            sub: [
+                {
+                    title: 'Condition', 
+                    items: ['used', 'new', 'all'], 
+                    method: 'onFilterByCondition'
+                }
+            ]
+        },
+        buses: {
+            inputs: [],
+            sub: [
+                { 
+                    title: 'Condition', 
+                    items: ['used', 'new', 'all'], 
+                    method: 'onFilterByCondition'
+                }
+            ]
+        },
+        motorcycle_parts_and_accessories: {
+            inputs: [],
+            sub: [
+                { 
+                    title: 'Condition', 
+                    items: ['used', 'new', 'all'], 
+                    method: 'onFilterByCondition'
+                }
+            ]
+        },
+        moto: {
+            inputs: [],
+            sub: [
+                { 
+                    title: 'Condition', 
+                    items: ['used', 'new', 'all'], 
+                    method: 'onFilterByCondition'
+                }
+            ]
+        },
+        other_transport: {
+            inputs: [],
+            sub: [
+                {
+                    title: 'Condition',
+                    items: ['used', 'new', 'all'],
+                    method: 'onFilterByCondition'
+                }
+            ]
+        },
+        trucks: {
+            inputs: [],
+            sub: [
+                {
+                    title: 'Condition',
+                    items: ['used', 'new', 'all'],
+                    method: 'onFilterByCondition'
+                }
+            ]
+        },
+        trailers: {
+            inputs: [],
+            sub: [
+                {
+                    title: 'Condition',
+                    items: ['used', 'new', 'all'],
+                    method: 'onFilterByCondition'
+                }
+            ]
+        },
+        special_equipment: {
+            inputs: [],
+            sub: [
+                {
+                    title: 'Condition',
+                    items: ['used', 'new', 'all'],
+                    method: 'onFilterByCondition'
+                }
+            ]
+        },
+        agricultural_machinery: {
+            inputs: [],
+            sub: [
+                {
+                    title: 'Condition',
+                    items: ['used', 'new', 'all'],
+                    method: 'onFilterByCondition'
+                }
+            ]
+        },
+        water_transport: {
+            inputs: [],
+            sub: [
+                {
+                    title: 'Condition',
+                    items: ['used', 'new', 'all'],
+                    method: 'onFilterByCondition'
+                }
+            ]
         }
     }
 };

@@ -7,10 +7,11 @@ import asyncComponent from '../hoc/asyncComponent/asyncComponent';
 import Layout from './Layout';
 import Post from './Post';
 
-const AsyncAuthSignin = asyncComponent(() => import('./AuthSignin'));
-const AsyncAuthSignup = asyncComponent(() => import('./AuthSignup'));
-const AsyncResetPass = asyncComponent(() => import('./ResetPass'));
+const AsyncAuthSignin = asyncComponent(() => import('./Authorization/AuthSignin'));
+const AsyncAuthSignup = asyncComponent(() => import('./Authorization/AuthSignup'));
+const AsyncResetPass = asyncComponent(() => import('./Authorization/ResetPass'));
 const AsyncPost = asyncComponent(() => import('./Post'));
+const AsyncProfile = asyncComponent(() => import('../components/Profile'));
 
 function App() {
   const header = (
@@ -35,7 +36,13 @@ function App() {
     <Layout>
       <AsyncPost />
     </Layout>
-  )
+  );
+
+  const profile = (
+    <Layout>
+      <AsyncProfile />
+    </Layout>
+  );
   
   return (
     <div className="App">
@@ -44,6 +51,7 @@ function App() {
         <Route path="/signin" exact component={AsyncAuthSignin} />
         <Route path="/password-reset" exact component={AsyncResetPass} />
         <Route path="/signup" exact component={AsyncAuthSignup} />
+        <Route path="/user/:section" render={() => profile} />
         <Route path="/post-new" exact render={() => post} />
         <Route path="/all/:category" exact render={() => singleCategory} />
         <Route path="/:category/:subcategory" render={() => main} />

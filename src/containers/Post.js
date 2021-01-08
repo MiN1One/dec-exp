@@ -39,9 +39,9 @@ class Publish extends PureComponent {
 
             this.setState({ selectedCat: null }, 
                 () => {
-                    import(`../store/Filters/${category}`)
+                    import(`../store/PostFilters/${category}`)
                     .then(filter => {
-                        this.setState({ filterObj: filter.default[category] });
+                        this.setState({ filterObj: filter.default });
                     })
                     .catch(er => {
                         
@@ -80,15 +80,43 @@ class Publish extends PureComponent {
         }, () => this.setState({ showCat: false, activeCat: null }));
     }
 
+    appendImage = (el, files) => {
+        const reader = new FileReader();
+
+        reader.readAsDataURL(files);
+        reader.onload = () => {
+            el.innerHTML = '';
+            el.style.backgroundImage = `url(${reader.result})`;
+        };
+    }
+
+    clearImages = (el) => {
+        el.innerHTML = '';
+        // el.
+    };
+
     onImageUpload = () => {
         const files = this.fileRef.current.files;
 
-        const formatData = new FormData();
+        if (files.length) {
+            let photos = Array.from(files).slice(0, 7);
+            console.log(photos);
+            const mainPhoto = document.querySelector('.post__figure--main');
+            const subPhotoContainers = Array.from(document.querySelectorAll('.post__figure--small'));
+            const subPhotos = Array.from(photos).slice(1);
+            
+            this.appendImage(mainPhoto, photos[0]);
+            
+            subPhotos.forEach((el, i) => this.appendImage(subPhotoContainers[i], el));
 
-        for (const img of files) {
-            formatData.append('photos[]', img);
-            console.log(img);
+            const formatData = new FormData();
+            
+            for (const img of files) {
+                formatData.append('photos[]', img);
+                
+            }
         }
+
     }
 
     render() {
@@ -134,7 +162,8 @@ class Publish extends PureComponent {
             );
         });
 
-        let subOptions = null
+        let subOptions = null;
+        let inputItems = null;
         if (this.state.filterObj && this.state.selectedCat) {
             subOptions = this.state.filterObj.items[utils.slug(this.state.selectedCat)].sub.map((cat, catIndex) => {
                 const dropItems = cat.items.map((el, i) => {
@@ -159,6 +188,15 @@ class Publish extends PureComponent {
                         </div>
                     </React.Fragment>
                 )
+            });
+        
+            inputItems = this.state.filterObj.items[utils.slug(this.state.selectedCat)].inputs.map((el, i) => {
+                return (
+                    <div className="mb-15" key={i}>
+                        <p className="post__title mb-1">{el.title}</p>
+                        <input type="text" placeholder={el.title} className="post__input" />
+                    </div>
+                );
             });
         }
         
@@ -192,7 +230,7 @@ class Publish extends PureComponent {
                                     <p className="post__title mb-1">Add photos</p>
                                     <div className="post__uploadbox" onClick={() => this.fileRef.current.click()}>
                                         <input 
-                                            className="post__input post__input--hide" 
+                                            className="post__input d-none" 
                                             type="file" 
                                             multiple 
                                             ref={this.fileRef} 
@@ -200,7 +238,6 @@ class Publish extends PureComponent {
                                         <figure className="post__figure post__figure--main">
                                             <svg className="post__icon post__icon--main mb-1" dangerouslySetInnerHTML={{__html: utils.use('camera')}} />
                                             <span className="post__prompt">Click or drag here to uload main photo</span>
-                                            {/* <img src={audi} className="post__img" alt="audi" /> */}
                                         </figure>
                                         <div className="post__row">
                                             <figure className="post__figure post__figure--small">
@@ -320,17 +357,10 @@ class Publish extends PureComponent {
                                     </div>
                                     <div className="post__group">
                                         {subOptions}
-                                        <div className="mb-15">
-                                            <p className="post__title mb-1">Engine volume</p>
-                                            <input type="text" placeholder="Engine volume" className="post__input" />
-                                        </div>
-                                        <div className="mb-15">
-                                            <p className="post__title mb-1">Year of manufacture</p>
-                                            <input type="text" placeholder="Year of manufacture" className="post__input mb-1" />
-                                        </div>
+                                        
                                     </div>
                                     <div className="post__group">
-                                        <p className="post__title mb-1">Color</p>
+                                        {/* <p className="post__title mb-1">Color</p>
                                         <div className="post__input post__input--cat mb-15" tabIndex="0">
                                             White
                                             <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
@@ -339,7 +369,16 @@ class Publish extends PureComponent {
                                         <div className="post__input post__input--cat mb-15" tabIndex="0">
                                             Medium
                                             <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
+                                        </div> */}
+                                        {/* <div className="mb-15">
+                                            <p className="post__title mb-1">Engine volume</p>
+                                            <input type="text" placeholder="Engine volume" className="post__input" />
                                         </div>
+                                        <div className="mb-15">
+                                            <p className="post__title mb-1">Year of manufacture</p>
+                                            <input type="text" placeholder="Year of manufacture" className="post__input mb-1" />
+                                        </div> */}
+                                        {inputItems}
                                     </div>
                                 </div>
                                 <div className="post__group post__group--des">
@@ -448,80 +487,106 @@ export default Publish;
 //     <svg className="icon--dark icon icon--8 ml-5" dangerouslySetInnerHTML={{__html: utils.use('thumbs-up')}} />
 // </button> */}
 
+{/* <figure className="post__figure post__figure--main">
+                                            <svg className="post__icon post__icon--main mb-1" dangerouslySetInnerHTML={{__html: utils.use('camera')}} />
+                                            <span className="post__prompt">Click or drag here to uload main photo</span>
+                                            <img src={audi} className="post__img" alt="audi" />
+                                        </figure>
+                                        <div className="post__row">
+                                            <figure className="post__figure post__figure--small">
+                                                <svg className="post__icon" dangerouslySetInnerHTML={{__html: utils.use('plus')}} />
+                                            </figure>
+                                            <figure className="post__figure post__figure--small">
+                                                <svg className="post__icon" dangerouslySetInnerHTML={{__html: utils.use('plus')}} />
+                                            </figure>
+                                            <figure className="post__figure post__figure--small">
+                                                <svg className="post__icon" dangerouslySetInnerHTML={{__html: utils.use('plus')}} />
+                                            </figure>
+                                            <figure className="post__figure post__figure--small">
+                                                <svg className="post__icon" dangerouslySetInnerHTML={{__html: utils.use('plus')}} />
+                                            </figure>
+                                            <figure className="post__figure post__figure--small">
+                                                <svg className="post__icon" dangerouslySetInnerHTML={{__html: utils.use('plus')}} />
+                                            </figure>
+                                            <figure className="post__figure post__figure--small">
+                                                <svg className="post__icon" dangerouslySetInnerHTML={{__html: utils.use('plus')}} />
+                                            </figure>
+                                        </div> */}
 
-// document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
-//     const dropZoneElement = inputElement.closest(".drop-zone");
+
+document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+    const dropZoneElement = inputElement.closest(".drop-zone");
   
-//     dropZoneElement.addEventListener("click", (e) => {
-//       inputElement.click();
-//     });
+    dropZoneElement.addEventListener("click", (e) => {
+      inputElement.click();
+    });
   
-//     inputElement.addEventListener("change", (e) => {
-//       if (inputElement.files.length) {
-//         updateThumbnail(dropZoneElement, inputElement.files[0]);
-//       }
-//     });
+    inputElement.addEventListener("change", (e) => {
+      if (inputElement.files.length) {
+        updateThumbnail(dropZoneElement, inputElement.files[0]);
+      }
+    });
   
-//     dropZoneElement.addEventListener("dragover", (e) => {
-//       e.preventDefault();
-//       dropZoneElement.classList.add("drop-zone--over");
-//     });
+    dropZoneElement.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropZoneElement.classList.add("drop-zone--over");
+    });
     
-//     dropZoneElement.addEventListener("drop", (e) => {
-//       e.preventDefault();
+    dropZoneElement.addEventListener("drop", (e) => {
+      e.preventDefault();
   
-//       if (e.dataTransfer.files.length) {
-//         inputElement.files = e.dataTransfer.files;
-//         updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
-//       }
+      if (e.dataTransfer.files.length) {
+        inputElement.files = e.dataTransfer.files;
+        updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+      }
   
-//       dropZoneElement.classList.remove("drop-zone--over");
-//     });
+      dropZoneElement.classList.remove("drop-zone--over");
+    });
   
-//     ["dragleave", "dragend"].forEach((type) => {
-//       dropZoneElement.addEventListener(type, (e) => {
-//         dropZoneElement.classList.remove("drop-zone--over");
-//       });
-//     });
+    ["dragleave", "dragend"].forEach((type) => {
+      dropZoneElement.addEventListener(type, (e) => {
+        dropZoneElement.classList.remove("drop-zone--over");
+      });
+    });
   
     
-//   });
+  });
   
-//   /**
-//    * Updates the thumbnail on a drop zone element.
-//    *
-//    * @param {HTMLElement} dropZoneElement
-//    * @param {File} file
-//    */
-//   function updateThumbnail(dropZoneElement, file) {
-//     let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+  /**
+   * Updates the thumbnail on a drop zone element.
+   *
+   * @param {HTMLElement} dropZoneElement
+   * @param {File} file
+   */
+  function updateThumbnail(dropZoneElement, file) {
+    let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
   
-//     // First time - remove the prompt
-//     if (dropZoneElement.querySelector(".drop-zone__prompt")) {
-//       dropZoneElement.querySelector(".drop-zone__prompt").remove();
-//     }
+    // First time - remove the prompt
+    if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+      dropZoneElement.querySelector(".drop-zone__prompt").remove();
+    }
   
-//     // First time - there is no thumbnail element, so lets create it
-//     if (!thumbnailElement) {
-//       thumbnailElement = document.createElement("div");
-//       thumbnailElement.classList.add("drop-zone__thumb");
-//       dropZoneElement.appendChild(thumbnailElement);
-//     }
+    // First time - there is no thumbnail element, so lets create it
+    if (!thumbnailElement) {
+      thumbnailElement = document.createElement("div");
+      thumbnailElement.classList.add("drop-zone__thumb");
+      dropZoneElement.appendChild(thumbnailElement);
+    }
   
-//     thumbnailElement.dataset.label = file.name;
+    thumbnailElement.dataset.label = file.name;
   
-//     // Show thumbnail for image files
-//     if (file.type.startsWith("image/")) {
-//       const reader = new FileReader();
+    // Show thumbnail for image files
+    if (file.type.startsWith("image/")) {
+      const reader = new FileReader();
   
-//       reader.readAsDataURL(file);
-//       reader.onload = () => {
-//         thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
-//       };
-//     } else {
-//       thumbnailElement.style.backgroundImage = null;
-//     }
-//   }
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+      };
+    } else {
+      thumbnailElement.style.backgroundImage = null;
+    }
+  }
   
 
 

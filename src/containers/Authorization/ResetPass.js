@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import * as emailValidator from 'email-validator';
 import { withRouter } from 'react-router';
 
-import Backdrop from '../UI/Backdrop';
-import Language from '../components/Language';
-import Logo from '../components/Logo';
-import * as utils from '../utilities/utilities';
+import Backdrop from '../../UI/Backdrop';
+import Language from '../../components/Language';
+import Logo from '../../components/Logo';
+import * as utils from '../../utilities/utilities';
 
 class ResetPass extends Component {
     constructor(props) {

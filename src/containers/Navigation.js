@@ -11,7 +11,7 @@ import Backdrop from '../UI/Backdrop';
 class Navigation extends PureComponent {
     state = {
         toggleLogo: false,
-        signedIn: false,
+        signedIn: true,
         inputFocused: false,
         showCat: false
     }
@@ -127,7 +127,7 @@ class Navigation extends PureComponent {
                             </div>
                             <div className="navigation__list">
                                 <div className={signClass.join(' ')}>
-                                    <Link to="/signin" className="navigation__link">
+                                    <Link to={this.state.signedIn ? '/user/profile' : '/signin'} className="navigation__link">
                                         <svg className="navigation__icon navigation__icon--arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
                                         <span className="navigation__title  navigation__title--user">{this.state.signedIn ? 'My profile' : 'Sign in'}</span>
                                         <div className="navigation__iconbox">

@@ -1,5 +1,5 @@
 .navigation {
-    background: var(--color-white-bg);
+    background: #fff;
     font-weight: 500;
     position: fixed;
     top: 0;
@@ -8,6 +8,7 @@
     border-bottom: 1px solid rgba(#000, .07);
     box-shadow: 0 -1.5rem 5rem rgba(#000, .07);
     z-index: 100;
+    backdrop-filter: blur(1px);
 
     &__wrapper {
         height: 7rem;

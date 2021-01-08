@@ -12,7 +12,7 @@ class Filter extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            filterConfig: {}
+            filterConfig: {},
         }
         this.category = this.props.match.params.category;
         this.subCategory = this.props.match.params.subcategory;
@@ -32,11 +32,8 @@ class Filter extends PureComponent {
         this.importFilter(this.category);
     }
 
-    componentDidUpdate() {
-        // console.log('this.category: ' + this.category);
-        // window.category = this.category;
-        // console.log('this.props...category: ' + this.props.match.params.category);
-        if (this.props.match.params.category !== this.category) this.importFilter(this.props.match.params.category);
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.match.params.category !== prevProps.match.params.category) this.importFilter(this.props.match.params.category);
     }
 
     render() {

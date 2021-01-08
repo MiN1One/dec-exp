@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import * as emailValidator from 'email-validator';
 import axios from 'axios';
 
-import Backdrop from '../UI/Backdrop';
-import Language from '../components/Language';
-import Logo from '../components/Logo';
-import * as utils from '../utilities/utilities';
+import Backdrop from '../../UI/Backdrop';
+import Language from '../../components/Language';
+import Logo from '../../components/Logo';
+import * as utils from '../../utilities/utilities';
 
 class AuthSignin extends Component {
     constructor(props) {
