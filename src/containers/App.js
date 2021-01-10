@@ -5,13 +5,12 @@ import Main from './Main';
 import Header from './Header';
 import asyncComponent from '../hoc/asyncComponent/asyncComponent';
 import Layout from './Layout';
-import Post from './Post';
 
 const AsyncAuthSignin = asyncComponent(() => import('./Authorization/AuthSignin'));
 const AsyncAuthSignup = asyncComponent(() => import('./Authorization/AuthSignup'));
 const AsyncResetPass = asyncComponent(() => import('./Authorization/ResetPass'));
 const AsyncPost = asyncComponent(() => import('./Post'));
-const AsyncProfile = asyncComponent(() => import('../components/Profile'));
+const AsyncProfile = asyncComponent(() => import('../components/Profile/Profile'));
 
 function App() {
   const header = (

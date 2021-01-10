@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
-import { NavLink, withRouter, Route, Switch } from 'react-router-dom';
 
-import avatar from '../assets/images/32.jpg';
-import company from '../assets/images/intech-2.jpg';
-import LoadingSub from '../UI/LoadingSub';
-import * as utils from '../utilities/utilities';
+import avatar from '../../assets/images/32.jpg';
+import company from '../../assets/images/intech-2.jpg';
+import LoadingSub from '../../UI/LoadingSub';
+import * as utils from '../../utilities/utilities';
 
 class Main extends PureComponent {
     constructor(props) {
@@ -13,7 +12,12 @@ class Main extends PureComponent {
             contactEditMode: false,
             companyEditMode: false,
             loading: false,
+            loadingCompany: false,
+            imageAppended: false
         }
+
+        this.contactFigRef = React.createRef();
+        this.companyFigRef = React.createRef();
 
         this.imgRef = React.createRef();
         this.companyRef = React.createRef();
@@ -53,18 +57,73 @@ class Main extends PureComponent {
         const numberCompany = this.numberCompanyInputRef.current.value;
         
         // ---------------
-        this.setState({ loading: true });
-        setTimeout(() => this.setState({ loading: false }, () => this.setState({ companyEditMode: false })), 2000);
+        this.setState({ loadingCompany: true });
+        setTimeout(() => this.setState({ loadingCompany: false }, () => this.setState({ companyEditMode: false })), 2000);
 
         // ....
     }
 
+    appendImage = (el, file) => {
+        const reader = new FileReader();
+
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            let image = el.querySelector('.profile__img');
+            if (!image) {
+                image = document.createElement('img');
+                image.classList.add('profile__img');
+                el.appendChild(image);
+            }
+            image.src = reader.result;
+        };
+    };
+
+    removeContactImage = () => {
+        this.contactFigRef.current.querySelector('.profile__img').remove();
+
+        // -----------------
+
+        // ....
+    }
+
+    removeComapnyImage = () => {
+        this.companyFigRef.current.querySelector('.profile__img').remove();
+
+        // -----------------
+
+        // ....
+    }
+
+    appendContactImg = () => {
+        if (this.imgRef.current.files.length) {
+            this.appendImage(this.contactFigRef.current, this.imgRef.current.files[0]);
+            
+            const formData = new FormData();
+            formData.append('profileImage[]', this.imgRef.current.files[0]);
+
+            // -------------------
+            
+            // .....
+        }
+    }
     
+    appendCompanyImg = () => {
+        if (this.companyRef.current.files.length) {
+            this.appendImage(this.companyFigRef.current, this.companyRef.current.files[0]);
+            
+            const formData = new FormData();
+            formData.append('profileImage[]', this.companyRef.current.files[0]);
+            
+            // -------------------
+            
+            // .....
+        }
+    }
     
     render() {
         let contactView = (
             <div className="profile__details">
-                <div className="profile__text">
+                <div className="profile__text profile__text--name">
                     <p className="profile__title">Name:</p>
                     John Doe
                 </div>
@@ -106,7 +165,7 @@ class Main extends PureComponent {
         }
         let companyView = (
             <div className="profile__details">
-                <div className="profile__text">
+                <div className="profile__text profile__text--name">
                     <p className="profile__title">Company Name:</p>
                     Intech Ltd.
                 </div>
@@ -151,13 +210,13 @@ class Main extends PureComponent {
                     {contactView}
                     <div>
                         <div className="pos-rel d-inline mb-1">
-                            <figure className="profile__figure">
+                            <figure className="profile__figure" ref={this.contactFigRef}>
                                 <img className="profile__img" alt="user" src={avatar} />
-                                <svg className="profile__icon profile__icon--big" dangerouslySetInnerHTML={{__html: utils.use('camera')}} />
+                                <svg className="profile__icon profile__icon--big" dangerouslySetInnerHTML={{__html: utils.use('user')}} />
                             </figure>
-                            <input className="d-none" type="file" ref={this.imgRef} />
+                            <input className="d-none" type="file" ref={this.imgRef} onChange={() => this.appendContactImg()} />
                             <div className="profile__btn--img">
-                                {this.state.contactEditMode && <button className="mr-5 profile__btn profile__btn--rounded" onClick={() => {}}>
+                                {this.state.contactEditMode && <button className="mr-5 profile__btn profile__btn--rounded" onClick={() => this.removeContactImage()}>
                                     <svg className="profile__icon profile__icon--small" dangerouslySetInnerHTML={{__html: utils.use('trash-2')}} />
                                 </button>}
                                 <button className="profile__btn profile__btn--rounded" onClick={() => this.imgRef.current.click()}>
@@ -171,10 +230,13 @@ class Main extends PureComponent {
                 {this.state.contactEditMode && 
                     <div className="profile__footer mt-15">
                         {this.state.loading && <LoadingSub />}
-                        <button className="ml-2 btn btn__primary" onClick={() => this.onSaveContactData()}>Save</button>
+                        <button className="ml-2 btn btn__primary" onClick={() => this.onSaveContactData()}>
+                            Save
+                            <svg className="icon icon--8 ml-5" dangerouslySetInnerHTML={{__html: utils.use('save')}} />
+                        </button>
                     </div>
                 }
-                <div className="profile__titlebar profile__titlebar--mid">
+                <div className="profile__titlebar">
                     <h2 className="heading heading__2 profile__heading">Company details</h2>
                     <button className="profile__btn profile__btn--rounded" onClick={() => this.onToggleCompanyEditMode()}>
                         <svg className="profile__icon profile__icon--small" dangerouslySetInnerHTML={{__html: utils.use(this.state.companyEditMode ? 'x' : 'edit-2')}} />
@@ -184,14 +246,14 @@ class Main extends PureComponent {
                     {companyView}
                     <div>
                         <div className="pos-rel d-inline mb-1">
-                            <figure className="profile__figure">
+                            <figure className="profile__figure" ref={this.companyFigRef}>
                                 <img className="profile__img" alt="user" src={company} />
-                                <svg className="profile__icon profile__icon--big" dangerouslySetInnerHTML={{__html: utils.use('camera')}} />
+                                <svg className="profile__icon profile__icon--big" dangerouslySetInnerHTML={{__html: utils.use('image')}} />
                             </figure>
-                            <input className="d-none" type="file" ref={this.companyRef} />
+                            <input className="d-none" type="file" ref={this.companyRef} onChange={() => this.appendCompanyImg()} />
                             
                             <div className="profile__btn--img">
-                                {this.state.companyEditMode && <button className="mr-5 profile__btn profile__btn--rounded" onClick={() => {}}>
+                                {this.state.companyEditMode && <button className="mr-5 profile__btn profile__btn--rounded" onClick={() => this.removeComapnyImage()}>
                                     <svg className="profile__icon profile__icon--small" dangerouslySetInnerHTML={{__html: utils.use('trash-2')}} />
                                 </button>}
                                 <button className="profile__btn profile__btn--rounded" onClick={() => this.companyRef.current.click()}>
@@ -204,8 +266,11 @@ class Main extends PureComponent {
                 </div>
                 {this.state.companyEditMode && 
                     <div className="profile__footer mt-15">
-                        {this.state.loading && <LoadingSub />}
-                        <button className="ml-2 btn btn__primary" onClick={() => this.onSaveCompanyData()}>Save</button>
+                        {this.state.loadingCompany && <LoadingSub />}
+                        <button className="ml-2 btn btn__primary" onClick={() => this.onSaveCompanyData()}>
+                            Save
+                            <svg className="icon icon--8 ml-5" dangerouslySetInnerHTML={{__html: utils.use('save')}} />
+                        </button>
                     </div>
                 }
             </React.Fragment>
@@ -213,85 +278,4 @@ class Main extends PureComponent {
     }
 }
 
-class Profile extends PureComponent {
-
-    render() {
-        return (
-            <div className="profile">
-                <div className="container">
-                    <div className="profile__wrapper">
-                        <div className="profile__head">
-                            <h2 className="heading heading__2">Profile</h2>
-                            <div className="profile__nav">
-                                Profile nav
-                            </div>
-                        </div>
-                        <div className="profile__main">
-                            <div className="profile__group profile__panel">
-                                <h5 className="profile__link profile__link--heading">{this.props.match.params.section}</h5>
-                                <ul className="profile__list">
-                                    <li className="profile__item">
-                                        <NavLink to="/user/profile" exact activeClassName="profile__link--active" className="profile__link">
-                                            <svg className="profile__icon" dangerouslySetInnerHTML={{__html: utils.use('user')}} />
-                                            Profile
-                                        </NavLink>
-                                    </li>
-                                    <li className="profile__item">
-                                        <NavLink to="/user/ads" activeClassName="profile__link--active" className="profile__link">
-                                            <svg className="profile__icon" dangerouslySetInnerHTML={{__html: utils.use('layout')}} />
-                                            Ads
-                                        </NavLink>
-                                    </li>
-                                    <li className="profile__item">
-                                        <NavLink to="/user/messages" activeClassName="profile__link--active" className="profile__link">
-                                            <svg className="profile__icon" dangerouslySetInnerHTML={{__html: utils.use('mail')}} />
-                                            Messages
-                                        </NavLink>
-                                    </li>
-                                    <li className="profile__item">
-                                        <NavLink to="/user/favourites" activeClassName="profile__link--active" className="profile__link">
-                                            <svg className="profile__icon" dangerouslySetInnerHTML={{__html: utils.use('heart')}} />
-                                            Favourites
-                                        </NavLink>
-                                    </li>
-                                    <li className="profile__item">
-                                        <NavLink to="/user/settings" activeClassName="profile__link--active" className="profile__link">
-                                            <svg className="profile__icon" dangerouslySetInnerHTML={{__html: utils.use('settings')}} />
-                                            Settings
-                                        </NavLink>
-                                    </li>
-                                    <li className="profile__item">
-                                        <NavLink to="/user/payments" activeClassName="profile__link--active" className="profile__link">
-                                            <svg className="profile__icon" dangerouslySetInnerHTML={{__html: utils.use('credit-card')}} />
-                                            Payments
-                                        </NavLink>
-                                    </li>
-                                    <li className="profile__item">
-                                        <NavLink to="/user/promotions" activeClassName="profile__link--active" className="profile__link">
-                                            <svg className="profile__icon" dangerouslySetInnerHTML={{__html: utils.use('trending-up')}} />
-                                            Promotions
-                                        </NavLink>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="profile__group profile__header">
-                                <Switch>
-                                    <Route path="/user/profile" render={() => <Main />}/>
-                                    <Route path="/user/ads" render={() => <h1>Hehe</h1>}/>
-                                    <Route path="/user/messages" render={() => <h1>Hehe</h1>}/>
-                                    <Route path="/user/favourites" render={() => <h1>Hehe</h1>}/>
-                                    <Route path="/user/settings" render={() => <h1>Hehe</h1>}/>
-                                    <Route path="/user/payments" render={() => <h1>Hehe</h1>}/>
-                                    <Route path="/user/promotions" render={() => <h1>Hehe</h1>}/>
-                                    <Route path="*" render={() => <h1>404 Not Found</h1>} />
-                                </Switch>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
-
-export default withRouter(Profile);
+export default Main;

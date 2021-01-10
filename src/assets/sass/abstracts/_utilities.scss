@@ -22,6 +22,8 @@
 .afe { align-items: flex-end !important; }
 .abs { align-items: baseline; }
 .sb { justify-content: space-between !important; }
+.fdc { flex-direction: column; }
+.ac { align-items: center; }
 
 .group-sb {
     display: flex;
@@ -32,6 +34,7 @@
 
 .d-inline { display: inline-block; }
 .d-none { display: none; }
+.d-flex { display: flex; }
 
 .m-0 { margin: 0 !important; }
 

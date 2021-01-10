@@ -16,24 +16,6 @@ class Navigation extends PureComponent {
         showCat: false
     }
 
-    // componentDidMount() {
-    //     document.addEventListener('scroll', this.onScroll);
-    // }
-
-    // onScroll = () => {
-    //     const scroll = document.documentElement.scrollTop;
-    //     if (scroll > 0) this.setState({ toggleLogo: true });
-    //     if (scroll === 0) this.setState({ toggleLogo: false });
-    // };
-
-    // componentWillUnmount() {
-    //     document.removeEventListener('scroll', this.onScroll);
-    // }
-
-    componentDidUpdate() {
-        console.log('Navigation.js update');
-    }
-
     onFocus = () => this.setState({ inputFocused: true });
     onBlur = () => this.setState({ inputFocused: false });
 
@@ -54,38 +36,42 @@ class Navigation extends PureComponent {
                 <p className="dropdown__title">Profile:</p>
                 <ul className="dropdown__list">
                     <li className="dropdown__item">
-                        <a href="#" className="dropdown__link">
+                        <a href="#" className="dropdown__link message-badge">
                             Ads
+                            {/* <span className="message-badge__counter"></span> */}
                         </a>
                     </li>
                     <li className="dropdown__item">
-                        <a href="#" className="dropdown__link dropdown__link--counter">
+                        <a href="#" className="dropdown__link message-badge">
                             Messages
-                            <span className="dropdown__counter">3</span>
+                            <span className="message-badge__counter">3</span>
                         </a>
                     </li>
                     <li className="dropdown__item">
-                        <a href="#settings" className="dropdown__link">
+                        <a href="#settings" className="dropdown__link message-badge">
                             Settings
+                            {/* <span className="message-badge__counter"></span> */}
                         </a>
                     </li>
                     <li className="dropdown__item">
-                        <a href="#" className="dropdown__link">
+                        <a href="#" className="dropdown__link message-badge">
                             Payments
+                            {/* <span className="message-badge__counter"></span> */}
                         </a>
                     </li>
                 </ul>
                 <p className="dropdown__title">Favourites:</p>
                 <ul className="dropdown__list">
                     <li className="dropdown__item">
-                        <a href="#" className="dropdown__link">
+                        <a href="#" className="dropdown__link message-badge">
                             Ads
-                            <span className="dropdown__counter">1</span>
+                            <span className="message-badge__counter">2</span>
                         </a>
                     </li>
                     <li className="dropdown__item">
-                        <a href="#" className="dropdown__link">
+                        <a href="#" className="dropdown__link message-badge">
                             Searches
+                            {/* <span className="message-badge__counter"></span> */}
                         </a>
                     </li>
                 </ul>
@@ -122,8 +108,6 @@ class Navigation extends PureComponent {
                             <div className="navigation__list">
                                 <Logo classOver="navigation__item" />
                                 <Language class="navigation__item navigation__item--drop" dropClass="dropdown--left-fix" />
-                                {/* {this.state.toggleLogo && <Logo classOver="navigation__item" />}
-                                {!this.state.toggleLogo && <Language class="navigation__item" dropClass="Dropdown--left-fix" />} */}
                             </div>
                             <div className="navigation__list">
                                 <div className={signClass.join(' ')}>
@@ -132,7 +116,7 @@ class Navigation extends PureComponent {
                                         <span className="navigation__title  navigation__title--user">{this.state.signedIn ? 'My profile' : 'Sign in'}</span>
                                         <div className="navigation__iconbox">
                                             <svg className="navigation__icon navigation__icon--abs navigation__icon--white" dangerouslySetInnerHTML={{__html: utils.use('user')}} />
-                                            {this.state.signedIn && <span></span>}
+                                            {this.state.signedIn && <span className="message-badge__empty"></span>}
                                         </div>
                                     </Link>
                                     {userDrop}
@@ -158,4 +142,4 @@ class Navigation extends PureComponent {
     }
 }
 
-export default withRouter(Navigation);
+export default withRouter(React.memo(Navigation));

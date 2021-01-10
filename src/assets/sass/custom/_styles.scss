@@ -183,3 +183,38 @@
     font-size: 1.6rem;
     font-weight: 300;
 }
+
+.message-badge {
+
+    &__empty {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: var(--color-grey-a5);
+        color: #fff;
+        width: 1.05rem;
+        height: 1.05rem;
+        border-radius: 50%;
+    }
+
+    &__counter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 2.5rem;
+        width: 3rem;
+        height: 2rem;
+        border-radius: 1rem;
+        color: #fff;
+        background: var(--color-grey-a5);
+        font-weight: 400;
+    }
+
+    &:hover &__counter {
+        background: var(--color-white-bg);
+        color: var(--color-grey-dark);
+    }
+}

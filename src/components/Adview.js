@@ -50,8 +50,13 @@ class adview extends PureComponent {
         root.style.setProperty('--cat-item-transition', 'none');
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         this.swiper.update();
+
+        if (prevProps !== this.props) {
+            const index = this.props.data.findIndex(el => el.id === this.props.match.params.id);
+            this.setState({ index });
+        }
     }
 
     componentWillUnmount() {
@@ -186,7 +191,7 @@ class adview extends PureComponent {
 
         const adsFrom = this.props.data.map((el, i) => {
             return (
-                <Link to="/" className="adview__card adview__box adview__box--card" key={i}>
+                <Link to={`${category}/${subcategory}/${el.id}`} className="adview__card adview__box adview__box--card" key={i}>
                     <figure className="adview__figure adview__figure--card mr-2">
                         <LazyLoadImage 
                             className="adview__img adview__img--card"
@@ -203,7 +208,7 @@ class adview extends PureComponent {
                     </div>
                 </Link>
             )
-        })
+        });
         
         return (
             <React.Fragment>

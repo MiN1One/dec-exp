@@ -50,6 +50,10 @@ class Publish extends PureComponent {
         }
     }
 
+    onSubmitPost = () => {
+        console.log(this.state)
+    }
+
     onInputDescription = (e) => this.setState({ description: e.target.value });
     onInputTitle = (e) => this.setState({ mainTitle: e.target.value });
 
@@ -360,24 +364,6 @@ class Publish extends PureComponent {
                                         
                                     </div>
                                     <div className="post__group">
-                                        {/* <p className="post__title mb-1">Color</p>
-                                        <div className="post__input post__input--cat mb-15" tabIndex="0">
-                                            White
-                                            <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
-                                        </div>
-                                        <p className="post__title mb-1">Condition</p>
-                                        <div className="post__input post__input--cat mb-15" tabIndex="0">
-                                            Medium
-                                            <svg className="post__icon post__icon--cat-arrow" dangerouslySetInnerHTML={{__html: utils.use('chevron-down')}} />
-                                        </div> */}
-                                        {/* <div className="mb-15">
-                                            <p className="post__title mb-1">Engine volume</p>
-                                            <input type="text" placeholder="Engine volume" className="post__input" />
-                                        </div>
-                                        <div className="mb-15">
-                                            <p className="post__title mb-1">Year of manufacture</p>
-                                            <input type="text" placeholder="Year of manufacture" className="post__input mb-1" />
-                                        </div> */}
                                         {inputItems}
                                     </div>
                                 </div>
@@ -438,7 +424,7 @@ class Publish extends PureComponent {
                         <div className="post__footer">
                             <div className="container">
                                 <div className="post__footwrap">
-                                    <button className="btn post__btn-main btn__primary">
+                                    <button className="btn post__btn-main btn__primary" onClick={() => this.onSubmitPost()}>
                                         Post
                                         <svg className="icon ml-5" dangerouslySetInnerHTML={{__html: utils.use('check-circle')}} />
                                     </button>
@@ -487,7 +473,7 @@ export default Publish;
 //     <svg className="icon--dark icon icon--8 ml-5" dangerouslySetInnerHTML={{__html: utils.use('thumbs-up')}} />
 // </button> */}
 
-{/* <figure className="post__figure post__figure--main">
+/*{/* <figure className="post__figure post__figure--main">
                                             <svg className="post__icon post__icon--main mb-1" dangerouslySetInnerHTML={{__html: utils.use('camera')}} />
                                             <span className="post__prompt">Click or drag here to uload main photo</span>
                                             <img src={audi} className="post__img" alt="audi" />
@@ -511,82 +497,82 @@ export default Publish;
                                             <figure className="post__figure post__figure--small">
                                                 <svg className="post__icon" dangerouslySetInnerHTML={{__html: utils.use('plus')}} />
                                             </figure>
-                                        </div> */}
+                                        </div> * */
 
 
-document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
-    const dropZoneElement = inputElement.closest(".drop-zone");
+// document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+//     const dropZoneElement = inputElement.closest(".drop-zone");
   
-    dropZoneElement.addEventListener("click", (e) => {
-      inputElement.click();
-    });
+//     dropZoneElement.addEventListener("click", (e) => {
+//       inputElement.click();
+//     });
   
-    inputElement.addEventListener("change", (e) => {
-      if (inputElement.files.length) {
-        updateThumbnail(dropZoneElement, inputElement.files[0]);
-      }
-    });
+//     inputElement.addEventListener("change", (e) => {
+//       if (inputElement.files.length) {
+//         updateThumbnail(dropZoneElement, inputElement.files[0]);
+//       }
+//     });
   
-    dropZoneElement.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      dropZoneElement.classList.add("drop-zone--over");
-    });
+//     dropZoneElement.addEventListener("dragover", (e) => {
+//       e.preventDefault();
+//       dropZoneElement.classList.add("drop-zone--over");
+//     });
     
-    dropZoneElement.addEventListener("drop", (e) => {
-      e.preventDefault();
+//     dropZoneElement.addEventListener("drop", (e) => {
+//       e.preventDefault();
   
-      if (e.dataTransfer.files.length) {
-        inputElement.files = e.dataTransfer.files;
-        updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
-      }
+//       if (e.dataTransfer.files.length) {
+//         inputElement.files = e.dataTransfer.files;
+//         updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+//       }
   
-      dropZoneElement.classList.remove("drop-zone--over");
-    });
+//       dropZoneElement.classList.remove("drop-zone--over");
+//     });
   
-    ["dragleave", "dragend"].forEach((type) => {
-      dropZoneElement.addEventListener(type, (e) => {
-        dropZoneElement.classList.remove("drop-zone--over");
-      });
-    });
+//     ["dragleave", "dragend"].forEach((type) => {
+//       dropZoneElement.addEventListener(type, (e) => {
+//         dropZoneElement.classList.remove("drop-zone--over");
+//       });
+//     });
   
     
-  });
+//   });
   
-  /**
-   * Updates the thumbnail on a drop zone element.
-   *
-   * @param {HTMLElement} dropZoneElement
-   * @param {File} file
-   */
-  function updateThumbnail(dropZoneElement, file) {
-    let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+//   /**
+//    * Updates the thumbnail on a drop zone element.
+//    *
+//    * @param {HTMLElement} dropZoneElement
+//    * @param {File} file
+//    */
+//   function updateThumbnail(dropZoneElement, file) {
+//     let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
   
-    // First time - remove the prompt
-    if (dropZoneElement.querySelector(".drop-zone__prompt")) {
-      dropZoneElement.querySelector(".drop-zone__prompt").remove();
-    }
+//     // First time - remove the prompt
+//     if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+//       dropZoneElement.querySelector(".drop-zone__prompt").remove();
+//     }
   
-    // First time - there is no thumbnail element, so lets create it
-    if (!thumbnailElement) {
-      thumbnailElement = document.createElement("div");
-      thumbnailElement.classList.add("drop-zone__thumb");
-      dropZoneElement.appendChild(thumbnailElement);
-    }
+//     // First time - there is no thumbnail element, so lets create it
+//     if (!thumbnailElement) {
+//       thumbnailElement = document.createElement("div");
+//       thumbnailElement.classList.add("drop-zone__thumb");
+//       dropZoneElement.appendChild(thumbnailElement);
+//     }
   
-    thumbnailElement.dataset.label = file.name;
+//     thumbnailElement.dataset.label = file.name;
   
-    // Show thumbnail for image files
-    if (file.type.startsWith("image/")) {
-      const reader = new FileReader();
+//     // Show thumbnail for image files
+//     if (file.type.startsWith("image/")) {
+//       const reader = new FileReader();
   
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
-      };
-    } else {
-      thumbnailElement.style.backgroundImage = null;
-    }
-  }
+//       reader.readAsDataURL(file);
+//       reader.onload = () => {
+//         thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+//       };
+//     } else {
+//       thumbnailElement.style.backgroundImage = null;
+//     }
+//   }
   
 
 

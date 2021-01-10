@@ -128,11 +128,6 @@
         width: 100%;
         position: relative;
 
-        &:hover .dropdown__counter {
-            background: var(--color-white-bg);
-            color: var(--color-grey-dark);
-        }
-
         &--thin {
             font-weight: 400;
             padding: 0;
@@ -143,22 +138,6 @@
             padding: 2rem 3rem;
             cursor: initial;
         }
-    }
-
-    &__counter {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 2.5rem;
-        width: 3rem;
-        height: 2rem;
-        border-radius: 1rem;
-        color: #fff;
-        background: var(--color-grey-a5);
-        font-weight: 400;
     }
     
     &__btn {

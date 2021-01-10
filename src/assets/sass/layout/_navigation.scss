@@ -89,17 +89,6 @@
         width: 4rem;
         height: 4rem;
 
-        span {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: var(--color-grey-a5);
-            color: #fff;
-            width: 1.05rem;
-            height: 1.05rem;
-            border-radius: 50%;
-        }
-
         &--menu {
             border-radius: .7rem;
             background: var(--color-primary);
