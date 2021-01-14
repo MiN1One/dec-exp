@@ -202,6 +202,7 @@ const mapStateToProps = state => {
         price: state.filters.price,
         size: state.filters.size,
         sort: state.filters.sort,
+        
     }
 };
 

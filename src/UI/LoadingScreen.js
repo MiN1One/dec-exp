@@ -1,7 +1,6 @@
-import './LoadingScreen.scss';
 
 const LoadingScreen = () => (
-  <div className="LoadingScreen">
+  <div className="loadingScreen">
     <div>
       <div class="cssload-dots">
         <div class="cssload-dot"></div>

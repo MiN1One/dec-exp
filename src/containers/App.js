@@ -5,6 +5,7 @@ import Main from './Main';
 import Header from './Header';
 import asyncComponent from '../hoc/asyncComponent/asyncComponent';
 import Layout from './Layout';
+import LoadingScreen from '../UI/LoadingScreen';
 
 const AsyncAuthSignin = asyncComponent(() => import('./Authorization/AuthSignin'));
 const AsyncAuthSignup = asyncComponent(() => import('./Authorization/AuthSignup'));
@@ -45,6 +46,7 @@ function App() {
   
   return (
     <div className="App">
+      {/* <LoadingScreen /> */}
       <Switch>
         <Route path="/" exact render={() => header} />
         <Route path="/signin" exact component={AsyncAuthSignin} />

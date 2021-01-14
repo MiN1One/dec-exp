@@ -218,3 +218,7 @@
         color: var(--color-grey-dark);
     }
 }
+
+[data-favorite=true] .icon {
+    fill: var(--color-red) !important;
+}

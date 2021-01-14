@@ -16,6 +16,10 @@ class Navigation extends PureComponent {
         showCat: false
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.match.url !== this.props.match.url) this.setState({ showCat: false });
+    }
+
     onFocus = () => this.setState({ inputFocused: true });
     onBlur = () => this.setState({ inputFocused: false });
 
@@ -27,7 +31,7 @@ class Navigation extends PureComponent {
         if (this.state.inputFocused) signClass.push('navigation__item--keep');
 
         const pathname = this.props.location.pathname;
-        console.log(pathname)
+        console.log(pathname);
         const isNotHome = pathname !== '/' && pathname !== '/post-new' && pathname !== '#';
         console.log(isNotHome);
 
@@ -106,7 +110,7 @@ class Navigation extends PureComponent {
                     <div className="container">
                         <nav role="navigation" className="navigation__wrapper">
                             <div className="navigation__list">
-                                <Logo classOver="navigation__item" />
+                                <Logo classOver="navigation__item" classImg="logo__figure--nav" />
                                 <Language class="navigation__item navigation__item--drop" dropClass="dropdown--left-fix" />
                             </div>
                             <div className="navigation__list">

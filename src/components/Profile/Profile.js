@@ -5,7 +5,8 @@ import $ from 'jquery';
 
 import Main from './Main';
 import * as utils from '../../utilities/utilities';
-import { ActiveAds, InactiveAds, PromotedAds } from './Ads';
+import { ActiveAds, InactiveAds, PromotedAds } from './Ads/Ads';
+import { FavAds, FavSearches } from './Favourites';
 
 class Profile extends PureComponent {
     constructor(props) {
@@ -16,7 +17,10 @@ class Profile extends PureComponent {
         this.subFavouritesList = React.createRef();
 
         this.slideSubLists = this.slideSubLists.bind(this);
+        this.scrollToTop = this.scrollToTop.bind(this);
     }
+
+    scrollToTop() { document.documentElement.scrollTop = 0; }
 
     slideSubLists() {
         if (this.props.match.params.section === 'ads') $(this.subAdsList.current).slideDown({ duration: 300 });
@@ -29,10 +33,12 @@ class Profile extends PureComponent {
 
     componentDidMount() {
         this.slideSubLists();
+        console.log('PROFILE uPDATEd');
     }
     
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         this.slideSubLists();
+        if (this.props.match.url !== prevProps.match.url) this.scrollToTop();
     }
 
     render() {
@@ -43,6 +49,20 @@ class Profile extends PureComponent {
                 <PromotedAds {...this.props} />
             </React.Fragment>
         );
+
+        const Favourites = (
+            <React.Fragment>
+                <FavAds {...this.props} />
+                <FavSearches {...this.props} />
+            </React.Fragment>
+        )
+
+        const activeAdsCount = this.props.data.length;
+        const promotedAdsCount = this.props.data.filter(el => el.premium === true).length;
+        const inactiveAdsCount = this.props.data.length;
+
+        const favAdsCount = this.props.data.filter(el => el.favorite === true).length;
+        const favSearchesCount = 0;
 
         return (
             <div className="profile">
@@ -70,17 +90,20 @@ class Profile extends PureComponent {
                                             My Ads
                                         </NavLink>
                                         <div className="profile__item profile__item--sub" ref={this.subAdsList}>
-                                            <NavLink to="/user/ads/active" activeClassName="profile__link--sub-active" className="profile__link">
+                                            <NavLink to="/user/ads/active" activeClassName="profile__link--sub-active" className="profile__link message-badge">
                                                 <svg className="profile__icon" dangerouslySetInnerHTML={{__html: utils.use('message-square')}} />
                                                 Active
+                                                {activeAdsCount !== 0 && <span className="message-badge__counter profile__mes-badge">{activeAdsCount}</span>}
                                             </NavLink>
-                                            <NavLink to="/user/ads/inactive" activeClassName="profile__link--sub-active" className="profile__link">
+                                            <NavLink to="/user/ads/inactive" activeClassName="profile__link--sub-active" className="profile__link message-badge">
                                                 <svg className="profile__icon" dangerouslySetInnerHTML={{__html: utils.use('archive')}} />
                                                 Inactive
+                                                {inactiveAdsCount !== 0 && <span className="message-badge__counter profile__mes-badge">{inactiveAdsCount}</span>}
                                             </NavLink>
-                                            <NavLink to="/user/ads/promoted" activeClassName="profile__link--sub-active" className="profile__link">
+                                            <NavLink to="/user/ads/promoted" activeClassName="profile__link--sub-active" className="profile__link message-badge">
                                                 <svg className="profile__icon" dangerouslySetInnerHTML={{__html: utils.use('corner-right-up')}} />
                                                 Promoted
+                                                {promotedAdsCount !== 0 && <span className="message-badge__counter profile__mes-badge">{promotedAdsCount}</span>}
                                             </NavLink>
                                         </div>
                                     </li>
@@ -110,13 +133,15 @@ class Profile extends PureComponent {
                                             Favourites
                                         </NavLink>
                                         <div className="profile__item profile__item--sub" ref={this.subFavouritesList}>
-                                            <NavLink to="/user/favourites/ads" activeClassName="profile__link--sub-active" className="profile__link">
+                                            <NavLink to="/user/favourites/ads" activeClassName="profile__link--sub-active" className="profile__link message-badge">
                                                 <svg className="profile__icon" dangerouslySetInnerHTML={{__html: utils.use('layout')}} />
                                                 Ads
+                                                {favAdsCount !== 0 && <span className="message-badge__counter profile__mes-badge">{favAdsCount}</span>}
                                             </NavLink>
-                                            <NavLink to="/user/favourites/searches" activeClassName="profile__link--sub-active" className="profile__link">
+                                            <NavLink to="/user/favourites/searches" activeClassName="profile__link--sub-active" className="profile__link message-badge">
                                                 <svg className="profile__icon" dangerouslySetInnerHTML={{__html: utils.use('search')}} />
                                                 Searches
+                                                {favSearchesCount !== 0 && <span className="message-badge__counter profile__mes-badge">{favSearchesCount}</span>}
                                             </NavLink>
                                         </div>
                                     </li>
@@ -147,11 +172,12 @@ class Profile extends PureComponent {
                                     <Route path="/user/ads/active" render={() => <ActiveAds {...this.props} />} />
                                     <Route path="/user/ads/inactive" render={() => <InactiveAds {...this.props} />} />
                                     <Route path="/user/ads/promoted" render={() => <PromotedAds {...this.props} />} />
-                                    <Route path="/user/messages/inbox" render={() => <h1>Hehe</h1>}/>
+                                    <Route path="/user/messages/inbox" exact render={() => <h1>Hehe</h1>}/>
                                     <Route path="/user/messages/sentbox" render={() => <h1>Hehe</h1>}/>
                                     <Route path="/user/messages/spam" render={() => <h1>Hehe</h1>}/>
-                                    <Route path="/user/favourites/ads" render={() => <h1>Hehe</h1>}/>
-                                    <Route path="/user/favourites/searches" render={() => <h1>Hehe</h1>}/>
+                                    <Route path="/user/favourites" exact render={() => Favourites}/>
+                                    <Route path="/user/favourites/ads" render={() => <FavAds {...this.props} />}/>
+                                    <Route path="/user/favourites/searches" render={() => <FavSearches {...this.props} />}/>
                                     <Route path="/user/settings" render={() => <h1>Hehe</h1>}/>
                                     <Route path="/user/payments" render={() => <h1>Hehe</h1>}/>
                                     <Route path="/user/promotions" render={() => <h1>Hehe</h1>}/>

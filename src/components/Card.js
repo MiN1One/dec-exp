@@ -31,7 +31,7 @@ const Card = (props) => {
                 </div>
             </Link>
             <button className="card__btn" data-favorite={props.data.favorite}>
-                <svg className="card__icon" dangerouslySetInnerHTML={{__html: utils.use('heart')}} />
+                <svg className="card__icon icon" dangerouslySetInnerHTML={{__html: utils.use('heart')}} />
             </button>
         </div>
     );

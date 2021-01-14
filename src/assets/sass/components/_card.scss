@@ -131,8 +131,4 @@
         &:focus .card__icon,
         &:active .card__icon { fill: var(--color-red); }
     }
-
-    [data-favorite=true] &__icon {
-        fill: var(--color-red);
-    }
 }

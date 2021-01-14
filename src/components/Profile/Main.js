@@ -165,7 +165,7 @@ class Main extends PureComponent {
         }
         let companyView = (
             <div className="profile__details">
-                <div className="profile__text profile__text--name">
+                <div className="profile__text">
                     <p className="profile__title">Company Name:</p>
                     Intech Ltd.
                 </div>

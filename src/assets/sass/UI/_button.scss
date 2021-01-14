@@ -115,4 +115,25 @@
             cursor: initial;
         }
     }
+
+    &__red {
+
+        &--outline {
+            background: #fff;
+            border-color: var(--color-red);
+            color: var(--color-grey-dark);
+            
+            &:hover,
+            &:active,
+            &:focus {
+                color: #fff;
+                background-color: var(--color-red);
+                border-color: var(--color-white-opaque-5);
+                
+                .icon { fill: #fff !important; }
+            }
+
+            .icon { fill: var(--color-grey-dark) !important; }
+        }
+    }
 }

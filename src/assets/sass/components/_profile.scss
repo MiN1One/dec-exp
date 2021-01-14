@@ -69,6 +69,7 @@
         padding: 1.2rem 2.3rem;
         font-size: 1.35rem;
         color: var(--color-grey-dark);
+        position: relative;
         
         &:not(.profile__link--active):hover { color: var(--color-primary); }
 
@@ -108,26 +109,76 @@
     &__link--active-cursored &__icon { fill: #fff; }
     &__link--active &__link,
     &__link--active-cursored &__link { color: #fff; }
+    &__link:hover &__mes-badge {
+        background: var(--color-grey-7);
+        color: #fff;
+    }
+
+    &__mes-badge {
+        font-size: 1.2rem;
+        width: 2.75rem;
+        height: 2rem;
+    }
 
     &__btn {
-        width: 3.3rem;
-        height: 3.3rem;
-        border-radius: 50%;
-        border: 1px solid rgba(#000, .15);
         display: flex;
         justify-content: center;
         align-items: center;
         background: #fff;
+        font-size: 1.5rem;
         
+        &--control {
+            padding: 1rem 1.7rem;
+            border: 1px solid rgba(#000, .07);
+            justify-content: flex-start;
+            font-size: 1.3rem;
+            color: initial;
+            background: var(--color-light-7);
+
+            &:not(.profile__btn--red):hover,
+            &:not(.profile__btn--red):focus {
+                color: var(--color-primary);
+                border-color: var(--color-primary-opaque);
+            }
+
+            &:hover,
+            &:focus { background: #fff; }
+
+            &:not(:last-child) { margin-right: 1.5rem; }
+        }
+        
+        &--red:hover,
+        &--red:focus {
+            color: var(--color-red);
+            border-color: var(--color-red-opaque);
+        }
+
         &--toggler {
             padding: 0 .5rem;
             border-left: 1px solid rgba(#000, .1);
-
+            
             &:hover { background: var(--color-primary); }
         }
 
-        &--rounded:hover {
-            border-color: var(--color-primary-opaque);
+        &--rounded {
+            border-radius: 50%;
+            width: 3.3rem;
+            height: 3.3rem;
+            border: 1px solid rgba(#000, .15);
+
+            &:hover { border-color: var(--color-primary-opaque); }
+        }
+
+        &--activate {
+            color: var(--color-primary);
+
+            &:hover { border-color: var(--color-primary-opaque); }
+        }
+
+        &--deact {
+            color: var(--color-red);
+
+            &:hover { border-color: var(--color-red-opaque); }
         }
         
         &--img {
@@ -139,7 +190,10 @@
         }
     }
 
-    &__btn:not(.profile__btn--rounded):hover &__icon { fill: #fff; }
+    &__btn--control:not(.profile__btn--red):hover &__icon,
+    &__btn--control:not(.profile__btn--red):focus &__icon { fill: var(--color-primary-opaque); }
+    &__btn--red:hover &__icon,
+    &__btn--red:focus &__icon { fill: var(--color-red-opaque); }
 
     &__icon {
         width: 2rem;
@@ -159,6 +213,8 @@
             height: 4.5rem;
             fill: var(--color-primary-opaque);
         }
+
+        &--det { fill: var(--color-grey-7); }
     }
 
     &__titlebar {
@@ -209,7 +265,6 @@
     &__text {
         font-size: 1.7rem;
         display: flex;
-        font-weight: 300;
         flex-direction: column;
 
         &--name {
@@ -268,60 +323,81 @@
         flex-direction: column;
         width: 100%;
     }
-
-    &__ad-wrapper {
-        display: flex;
-        justify-content: space-between;
-        border-radius: .7rem;
-        max-width: 100%;
-        height: 17rem;
-        // background: var(--color-white-bg-secondary);
-        background: #fcfcfc;
-        border: 1px solid rgba(#000, .07);
-        padding: 1.7rem;
-        // box-shadow: 0 0 1rem rgba(#000, .04);
-
-        &:not(:last-child) { margin-bottom: 1.5rem; }
-    }
     
     &__ad {
+        max-width: 100%;
+        height: 18rem;
+        padding: 2rem;
+        transition: all .2s ease;
         display: flex;
+
+        &:not(:last-child) { border-bottom: 1px solid rgba(#000, .045); }
     }
     
     &__ad-figure {
-        width: 17rem;
+        width: 19rem;
         overflow: hidden;
         height: 100%;
         margin-right: 2rem;
-        border-radius: .7rem;
+        position: relative;
+    }
+
+    &__ad-left {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: calc(100% - 17rem - 2rem);
     }
     
     &__ad-img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-    }
-
-    &__ad-left {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    &__ad-right {
-
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
     }
 
     &__ad-main {
-        width: 20rem;
+        display: flex;
+        flex-direction: column;
     }
 
     &__ad-title {
-        font-size: 2.7rem;
-        
-        &--sub {
-            font-size: 1.45rem;
-            color: var(--color-grey-7);
+        font-size: 2.3rem;
+
+        &--price-tag {
+            font-size: 1.8rem;
+            width: max-content;
+            color: var(--color-black);
         }
+    }
+
+    &__ad-group {
+        display: flex;
+        align-items: center;
+    }
+
+    &__ad-details {
+        display: flex;
+        align-items: center;
+        font-size: 1.3rem;
+        color: var(--color-grey-dark);
+
+        &:not(:last-child) { margin-right: 1rem; }
+    }
+
+    &__ad-separator {
+        margin-right: 1rem;
+        font-size: 1.45rem;
+        font-weight: 300;
+        color: var(--color-grey-7);
+    }
+
+    &__ad-badge {
+        box-shadow: none;
+        border-radius: 0;
     }
 }

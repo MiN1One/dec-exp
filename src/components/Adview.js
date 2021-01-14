@@ -48,22 +48,26 @@ class adview extends PureComponent {
 
         const root = document.documentElement;
         root.style.setProperty('--cat-item-transition', 'none');
+        
+        document.body.style.overflow = 'hidden';
     }
-
+    
     componentDidUpdate(prevProps, prevState) {
         this.swiper.update();
-
+        
         if (prevProps !== this.props) {
             const index = this.props.data.findIndex(el => el.id === this.props.match.params.id);
             this.setState({ index });
         }
     }
-
+    
     componentWillUnmount() {
         this.swiper.destroy();
-
+        
         const root = document.documentElement;
         root.style.setProperty('--cat-item-transition', 'all .3s ease');
+
+        document.body.style.overflow = 'initial';
     }
 
     onNextImage = (img) => {
